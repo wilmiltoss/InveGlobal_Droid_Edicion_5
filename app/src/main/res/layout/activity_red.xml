@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".principal.subVentanas.RedActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvDatos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="                   ENVIO DE DATOS"
+            android:textColor="@color/colorPrimaryNegro"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="99dp">
+
+        <Button
+            android:id="@+id/btn_enviar_datos"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:layout_marginTop="25dp"
+            android:onClick="onClickEnviar"
+            android:textColor="@color/colorAccent"
+
+            android:text="ENVIAR DATOS"
+            android:background="@drawable/boton_pulsado"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="99dp">
+
+        <Button
+            android:id="@+id/btn_volver"
+            style="?android:textAppearanceSmall"
+            android:background="@drawable/boton_pulsado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:onClick="onClick"
+            android:text="volver"
+            android:textColor="#389136"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="1dp"
+        android:layout_height="1dp">
+
+        <TextView
+            android:id="@+id/etParametro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:hint="parametro"
+            android:textColor="@color/colorPrimaryNegro"/>
+
+        <TextView
+        android:id="@+id/tvResultado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="resultado"
+        android:textColor="@color/colorPrimaryNegro"/>
+
+        <TextView
+            android:id="@+id/tv_idClave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text=" clave"
+            android:textColor="@color/colorPrimaryNegro"/>
+
+    </LinearLayout>
+
+
+    <ProgressBar
+        android:id="@+id/progressbar_Horizontal"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="34dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="0" />
+
+
+    <ProgressBar
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/progressBarCircular"
+        android:progress="0"
+        android:indeterminate="false"
+        android:max="100"
+        android:visibility="invisible"
+        android:layout_gravity="center_horizontal"/>
+
+    <!--BARRA DE HERRAMIENTAS -->
+    <!--
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/navigation"
+            android:layout_width="317dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:background="?android:attr/windowBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:itemBackground="@color/colorPrimaryDark"
+            app:itemIconTint="@color/colorTransparente"
+            app:itemTextColor="@color/colorTransparente"
+            app:itemIconSize="20dp"
+            app:menu="@menu/navigation" />
+
+    </FrameLayout>
+    -->
+</LinearLayout>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:id="@+id/main_content"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    tools:context=".principal.subVentanas.ConfiguracionSoporteActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@color/colorPrimary"
+            android:text="Ingrese la Ubicación"
+            android:gravity="center"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/et_codigoSoporte"
+            android:layout_width="275dp"
+            android:layout_height="wrap_content"
+            android:hint="Leer Código..."
+            android:inputType="phone"
+            android:imeActionId="12"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_aceptar"
+            style="?android:textAppearanceSmall"
+            android:layout_width="167dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:onClick="aceptarlo"
+            android:text="Aceptar"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+      <!-- <Button
+            android:id="@+id/btn_aceptar2"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:onClick="prueba"
+            android:text="prueba"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+  -->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical">
+
+        <!--De la consulta de la tabla INVENTARIO_CONFIGURACIONES -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="@color/colorPrimaryNegro"/>
+            <TextView
+                android:id="@+id/tv_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:hint="tv2"
+                android:textColor="@color/colorPrimary"/>
+            <TextView
+                android:id="@+id/tv_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:hint="tv3"
+                android:textColor="@color/colorPrimary"/>
+            <TextView
+                android:id="@+id/tv_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="tv1: "
+                android:textColor="@color/colorPrimaryNegro"/>
+            <TextView
+                android:id="@+id/tv_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:hint="tv2"
+                android:textColor="@color/colorPrimary"/>
+            <TextView
+                android:id="@+id/tv_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:hint="tv3"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/tv_7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:hint="tv7"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/tv_usurioC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:hint="usuario"
+                android:textColor="@color/colorPrimary"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_conteo1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:hint="con1"
+                android:textColor="@color/colorPrimary"/>
+            <TextView
+                android:id="@+id/tv_conteo2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:hint="con2"
+                android:textColor="@color/colorPrimary"/>
+            <TextView
+                android:id="@+id/tv_conteo3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:hint="con3"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/et_claveArreglada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:hint="claveArreglada"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/tv_ID_INV_SOPORT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:hint="ID_INV_SOPORT"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/tv_ID_INVENTARIO"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:hint="ID_INVENTARIO"
+                android:textColor="@color/colorPrimary"/>
+            <TextView
+                android:id="@+id/tv_NRO_CONTEO"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:hint="NRO CONTEO"
+                android:textColor="@color/colorPrimary"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
