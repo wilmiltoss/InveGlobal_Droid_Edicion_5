@@ -146,9 +146,18 @@ public class StockActivity extends AppCompatActivity {
             //7
             String metro =miBundle.getString("msjEmetro");
             txImetro.setText(metro);
-            //8
+
+            //8 ELIMINAR 0 A LA IZQUIERDA
+            //si el 1er digito es igual a 0 lo guardamos en scanning0 sino guardamos en scanning
             String scanning =miBundle.getString("msjScanning");
-            txScanning.setText(scanning);
+            String pri_digito=scanning.substring(0,1);//extrae el 1er digito
+            if (pri_digito.equals("0")) {//si el 1er digito es 0
+                String scanning0 = scanning.substring(1);//lo eliminamos y gurdamos
+                txScanning.setText(scanning0);
+            }else {
+                txScanning.setText(scanning);
+            }
+
             //9
             String usuario =miBundle.getString("msjUsu");
             txUsuario.setText(usuario);
@@ -196,16 +205,31 @@ public class StockActivity extends AppCompatActivity {
     //muestra los datos traidos de LecturasActivity en la pantalla StockActivity
     private void consultar() {
         SQLiteDatabase db = conn.getReadableDatabase();
-        String[] parametros = {txIScanning.getText().toString()};
+        String str = txIScanning.getText().toString();
+        String pri_digito=str.substring(0,1);//extrae el 1er
         String[] campos = {Utilidades.CAMPO_DESCRIPCION_SCANNING, Utilidades.CAMPO_DETALLE, Utilidades.CAMPO_ID_SECTOR};
-
         try {
-            Cursor cursor = db.query(Utilidades.TABLA_MAESTRO, campos, Utilidades.CAMPO_SCANNING + "=?", parametros, null, null, null);
-            cursor.moveToFirst();
-            txDescripcion.setText(cursor.getString(0));//muestra los campos
-            txDetalle.setText(cursor.getString(1));
-            txSector.setText(cursor.getString(2));
-            cursor.close();
+            if (pri_digito.equals("0")) {//si el 1er digito es 0
+                String scanning = str.substring(1);//lo eliminamos y realizamos la consulta
+                String[] parametros = {scanning};//guarmados en un array scanning ya con el 1er digito eliminado
+
+                Cursor cursor = db.query(Utilidades.TABLA_MAESTRO, campos, Utilidades.CAMPO_SCANNING + "=?", parametros, null, null, null);
+                cursor.moveToFirst();
+                txDescripcion.setText(cursor.getString(0));//muestra los campos
+                txDetalle.setText(cursor.getString(1));
+                txSector.setText(cursor.getString(2));
+                cursor.close();
+                //String[] parametros = {txIScanning.getText().toString()};
+            }else{
+                String[] parametros = {str};//guarmados en un array el str con todos sus digitos
+                Cursor cursor = db.query(Utilidades.TABLA_MAESTRO, campos, Utilidades.CAMPO_SCANNING + "=?", parametros, null, null, null);
+                cursor.moveToFirst();
+                txDescripcion.setText(cursor.getString(0));//muestra los campos
+                txDetalle.setText(cursor.getString(1));
+                txSector.setText(cursor.getString(2));
+                cursor.close();
+            }
+
 
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "El codigo no existe", Toast.LENGTH_LONG).show();
@@ -380,7 +404,6 @@ public class StockActivity extends AppCompatActivity {
         }
     }
 
-
     public void sumaStock(){
         int aux1 = Integer.valueOf(txSumaCantidad.getText().toString());
         int aux2 = Integer.valueOf(campoCantidad.getText().toString());
@@ -429,10 +452,12 @@ public class StockActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),"Se agrego la cantidad",Toast.LENGTH_SHORT).show();
         db.close();
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Error al actualizar los datos", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Error al agregar la cantidad", Toast.LENGTH_LONG).show();
         }
 
     }
+
+    //reemplaza la cantidad ultima registrada
     private void reemplazarTablaLecturaSQL() {
         try{
         sumaStock();
@@ -458,7 +483,7 @@ public class StockActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),"Cantidad reemplazada",Toast.LENGTH_SHORT).show();
         db.close();
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Error al reemplazar los datos", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Error al reemplazar la cantidad", Toast.LENGTH_LONG).show();
         }
 
     }

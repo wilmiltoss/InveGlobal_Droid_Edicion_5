@@ -96,7 +96,6 @@ public class LecturasActivity extends AppCompatActivity {
         dialogo.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
             }
         });
         android.support.v7.app.AlertDialog alertDialog = dialogo.create();
@@ -119,7 +118,6 @@ public class LecturasActivity extends AppCompatActivity {
                     btnBuscar2.setVisibility(View.VISIBLE);
                     panelNormal.setVisibility(View.GONE);
                     btnBuscar.setVisibility(View.GONE);
-
                 }
             }
         });
@@ -136,38 +134,60 @@ public class LecturasActivity extends AppCompatActivity {
         navigation2.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener2);
 
     }
-    //1-comprueba el codigo cargado si es existe
+    //1-comprueba el codigo cargado si es existe //CONTEO NORMAL
     public void comprobarCodigo (){
         try {
             ConexionSQLiteHelper admin = new ConexionSQLiteHelper(this, "InveStock.sqlite", null, 1);
             SQLiteDatabase db = admin.getWritableDatabase();
-            String scanning = campoScanning.getText().toString();
-            fila = db.rawQuery("SELECT " + Utilidades.CAMPO_SCANNING + " FROM " + Utilidades.TABLA_MAESTRO +
-                    " WHERE " + Utilidades.CAMPO_SCANNING + "='" +scanning+ "'", null);
-            fila.moveToFirst();
-            tvScanning.setText(fila.getString(0));//muestra los campos en la tx oculta
+            String str = campoScanning.getText().toString();
+            String pri_digito=str.substring(0,1);//extrae el 1er digito
+
+            if (pri_digito.equals("0")) {//si el 1er digito es 0
+                String scanning = str.substring(1);//lo eliminamos y realizamos la consulta
+                fila = db.rawQuery("SELECT ltrim(" + Utilidades.CAMPO_SCANNING + ", '0') FROM " + Utilidades.TABLA_MAESTRO +
+                        " WHERE " + Utilidades.CAMPO_SCANNING + "='" + scanning + "'", null);
+                fila.moveToFirst();
+                tvScanning.setText(fila.getString(0));//muestra los campos en la tx oculta
+
+            }else {//sino realizamos la consulta normal
+                fila = db.rawQuery("SELECT ltrim(" + Utilidades.CAMPO_SCANNING + ", '0') FROM " + Utilidades.TABLA_MAESTRO +
+                        " WHERE " + Utilidades.CAMPO_SCANNING + "='" + str + "'", null);
+                fila.moveToFirst();
+                tvScanning.setText(fila.getString(0));//muestra los campos en la tx oculta
+
+            }
 
         }catch (Exception e){
             tvScanning.setText("");
         }
     }
 
-    //1-comprueba el codigo cargado si es existe
+    //1-comprueba el codigo cargado si es existe //CONTEO RAPIDO
     public void comprobarCodigo2 (){
         try {
             ConexionSQLiteHelper admin = new ConexionSQLiteHelper(this, "InveStock.sqlite", null, 1);
             SQLiteDatabase db = admin.getWritableDatabase();
-            String scanning = lecturaRapida.getText().toString();
-            fila = db.rawQuery("SELECT " + Utilidades.CAMPO_SCANNING + " FROM " + Utilidades.TABLA_MAESTRO +
-                    " WHERE " + Utilidades.CAMPO_SCANNING + "='" +scanning+ "'", null);
-            fila.moveToFirst();
-            tvScanning.setText(fila.getString(0));//muestra los campos en la tx oculta
+            String str = lecturaRapida.getText().toString();
+            String pri_digito=str.substring(0,1);//extrae el 1er digito
 
+            if (pri_digito.equals("0")) {//si el 1er digito es 0
+                String scanning = str.substring(1);//lo eliminamos y realizamos la consulta
+                fila = db.rawQuery("SELECT ltrim(" + Utilidades.CAMPO_SCANNING + ", '0') FROM " + Utilidades.TABLA_MAESTRO +
+                        " WHERE " + Utilidades.CAMPO_SCANNING + "='" + scanning + "'", null);
+                fila.moveToFirst();
+                tvScanning.setText(fila.getString(0));//muestra los campos en la tx oculta
+
+            }else {//sino realizamos la consulta normal
+                fila = db.rawQuery("SELECT ltrim(" + Utilidades.CAMPO_SCANNING + ", '0') FROM " + Utilidades.TABLA_MAESTRO +
+                        " WHERE " + Utilidades.CAMPO_SCANNING + "='" + str + "'", null);
+                fila.moveToFirst();
+                tvScanning.setText(fila.getString(0));//muestra los campos en la tx oculta
+            }
         }catch (Exception e){
             tvScanning.setText("");
         }
-    }
 
+}
 
     //2-salto automatico de ventana
     public void validacionCampoScanning (){
@@ -198,7 +218,6 @@ public class LecturasActivity extends AppCompatActivity {
                         (s.length() == 7)  && (tvScanning.getText().length()!=0))
                 {
                     envioDatosLectura();//si esta correcto, envia los datos a Lectura
-
                 }else if (s.length()==13){
                     envioDatosLectura();//si esta correcto, envia los datos a Lec
                 }
@@ -299,12 +318,9 @@ public class LecturasActivity extends AppCompatActivity {
         tvUsuario = (TextView)findViewById(R.id.tv_Usuario);
         tvClave = (TextView)findViewById(R.id.tv_clave);
 
-
         tvScanning = (TextView)findViewById(R.id.tv_scanning);//auxiliar
         panelNormal=(TextInputLayout) findViewById(R.id.et_panelNormal);
         panelRapido=(TextInputLayout) findViewById(R.id.et_panelRapido);
-
-
 
         //btnScanner=(ImageButton)findViewById(R.id.btn_Scanner);
 
@@ -322,17 +338,17 @@ public class LecturasActivity extends AppCompatActivity {
 
     //envia las capturas de los datos ingresados a la ventana StockActivity
     public void onClickBuscar(View view) {
-        if (campoScanning.getText().length() != 0) {//si el campo esta vacio, mostrar mensaje
+        if (campoScanning.getText().equals("")) {//si el campo esta vacio, mostrar mensaje
             switch (view.getId()) {
                 case R.id.btn_buscar:
-                    envioDatosLectura();
+                    envioDatosLectura();//para conteo normal
                     break;
                 case R.id.btn_buscar2:
-                    envioDatosLectura2();
+                    envioDatosLectura2();//para conteo rapido
                     break;
             }
         } else {
-            Toast.makeText(getApplicationContext(), "El campo esta vacio", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Busqueda sin resultado", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -396,7 +412,6 @@ public class LecturasActivity extends AppCompatActivity {
         dialogo.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
             }
         });
         android.support.v7.app.AlertDialog alertDialog = dialogo.create();
@@ -461,7 +476,6 @@ public class LecturasActivity extends AppCompatActivity {
         miIntent = new Intent(LecturasActivity.this, StockAutomaticoActivity.class);
         Bundle miBundle = new Bundle();
         miBundle.putString("msjScanning", lecturaRapida.getText().toString());
-
         miBundle.putString("msjEnroLocacion", txRnroLocacion.getText().toString());//E1
         miBundle.putString("msjEconteo", txRconteo.getText().toString());//E2
         miBundle.putString("msjEsoporte", txRsoporte.getText().toString());//E2

@@ -65,10 +65,10 @@ public class GeneraArchivoActivity extends AppCompatActivity {
         if(cursor.getCount() <= 0)
         {
             cursor.close();
-           // Toast.makeText(getApplicationContext(), "No se registró ningun articulo", Toast.LENGTH_LONG).show();
+            // Toast.makeText(getApplicationContext(), "No se registró ningun articulo", Toast.LENGTH_LONG).show();
             return false;
         }
-            cursor.close();
+        cursor.close();
         //Toast.makeText(getApplicationContext(), "si hay registr", Toast.LENGTH_LONG).show();
         return true;
     }
@@ -81,16 +81,16 @@ public class GeneraArchivoActivity extends AppCompatActivity {
         {
             if((validarRegistroBD("1"))){//valida si existe registro en la tabla
 
-            //Copia los datos de lectura a un nuevo directorio "InveGlobal"
-            File origen = new File("sdcard/Download/lectura.csv");//de origen
-            File destino = new File("sdcard/Inve_Back/lectura.csv");//copia en destino
-            copiarDirectorio(origen, destino);
-            //copiarPegarBd ();
+                //Copia los datos de lectura a un nuevo directorio "InveGlobal"
+                File origen = new File("sdcard/Download/lectura.csv");//de origen
+                File destino = new File("sdcard/Inve_Back/lectura.csv");//copia en destino
+                copiarDirectorio(origen, destino);
+                //copiarPegarBd ();
 
-            escribirLecturas2();//escribe de la bd al archivo csv
-            Toast.makeText(getApplicationContext(), "Archivo Generado!", Toast.LENGTH_LONG).show();
+                escribirLecturas2();//escribe de la bd al archivo csv
+                Toast.makeText(getApplicationContext(), "Archivo Generado!", Toast.LENGTH_LONG).show();
 
-            pasarAmenuPrincipal();
+                pasarAmenuPrincipal();
 
             }else{
                 Toast.makeText(getApplicationContext(), "No Hay Datos de Lecturas", Toast.LENGTH_LONG).show();
@@ -116,20 +116,19 @@ public class GeneraArchivoActivity extends AppCompatActivity {
             conn= new ConexionSQLiteHelper(getApplicationContext(),"InveStock.sqlite",null,1);
             db = conn.getWritableDatabase();
             cursor = db.rawQuery("SELECT " +Utilidades.CAMPO_ID_LOCACION_L+","
-                                                +Utilidades.CAMPO_NRO_CONTEO+","
-                                                +Utilidades.CAMPO_ID_SOPORTE_L+","
-                                                +Utilidades.CAMPO_NRO_SOPORTE_L+","
-                                                +Utilidades.CAMPO_LETRA_SOPORTE_L+","
-                                                +Utilidades.CAMPO_NIVEL+","
-                                                +Utilidades.CAMPO_METRO+","
-                                                +Utilidades.CAMPO_SCANNING_L+","
-                                                +Utilidades.CAMPO_CANTIDAD+","
-                                                +Utilidades.CAMPO_ID_USUARIO_L+","
-                                                +Utilidades.CAMPO_ID_INVENTARIO+
-                                         " FROM "+Utilidades.TABLA_LECTURAS, null);
+                    +Utilidades.CAMPO_NRO_CONTEO+","
+                    +Utilidades.CAMPO_ID_SOPORTE_L+","
+                    +Utilidades.CAMPO_NRO_SOPORTE_L+","
+                    +Utilidades.CAMPO_LETRA_SOPORTE_L+","
+                    +Utilidades.CAMPO_NIVEL+","
+                    +Utilidades.CAMPO_METRO+","
+                    +Utilidades.CAMPO_SCANNING_L+","
+                    +Utilidades.CAMPO_CANTIDAD+","
+                    +Utilidades.CAMPO_ID_USUARIO_L+
+                    " FROM "+Utilidades.TABLA_LECTURAS, null);
             while(cursor.moveToNext())
                 //muestra los campos por columnas
-                lLineas.add(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s",
+                lLineas.add(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s",
                         cursor.getString(0),
                         cursor.getString(1),
                         cursor.getString(2),
@@ -139,8 +138,7 @@ public class GeneraArchivoActivity extends AppCompatActivity {
                         cursor.getString(6),
                         cursor.getString(7),
                         cursor.getString(8),
-                        cursor.getString(9),
-                        cursor.getString(10)));
+                        cursor.getString(9)));
             cursor.close();
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Error al generar registros", Toast.LENGTH_LONG).show();
@@ -168,7 +166,7 @@ public class GeneraArchivoActivity extends AppCompatActivity {
                 //guarda en la memoria externa de la aplicacion(sdcard)
                 pathDir = ruta_sd3+ "";
                 //_____________________________________________________________________________
-                   //almacenamiento externo **Dar permiso en el aplicacion del dispositivo
+                //almacenamiento externo **Dar permiso en el aplicacion del dispositivo
                 file = new File(pathDir, "lectura.csv");//se puede decirle la ruta aca
                 fout = new OutputStreamWriter(new FileOutputStream(file));
 

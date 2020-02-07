@@ -22,7 +22,7 @@ public class StockAutomaticoActivity extends AppCompatActivity {
 
     TextView txScanning, txDescripcion, txDetalle, txSector, txCantidad, txIScanning,
             txIconteo, txInroLocacion,txIsoporte, txInivel,txImetro, txInroSoporte,
-            txSumaCantidad,txIdLetraSoporte,txResulSuma, nroLecturas, txUsuario, txSectorDescripcion, campoCantidad, tvIdInventarioL, tvClaveS;;
+            txSumaCantidad,txIdLetraSoporte,txResulSuma, nroLecturas, txUsuario, txSectorDescripcion, campoCantidad, tvIdInventarioL, tvClaveS;
     ConexionSQLiteHelper conn;
 
     Button btnGrabar;
@@ -81,9 +81,18 @@ public class StockAutomaticoActivity extends AppCompatActivity {
             //7
             String metro =miBundle.getString("msjEmetro");
             txImetro.setText(metro);
-            //8
+
+            //8 ELIMINAR 0 A LA IZQUIERDA AL RECIBIR
+            //si el 1er digito es igual a 0 lo guardamos en scanning0 sino guardamos en scanning
             String scanning =miBundle.getString("msjScanning");
-            txScanning.setText(scanning);
+            String pri_digito=scanning.substring(0,1);//extrae el 1er digito
+            if (pri_digito.equals("0")) {//si el 1er digito es 0
+                String scanning0 = scanning.substring(1);//lo eliminamos y gurdamos
+                txScanning.setText(scanning0);
+            }else {
+                txScanning.setText(scanning);
+            }
+
             //9
             String usuario =miBundle.getString("msjUsu");
             txUsuario.setText(usuario);
@@ -123,7 +132,7 @@ public class StockAutomaticoActivity extends AppCompatActivity {
         tvIdInventarioL = (TextView)findViewById(R.id.tv_IdInventarioL);
 
         //campo editable
-        campoCantidad = (TextView) findViewById(R.id.etCantidad);         //9
+        campoCantidad = (TextView) findViewById(R.id.etCantidad1);         //9
         // txScanning=(EditText)findViewById(R.id.etActualizaScanning);
 
     }
