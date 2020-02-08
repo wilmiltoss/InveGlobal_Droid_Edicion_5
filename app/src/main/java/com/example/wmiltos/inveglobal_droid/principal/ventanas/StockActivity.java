@@ -53,10 +53,12 @@ public class StockActivity extends AppCompatActivity {
         btnGrabar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int limitarCantidad = campoCantidad.getText().length();
+                if (limitarCantidad <= 4) {//si es menor o igual a 4 digitos, ejecuta la consulta, sino el mensaje
 
-                //convertimos el campo a int p/ enviarlo a seleccionarConteo
-                int campo =  Integer.parseInt(txIconteo.getText().toString());
-                conteoEnProceso(campo);
+                    //convertimos el campo a int p/ enviarlo a seleccionarConteo
+                    int campo = Integer.parseInt(txIconteo.getText().toString());
+                    conteoEnProceso(campo);
 
                     if (campoCantidad.getText().length() != 0) {//si el campo esta vacio, mostrar mensaje
                         SQLiteDatabase db = conn.getWritableDatabase();
@@ -92,6 +94,13 @@ public class StockActivity extends AppCompatActivity {
                     } else {
                         Toast.makeText(getApplicationContext(), "El campo esta vacio", Toast.LENGTH_LONG).show();
                     }
+                }else{
+                    Toast.makeText(getApplicationContext(), "La cantidad supera a lo permitido..Favor verifique", Toast.LENGTH_LONG).show();
+
+                }
+
+
+
             }
 
         });
@@ -233,7 +242,9 @@ public class StockActivity extends AppCompatActivity {
 
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "El codigo no existe", Toast.LENGTH_LONG).show();
+            StockActivity.this.finish();
             limpiar();
+
         }
     }
 
@@ -397,7 +408,7 @@ public class StockActivity extends AppCompatActivity {
             txSumaCantidad.setText(cursor.getString(0));
             cursor.close();
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Sin registros", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Sin registros", Toast.LENGTH_LONG).show();
         }
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Error al mostrar la cantidad", Toast.LENGTH_LONG).show();
@@ -559,7 +570,7 @@ public class StockActivity extends AppCompatActivity {
             cursor.close();
 
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Error en mostrar sector", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Error en mostrar sector", Toast.LENGTH_LONG).show();
             limpiar();
         }
 

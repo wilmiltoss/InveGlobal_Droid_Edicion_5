@@ -529,7 +529,7 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
     private void numberPickerDialogoConteo(){
 
         NumberPicker myNumberPickerConteo = new NumberPicker(this);
-        myNumberPickerConteo.setMaxValue(3);
+        myNumberPickerConteo.setMaxValue(1);
         myNumberPickerConteo.setMinValue(1);
         NumberPicker.OnValueChangeListener myValChangedListener = new NumberPicker.OnValueChangeListener() {
             @Override
