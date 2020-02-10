@@ -152,6 +152,7 @@ public class StockAutomaticoActivity extends AppCompatActivity {
 
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "El codigo no existe", Toast.LENGTH_LONG).show();
+            StockAutomaticoActivity.this.finish();
             limpiar();
         }
     }

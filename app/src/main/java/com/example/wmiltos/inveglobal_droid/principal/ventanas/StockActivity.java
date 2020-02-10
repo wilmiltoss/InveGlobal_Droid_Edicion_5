@@ -27,7 +27,8 @@ public class StockActivity extends AppCompatActivity {
 
     TextView txScanning, txDescripcion, txDetalle, txSector, txCantidad, txIScanning,
              txIconteo, txInroLocacion,txIsoporte, txInivel,txImetro, txInroSoporte,
-             txSumaCantidad,txIdLetraSoporte,txResulSuma, nroLecturas, txUsuario, txSectorDescripcion, tvIdInventarioL, tvClaveS;
+             txSumaCantidad,txIdLetraSoporte,txResulSuma, nroLecturas, txUsuario, txSectorDescripcion, tvIdInventarioL, tvClaveS,
+              tvCantidadConteo;
     EditText campoCantidad;
     ConexionSQLiteHelper conn;
     Button btnGrabar;
@@ -53,8 +54,10 @@ public class StockActivity extends AppCompatActivity {
         btnGrabar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int limitarCantidad = campoCantidad.getText().length();
-                if (limitarCantidad <= 4) {//si es menor o igual a 4 digitos, ejecuta la consulta, sino el mensaje
+                String cantMaxConteo = tvCantidadConteo.getText().toString();
+                String cantidad = campoCantidad.getText().toString();
+
+                if (cantidad.hashCode()<= cantMaxConteo.hashCode()) {//si es mayor a la cantidad cargada
 
                     //convertimos el campo a int p/ enviarlo a seleccionarConteo
                     int campo = Integer.parseInt(txIconteo.getText().toString());
@@ -95,11 +98,9 @@ public class StockActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "El campo esta vacio", Toast.LENGTH_LONG).show();
                     }
                 }else{
-                    Toast.makeText(getApplicationContext(), "La cantidad supera a lo permitido..Favor verifique", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "La cantidad ingresada supera a lo establecido. Cantidad Máxima = "+cantMaxConteo, Toast.LENGTH_LONG).show();
 
                 }
-
-
 
             }
 
@@ -116,7 +117,7 @@ public class StockActivity extends AppCompatActivity {
     public void verIdInventario (){
         SQLiteDatabase db = conn.getWritableDatabase();
         try {
-            String[] campos = new String[] {"ID_INVENTARIO"};
+            String[] campos = new String[] {"ID_INVENTARIO,CANTIDAD_MAXIMA_CONTEO"};
             String[] args = new String[] {"1"};
             Cursor c = db.query(Utilidades.TABLA_CONFIGURACIONES, campos, "ID_INVENTARIO>?", args, null, null, null);
             //Nos aseguramos de que existe al menos un registro
@@ -125,6 +126,8 @@ public class StockActivity extends AppCompatActivity {
                 do {
                     String ID_INVENTARIO = c.getString(0);
                     tvIdInventarioL.setText(ID_INVENTARIO);
+                    String CANTIDAD_CONTEO = c.getString(1);
+                    tvCantidadConteo.setText(CANTIDAD_CONTEO);
                 } while(c.moveToNext());
             }
         }catch (Exception e){
@@ -208,6 +211,7 @@ public class StockActivity extends AppCompatActivity {
         //campo editable
         campoCantidad = (EditText)findViewById(R.id.etCantidad);         //9
        // txScanning=(EditText)findViewById(R.id.etActualizaScanning);
+        tvCantidadConteo = findViewById(R.id.tvCantidadConteo);
 
     }
 

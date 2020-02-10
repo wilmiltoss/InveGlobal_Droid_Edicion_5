@@ -158,7 +158,7 @@
             android:layout_height="wrap_content"
             android:textSize="25dp"
             android:hint="cantidad.."
-            android:inputType="phone"
+            android:inputType="number"
             android:maxLength="7"
             android:background="@drawable/stylo_borde"
             android:textColor="@color/colorPrimaryNegro"
@@ -318,8 +318,6 @@
             android:textSize="20dp"
             android:textStyle="bold" />
 
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -334,15 +332,22 @@
             android:textSize="15dp"
             android:hint="Nro.Lecturas"
             android:textColor="@color/colorPrimary"/>
+
+        <TextView
+            android:id="@+id/tvCantidadConteo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="170dp"
+            android:textSize="15dp"
+            android:hint="cantidad conteo"
+            android:textColor="@color/colorPrimary"/>
     </LinearLayout>
 
 
             <FrameLayout
 
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                >
+                android:layout_height="match_parent">
 
                 <android.support.design.widget.BottomNavigationView
                     android:id="@+id/navigation"
