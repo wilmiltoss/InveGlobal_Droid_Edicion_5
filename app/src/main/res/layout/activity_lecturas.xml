@@ -151,7 +151,7 @@
                    android:layout_width="256dp"
                    android:layout_height="wrap_content"
                    android:background="@drawable/stylo_borde"
-                   android:inputType="phone"
+                   android:inputType="number"
                    android:maxLength="20" />
            </android.support.design.widget.TextInputLayout>
 
@@ -162,6 +162,7 @@
                android:layout_height="wrap_content"
                android:paddingLeft="10dp"
                android:paddingTop="0dp"
+               android:inputType="number"
                app:counterEnabled="true"
                app:counterMaxLength="13">
 
@@ -171,7 +172,7 @@
                    android:layout_height="wrap_content"
                    android:backgroundTint="@color/colorVerdeClaro"
                    android:background="@drawable/stylo_borde"
-                   android:inputType="phone"
+                   android:inputType="number"
                    android:maxLength="20"
                    android:textColor="@color/colorPrimaryNegro"/>
            </android.support.design.widget.TextInputLayout>
