@@ -82,17 +82,17 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
 
        // datosScanner();
         //botones de NumberPicker
-        btnMetro = (Button) findViewById(R.id.btn_Metro);
+        btnMetro =  findViewById(R.id.btn_Metro);
         btnMetro.setOnClickListener(this);
 
-        btnConteo = (Button) findViewById(R.id.btn_conteo);
+        btnConteo =  findViewById(R.id.btn_conteo);
         btnConteo.setOnClickListener(this);
 
-        btnNivel = (Button) findViewById(R.id.btn_nivel);
+        btnNivel =  findViewById(R.id.btn_nivel);
         btnNivel.setOnClickListener(this);
 
-        btnNroSoporte = (Button) findViewById(R.id.btn_nroSoporte);
-        //btnNroSoporte.setEnabled(true);
+        btnNroSoporte = findViewById(R.id.btn_nroSoporte);
+
         btnNroSoporte.setOnClickListener(this);
 
         ArrayAdapter<CharSequence> adaptador = new ArrayAdapter
@@ -150,7 +150,7 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
     //boton fisico atraz
     @Override
     public void onBackPressed() {
-    dialogo();
+        UbicacionActivity.this.finish();
     }
 
     //setea el items del spinner de lo que viene de la configuracion
@@ -188,11 +188,11 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
         //conexion
         conn = new ConexionSQLiteHelper(getApplicationContext(), "InveStock.sqlite", null, 1);
 
-        btnHecho = (Button) findViewById(R.id.btn_hecho);
-        btnbarra = (Button) findViewById(R.id.btn_barra);
-        btnCerrar = (Button) findViewById(R.id.btn_cerrar);
+        btnHecho =  findViewById(R.id.btn_hecho);
+        btnbarra =  findViewById(R.id.btn_barra);
+        btnCerrar =  findViewById(R.id.btn_cerrar);
 
-        campoConteo = (TextView) findViewById(R.id.tv_conteo);//1
+        campoConteo =  findViewById(R.id.tv_conteo);//1
         campoNivel = (TextView) findViewById(R.id.tv_nivel);//4
         campoMetro = (TextView) findViewById(R.id.tv_metro);//
         campoNroSoporte = (TextView) findViewById(R.id.tv_nro_soporte);
@@ -231,6 +231,7 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
         tvConteo1 = (TextView) findViewById(R.id.tv_conteo1);
         tvConteo2 = (TextView) findViewById(R.id.tv_conteo2);
         tvConteo3 = (TextView) findViewById(R.id.tv_conteo3);
+
     }
 
     //spinner Locacion
@@ -377,10 +378,11 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
                 //bloqueamos controles
                 comboLocacion.setEnabled(false);
                 comboSoporte.setEnabled(false);
-                campoNroSoporte.setEnabled(false);
-                //btnNroSoporte.setVisibility(View.GONE);
+
+                //campoNroSoporte.setEnabled(false);
 
             }
+
 
             //CAMPO_ID_INVENTARIO_SOPORTE tv1
             //CAMPO_ID_CLAVE              tv2
@@ -394,33 +396,38 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
             if (tv1.getText().toString() != "") {
                 dialogoSpinner();
             }
+
         } catch (Exception e){
             Toast.makeText(getApplicationContext(), "error dialogo", Toast.LENGTH_SHORT).show();
         }
     }
-
+    //validamos los botones hecho y cerrar inventario si poseen claves ingresadas
     public void validacionHabiltarBoton(){
         String conteo1 = tvConteo1.getText().toString();
         String conteo2 = tvConteo2.getText().toString();
         String conteo3 = tvConteo3.getText().toString();
 
         //Evaluamos los textview; validacion de los estados de los conteos, para habilitar botones
+        //si hay datos de conteo habilitamos botones
         if (conteo1.equals("0") || conteo1.equals("1") || conteo1.equals("2")) {
             //Toast.makeText(getApplicationContext(), "habilitamos boton"+conteo1, Toast.LENGTH_SHORT).show();
             btnHecho.setEnabled(true);
             btnCerrar.setEnabled(true);
+
 
         }else if (conteo2.equals("0") || conteo2.equals("1") || conteo2.equals("2")) {
             //Toast.makeText(getApplicationContext(), "habilitamos boton"+conteo1, Toast.LENGTH_SHORT).show();
             btnHecho.setEnabled(true);
             btnCerrar.setEnabled(true);
 
+
         }else if (conteo3.equals("0") || conteo3.equals("1") || conteo3.equals("2")){
            // Toast.makeText(getApplicationContext(), "habilitamos boton"+conteo1, Toast.LENGTH_SHORT).show();
             btnHecho.setEnabled(true);
             btnCerrar.setEnabled(true);
+
         } else {
-            //habilitar botones y cambiar de color
+            //bloqueamos botones y cambiamos de color
             btnHecho.setEnabled(false);
             btnHecho.setBackgroundColor(0xFFE2E2E2);
             btnHecho.setTextColor(Color.parseColor("#FFFFFF"));
@@ -428,6 +435,8 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
             btnCerrar.setEnabled(false);
             btnCerrar.setTextColor(Color.parseColor("#FFFFFF"));
             btnCerrar.setBackgroundColor(0xFFE2E2E2);
+
+
            // Toast.makeText(getApplicationContext(), "boton no habilitado", Toast.LENGTH_SHORT).show();
         }
     }
@@ -444,6 +453,7 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
             public void onClick(DialogInterface dialog, int which) {
 
                 seleccionItemsSpinner();
+                btnNroSoporte.setEnabled(false);//bloqueamos el nro de soporte
             }
         });
         android.support.v7.app.AlertDialog alertDialog = dialogo.create();

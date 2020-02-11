@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +41,7 @@ public class ConfiguracionSoporteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_configuracion_soporte);
         variables();
         recepcionDatosUsuario();
+        validacionCampoCodSoporte();
 
     }
 
@@ -124,7 +127,29 @@ public class ConfiguracionSoporteActivity extends AppCompatActivity {
 
 
     public void aceptarlo(View view) {
-        validacionConteo();// # 1
+       // validacionConteo();// # 1
+    }
+
+
+    //2-salto automatico de ventana
+    public void validacionCampoCodSoporte (){
+        codigoSoporte.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+
+            }
+            //Pasar a la sgte ventana automaticamente si el numero de caracteres son las sgtes
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+            validacionConteo();
+            }
+        });
     }
 
     //valida si los conteos ya estan cerradas #2

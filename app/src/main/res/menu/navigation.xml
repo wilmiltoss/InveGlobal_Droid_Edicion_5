@@ -21,7 +21,7 @@
 
     <item
         android:id="@+id/navigation_red"
-        android:icon="@drawable/ic_action_name"
+        android:icon="@drawable/wifi"
         android:title="Red" />
 
 

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -56,52 +57,14 @@ public class StockActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String cantMaxConteo = tvCantidadConteo.getText().toString();
                 String cantidad = campoCantidad.getText().toString();
+                //si la cantidad ingresada es mayor a la cantidad permitida o tiene mas de 5 digitos, mostrar el dialogo
+                if (cantidad.hashCode()> cantMaxConteo.hashCode() || cantidad.length() >= 5) {//si es mayor a la cantidad cargada
 
-                if (cantidad.hashCode()<= cantMaxConteo.hashCode()) {//si es mayor a la cantidad cargada
+                    dialogoGuardarRegistro();
 
-                    //convertimos el campo a int p/ enviarlo a seleccionarConteo
-                    int campo = Integer.parseInt(txIconteo.getText().toString());
-                    conteoEnProceso(campo);
-
-                    if (campoCantidad.getText().length() != 0) {//si el campo esta vacio, mostrar mensaje
-                        SQLiteDatabase db = conn.getWritableDatabase();
-                        String[] parametros = {txInroLocacion.getText().toString(),
-                                txIconteo.getText().toString(),
-                                txIsoporte.getText().toString(),
-                                txInroSoporte.getText().toString(),
-                                txInivel.getText().toString(),
-                                txImetro.getText().toString(),
-                                txScanning.getText().toString(),
-                                tvIdInventarioL.getText().toString()};
-                        fila = db.rawQuery("SELECT " + Utilidades.CAMPO_CANTIDAD +
-
-                                        " FROM " + Utilidades.TABLA_LECTURAS + " WHERE "
-                                        + Utilidades.CAMPO_ID_LOCACION_L + "=? AND "
-                                        + Utilidades.CAMPO_NRO_CONTEO + "=? AND "
-                                        + Utilidades.CAMPO_ID_SOPORTE_L + "=? AND "
-                                        + Utilidades.CAMPO_NRO_SOPORTE_L + "=? AND "
-                                        + Utilidades.CAMPO_NIVEL + "=? AND "
-                                        + Utilidades.CAMPO_METRO + "=? AND "
-                                        + Utilidades.CAMPO_SCANNING_L + "=? AND "
-                                        + Utilidades.CAMPO_ID_INVENTARIO_L + "=?"
-                                , parametros, null);
-                        //si el select tira cantidad va actualizar, sino va registrar
-                        if (fila.moveToFirst()) {
-                            if (fila != null) {
-                                actualizarDialogo();
-                            }
-                        } else {
-                            registrarDialogo();
-                        }
-
-                    } else {
-                        Toast.makeText(getApplicationContext(), "El campo esta vacio", Toast.LENGTH_LONG).show();
-                    }
-                }else{
-                    Toast.makeText(getApplicationContext(), "La cantidad ingresada supera a lo establecido. Cantidad Máxima = "+cantMaxConteo, Toast.LENGTH_LONG).show();
-
+                }else{//si no guarda el registro directamente
+                    guardarRegistro();
                 }
-
             }
 
         });
@@ -133,6 +96,69 @@ public class StockActivity extends AppCompatActivity {
         }catch (Exception e){
             Toast.makeText(getApplicationContext(), "Error al consultar IdInventario", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void dialogoGuardarRegistro(){
+        android.support.v7.app.AlertDialog.Builder dialogo = new android.support.v7.app.AlertDialog.Builder(StockActivity.this);
+        dialogo.setMessage("Desea guardarlo de todas formas.?").setTitle("La cantidad excede a lo permitido..!!")
+                .setIcon(R.drawable.alerta_roja);
+        //2 -evento click ok
+        dialogo.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+               guardarRegistro();
+
+            }
+        });
+        dialogo.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                campoCantidad.setText("");
+            }
+        });
+        android.support.v7.app.AlertDialog alertDialog = dialogo.create();
+        alertDialog.show();
+    }
+
+    public void guardarRegistro(){
+            //convertimos el campo a int p/ enviarlo a seleccionarConteo
+            int campo = Integer.parseInt(txIconteo.getText().toString());
+            conteoEnProceso(campo);
+
+            if (campoCantidad.getText().length() != 0) {//si el campo esta vacio, mostrar mensaje
+                SQLiteDatabase db = conn.getWritableDatabase();
+                String[] parametros = {txInroLocacion.getText().toString(),
+                        txIconteo.getText().toString(),
+                        txIsoporte.getText().toString(),
+                        txInroSoporte.getText().toString(),
+                        txInivel.getText().toString(),
+                        txImetro.getText().toString(),
+                        txScanning.getText().toString(),
+                        tvIdInventarioL.getText().toString()};
+                fila = db.rawQuery("SELECT " + Utilidades.CAMPO_CANTIDAD +
+
+                                " FROM " + Utilidades.TABLA_LECTURAS + " WHERE "
+                                + Utilidades.CAMPO_ID_LOCACION_L + "=? AND "
+                                + Utilidades.CAMPO_NRO_CONTEO + "=? AND "
+                                + Utilidades.CAMPO_ID_SOPORTE_L + "=? AND "
+                                + Utilidades.CAMPO_NRO_SOPORTE_L + "=? AND "
+                                + Utilidades.CAMPO_NIVEL + "=? AND "
+                                + Utilidades.CAMPO_METRO + "=? AND "
+                                + Utilidades.CAMPO_SCANNING_L + "=? AND "
+                                + Utilidades.CAMPO_ID_INVENTARIO_L + "=?"
+                        , parametros, null);
+                //si el select tira cantidad va actualizar, sino va registrar
+                if (fila.moveToFirst()) {
+                    if (fila != null) {
+                        actualizarDialogo();
+                    }
+                } else {
+                    registrarDialogo();
+                }
+
+            } else {
+                Toast.makeText(getApplicationContext(), "El campo esta vacio", Toast.LENGTH_LONG).show();
+            }
     }
 
     //recepcion de los mensajes de la ventana LecturaActivity
