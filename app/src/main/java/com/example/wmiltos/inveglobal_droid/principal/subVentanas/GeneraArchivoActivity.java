@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.example.wmiltos.inveglobal_droid.R;
 import com.example.wmiltos.inveglobal_droid.entidades.conexion.ConexionSQLiteHelper;
+import com.example.wmiltos.inveglobal_droid.entidades.tablas.Lecturas;
+import com.example.wmiltos.inveglobal_droid.entidades.tablas.Locacion;
 import com.example.wmiltos.inveglobal_droid.principal.login.LoginActivity;
 import com.example.wmiltos.inveglobal_droid.utilidades.Utilidades;
 
@@ -57,49 +59,43 @@ public class GeneraArchivoActivity extends AppCompatActivity {
     }
 
     //valida si existe registro en la tabla Lectura para generar archivo
-    public boolean validarRegistroBD (String campoCarga) {
+    public void validarRegistroBD () {
         SQLiteDatabase db = conn.getWritableDatabase();
-
-        String Query = "Select * from " +Utilidades.TABLA_LECTURAS+" where " + Utilidades.CAMPO_ID_SOPORTE_L+ " = " + campoCarga;
+        Lecturas lecturas = null;
+        try{
+        String Query = "Select count(scanning) as cantidad from " +Utilidades.TABLA_LECTURAS+" where " + Utilidades.CAMPO_ID_SOPORTE_L;
         Cursor cursor = db.rawQuery(Query, null);
-        if(cursor.getCount() <= 0)
-        {
-            cursor.close();
-            // Toast.makeText(getApplicationContext(), "No se registró ningun articulo", Toast.LENGTH_LONG).show();
-            return false;
+
+        while (cursor.moveToNext()) {
+            lecturas = new Lecturas();
+            lecturas.setScanning(cursor.getString(0));
+
+            Log.i("cantidad", lecturas.getScanning());
         }
-        cursor.close();
-        //Toast.makeText(getApplicationContext(), "si hay registr", Toast.LENGTH_LONG).show();
-        return true;
-    }
-
-
-
-    //Genera archivo csv de tabla Lectura SQL si existe registro, sino vuelve al menu
-    public void generarArchivo(View view) {
-        try
+        if(lecturas.getScanning().equals("0"))//si no hay registro enviar mensaje
         {
-            if((validarRegistroBD("1"))){//valida si existe registro en la tabla
+            Toast.makeText(getApplicationContext(), "No Hay Datos de Lecturas", Toast.LENGTH_LONG).show();
+            pasarAmenuPrincipal();
+        }else {   //sino guardar en las carpetas destinadas
+            //Copia los datos de lectura a un nuevo directorio "InveGlobal"
+            File origen = new File("sdcard/Download/lectura.csv");//de origen
+            File destino = new File("sdcard/Inve_Back/lectura.csv");//copia en destino
+            copiarDirectorio(origen, destino);
+            //copiarPegarBd ();
 
-                //Copia los datos de lectura a un nuevo directorio "InveGlobal"
-                File origen = new File("sdcard/Download/lectura.csv");//de origen
-                File destino = new File("sdcard/Inve_Back/lectura.csv");//copia en destino
-                copiarDirectorio(origen, destino);
-                //copiarPegarBd ();
+            escribirLecturas2();//escribe de la bd al archivo csv
+            Toast.makeText(getApplicationContext(), "Archivo Generado!", Toast.LENGTH_LONG).show();
 
-                escribirLecturas2();//escribe de la bd al archivo csv
-                Toast.makeText(getApplicationContext(), "Archivo Generado!", Toast.LENGTH_LONG).show();
-
-                pasarAmenuPrincipal();
-
-            }else{
-                Toast.makeText(getApplicationContext(), "No Hay Datos de Lecturas", Toast.LENGTH_LONG).show();
-                pasarAmenuPrincipal();
+            pasarAmenuPrincipal();
             }
-
         }catch (Exception ex){
             Toast.makeText(getApplicationContext(), "Error al leer fichero en la memoria interna", Toast.LENGTH_LONG).show();
         }
+    }
+
+    //Genera archivo csv de tabla Lectura SQL si existe registro, sino vuelve al menu
+    public void generarArchivo(View view) {
+      validarRegistroBD();
     }
 
     private void pasarAmenuPrincipal() {
