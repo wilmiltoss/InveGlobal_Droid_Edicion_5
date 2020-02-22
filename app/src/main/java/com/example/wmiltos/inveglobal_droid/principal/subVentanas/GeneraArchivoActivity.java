@@ -301,6 +301,6 @@ public class GeneraArchivoActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Error al copiar Bd a download", Toast.LENGTH_LONG).show();
         }
     }
-    //prueba de actualizacion ahora
+    //prueba de actualizacion ahora nuevamente
 
 }
