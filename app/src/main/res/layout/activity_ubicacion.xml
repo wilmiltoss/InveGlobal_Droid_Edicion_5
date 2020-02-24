@@ -7,7 +7,6 @@
     android:orientation="vertical"
     tools:context=".principal.ventanas.UbicacionActivity">
 
-
     <!-- Login progress -->
     <ProgressBar
         style="?android:attr/progressBarStyleLarge"
@@ -15,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -25,214 +25,214 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingTop="5dp">
-
-        <Button
-            android:id="@+id/btn_conteo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Conteo:"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="116dp" />
-
-        <TextView
-            android:id="@+id/tv_conteo"
-            android:layout_width="62dp"
-            android:textSize="20dp"
-            android:textColor="@color/colorPrimaryNegro"
-            android:layout_height="wrap_content"
-            android:text="1" />
-
-
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp">
-
-        <TextView
-            android:id="@+id/txtLocacion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Locación : "
-            android:textColor="@color/colorPrimaryNegro"
-            android:textSize="20dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Spinner
-            android:id="@+id/sp_locacion"
-            android:layout_width="225dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/stylo_borde"
-            android:text="" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp">
-
-        <TextView
-            android:id="@+id/txtTipoSoporte"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tipo Soporte : "
-            android:textColor="@color/colorPrimaryNegro"
-            android:textSize="20dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Spinner
-            android:id="@+id/sp_tipoSoporte"
-            android:layout_width="242dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/stylo_borde"
-            android:text="" />
-
-        <Button
-            android:id="@+id/btn_nroSoporte"
-            android:layout_width="53dp"
-            android:layout_height="wrap_content"
-            android:text="Nro"
-            android:enabled="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="116dp" />
-
-        <TextView
-            android:id="@+id/tv_nro_soporte"
-            android:layout_width="40dp"
-            android:layout_height="37dp"
-            android:text="1"
-            android:textColor="@color/colorPrimaryNegro"
-            android:textSize="20dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp">
-
-        <Button
-            android:id="@+id/btn_Metro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Metro :"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="116dp" />
-
-        <TextView
-            android:id="@+id/tv_metro"
-            android:layout_width="53dp"
-            android:layout_height="wrap_content"
-            android:text="1"
-            android:textColor="@color/colorPrimaryNegro"
-            android:textSize="20dp"/>
-
-        <Button
-            android:id="@+id/btn_nivel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nivel :"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="116dp" />
-
-        <TextView
-            android:id="@+id/tv_nivel"
-            android:layout_width="53dp"
-            android:layout_height="wrap_content"
-            android:text="1"
-            android:textColor="@color/colorPrimaryNegro"
-            android:textSize="20dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="190dp"
-        android:layout_height="0dp">
-
-        <TextView
-            android:id="@+id/txtIdlocacion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:text="locacion"
-            android:textColor="@color/colorPrimaryNegro"
-            android:textSize="15dp" />
-
-        <TextView
-            android:id="@+id/txtIdSoporte"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:text=""
-            android:textColor="@color/colorPrimaryNegro"
-            android:textSize="15dp" />
-
-        <TextView
-            android:id="@+id/txtDescripSoporte"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:text=""
-            android:textColor="@color/colorPrimaryNegro"
-            android:textSize="15dp" />
-
-        <TextView
-            android:id="@+id/txtDescripcionloca"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:text=""
-            android:textColor="@color/colorPrimaryNegro"
-            android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/text_nombreEquipoL"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:hint=""
-                android:textColor="@color/colorPrimary"/>
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp">
 
-        <TextView
-            android:id="@+id/text_usuario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="1dp"
-            android:textColor="@color/colorPrimary"/>
+                <Button
+                    android:id="@+id/btn_conteo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Conteo:"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="116dp" />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_conteo"
+                    android:layout_width="62dp"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textColor="@color/colorPrimaryNegro"
+                    android:textSize="20dp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/txtLocacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Locación : "
+                    android:textColor="@color/colorPrimaryNegro"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Spinner
+                    android:id="@+id/sp_locacion"
+                    android:layout_width="225dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/stylo_borde"
+                    android:text="" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/txtTipoSoporte"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tipo Soporte : "
+                    android:textColor="@color/colorPrimaryNegro"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btn_nroSoporte"
+                    android:layout_width="53dp"
+                    android:layout_height="wrap_content"
+                    android:enabled="true"
+                    android:text="Nro"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="116dp" />
+
+                <Spinner
+                    android:id="@+id/sp_tipoSoporte"
+                    android:layout_width="242dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/stylo_borde"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/tv_nro_soporte"
+                    android:layout_width="40dp"
+                    android:layout_height="37dp"
+                    android:text="1"
+                    android:textColor="@color/colorPrimaryNegro"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp">
+
+                <Button
+                    android:id="@+id/btn_Metro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Metro :"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="116dp" />
+
+                <TextView
+                    android:id="@+id/tv_metro"
+                    android:layout_width="53dp"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textColor="@color/colorPrimaryNegro"
+                    android:textSize="20dp" />
+
+                <Button
+                    android:id="@+id/btn_nivel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nivel :"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="116dp" />
+
+
+                <TextView
+                    android:id="@+id/tv_nivel"
+                    android:layout_width="53dp"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textColor="@color/colorPrimaryNegro"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="190dp"
+                android:layout_height="0dp">
+
+                <TextView
+                    android:id="@+id/txtIdlocacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:text="locacion"
+                    android:textColor="@color/colorPrimaryNegro"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/txtIdSoporte"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:text=""
+                    android:textColor="@color/colorPrimaryNegro"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/txtDescripSoporte"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:text=""
+                    android:textColor="@color/colorPrimaryNegro"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/txtDescripcionloca"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:text=""
+                    android:textColor="@color/colorPrimaryNegro"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/text_nombreEquipoL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint=""
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/text_usuario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="1dp" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -242,48 +242,48 @@
                     android:id="@+id/tv_Inventario"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:text="Inventario: "
                     android:layout_marginLeft="5dp"
-                    android:textColor="@color/colorPrimaryNegro"/>
+                    android:text="Inventario: "
+                    android:textColor="@color/colorPrimaryNegro"
+                    android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/tv_IdInventario"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
                     android:hint="id inventario"
-                    android:textColor="@color/colorPrimary"/>
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/tv_barraSector"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
+                    android:textColor="@color/colorPrimary"
 
-                    android:textColor="@color/colorPrimary"/>
+                    android:textSize="20dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:id="@+id/tv_DescripcionSoport"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
                     android:text=""
-                    android:textColor="@color/colorPrimaryNegro"/>
+                    android:textColor="@color/colorPrimaryNegro"
+                    android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/tv_6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:hint="descripción soporte"
                     android:layout_marginLeft="5dp"
-                    android:textColor="@color/colorPrimary"/>
-
+                    android:hint="descripción soporte"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20dp" />
 
 
             </LinearLayout>
@@ -292,70 +292,78 @@
             <LinearLayout
                 android:layout_width="1dp"
                 android:layout_height="1dp">
+
                 <TextView
                     android:id="@+id/tv_7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
                     android:hint="tv7"
-                    android:textColor="@color/colorPrimary"/>
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20dp" />
+
                 <TextView
                     android:id="@+id/tv_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
                     android:text=""
-                    android:textColor="@color/colorPrimaryNegro"/>
+                    android:textColor="@color/colorPrimaryNegro"
+                    android:textSize="20dp" />
+
                 <TextView
                     android:id="@+id/tv_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
                     android:hint="tv2"
-                    android:textColor="@color/colorPrimary"/>
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20dp" />
+
                 <TextView
                     android:id="@+id/tv_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
                     android:hint="tv3"
-                    android:textColor="@color/colorPrimary"/>
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20dp" />
+
                 <TextView
                     android:id="@+id/tv_4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
                     android:text="tv1: "
-                    android:textColor="@color/colorPrimaryNegro"/>
+                    android:textColor="@color/colorPrimaryNegro"
+                    android:textSize="20dp" />
+
                 <TextView
                     android:id="@+id/tv_5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
                     android:hint="tv5"
-                    android:textColor="@color/colorPrimary"/>
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/tv_conteo1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
                     android:hint="con1"
-                    android:textColor="@color/colorPrimary"/>
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20dp" />
+
                 <TextView
                     android:id="@+id/tv_conteo2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
                     android:hint="con2"
-                    android:textColor="@color/colorPrimary"/>
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20dp" />
+
                 <TextView
                     android:id="@+id/tv_conteo3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
                     android:hint="con3"
-                    android:textColor="@color/colorPrimary"/>
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20dp" />
 
             </LinearLayout>
 
@@ -402,38 +410,34 @@
                     android:paddingRight="10dp"
                     android:text="cerrar"
                     android:textColor="@color/colorTransparente" />
-
-
             </LinearLayout>
 
-     <!--BARRA DE HERRAMIENTAS -->
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                <HorizontalScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
-                <android.support.design.widget.BottomNavigationView
-                    android:id="@+id/navigation"
-                    android:layout_width="357dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="0dp"
-                    android:layout_marginStart="0dp"
-                    android:background="?android:attr/windowBackground"
-                    app:itemBackground="@color/colorPrimaryDark"
-                    app:itemIconSize="20dp"
-                    app:itemIconTint="@color/colorTransparente"
-                    app:itemTextColor="@color/colorTransparente"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:menu="@menu/navigation" />
-
-            </FrameLayout>
-
+                        <android.support.design.widget.BottomNavigationView
+                            android:id="@+id/navigation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="0dp"
+                            android:layout_marginStart="0dp"
+                            android:background="?android:attr/windowBackground"
+                            app:itemBackground="@color/colorPrimaryDark"
+                            app:itemIconSize="20dp"
+                            app:itemIconTint="@color/colorTransparente"
+                            app:itemTextColor="@color/colorTransparente"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:menu="@menu/navigation" />
+                    </FrameLayout>
+                </HorizontalScrollView>
 
         </LinearLayout>
-
-
-
 
     </ScrollView>
 

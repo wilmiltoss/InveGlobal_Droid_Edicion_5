@@ -12,6 +12,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,6 +23,7 @@ import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.wmiltos.inveglobal_droid.R;
 import com.example.wmiltos.inveglobal_droid.dialogo.DialogoBarraSector;
@@ -64,6 +66,7 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ubicacion);
+
         //Icono en el action Bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
@@ -145,6 +148,47 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
                 }
             }
         });
+    }
+
+
+
+    //IMPORTANTE= inflater de la barra superior menu para que funcione la grilla
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu); //apuntamos al xml menu_principal para q aparezca
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        switch (item.getItemId()) {
+            case R.id.navigation_home:
+                dialogo();
+                return true;
+            case R.id.action_genera_archivo:
+                Intent intent2 = new Intent(UbicacionActivity.this, VisualizarRegistroActivity.class);
+                startActivity(intent2);
+                return true;
+            case R.id.action_limpiar:
+                Intent intent3 = new Intent(UbicacionActivity.this, Limpiar2Activity.class);
+                startActivity(intent3);
+                return true;
+            case R.id.action_enviar_red:
+                Intent intent4 = new Intent(UbicacionActivity.this, RedActivity.class);
+                startActivity(intent4);
+                return true;
+        //}
+        //return false;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     //boton fisico atraz

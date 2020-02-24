@@ -24,6 +24,9 @@
         android:icon="@drawable/wifi"
         android:title="Red" />
 
-
+    <item
+        android:id="@+id/navigation_otro"
+        android:icon="@drawable/inventario"
+        android:title="Otro" />
 
 </menu>
