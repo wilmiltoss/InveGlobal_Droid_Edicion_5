@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".iTrack.QuiebreActivity"
+    android:orientation="vertical"
+    tools:showIn="@layout/activity_quiebre">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+
+      <!--  <Button
+            android:id="@+id/btn_ConteoRapido_quiebre"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:background="@drawable/btn_color"
+            android:onClick="onClickConteoRapido_quiebre"
+            android:text="Conteo +1"
+            android:textColor="@color/colorVerde" />-->
+
+        <TextView
+            android:id="@+id/txtScanning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SCANNING            "
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/et_panelNormal"
+                android:layout_width="282dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="0dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="13">
+
+                <EditText
+                    android:id="@+id/et_scan_lectura_quiebre"
+                    android:layout_width="256dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/stylo_borde"
+                    android:inputType="number"
+                    android:maxLength="20" />
+            </android.support.design.widget.TextInputLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_buscar"
+            android:layout_width="312dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="0dp"
+            android:background="@color/colorPrimary"
+            android:text="Buscar"
+            android:onClick="onClickBuscar"
+            android:gravity="center"
+            android:textColor="@color/cardview_light_background" />
+
+        <!--    <Button
+            android:id="@+id/btn_buscar2"
+            android:layout_width="300dp"
+            android:layout_height="58dp"
+            android:background="@color/colorPrimaryNegro"
+            android:onClick="onClickBuscar"
+            android:layout_marginTop="20dp"
+            android:text="Buscar"
+            android:textColor="@color/colorTransparente" />-->
+
+
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ID "
+                    android:textColor="@color/colorPrimaryNegro" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:paddingRight="40dp"
+                    android:text="CODIGO"
+                    android:textColor="@color/colorPrimaryNegro" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:paddingRight="50dp"
+                    android:text="DESCRIPCION    "
+                    android:textColor="@color/colorPrimaryNegro" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:paddingRight="3dp"
+                    android:text="CANTIDAD"
+                    android:textColor="@color/colorPrimaryNegro" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="--------------------------------------------------------------------------------------------" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <ListView
+                    android:id="@+id/textViewPanel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="327dp"
+                    android:divider="#61000000"
+                    android:dividerHeight="1dp"
+                    android:scrollbarSize="2dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_finalizar"
+            android:layout_width="312dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="0dp"
+            android:background="@color/colorPrimary"
+            android:text="FINALIZAR"
+            android:layout_gravity="center"
+            android:onClick="onClickFinalizar"
+            android:gravity="center"
+            android:textColor="@color/cardview_light_background" />
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

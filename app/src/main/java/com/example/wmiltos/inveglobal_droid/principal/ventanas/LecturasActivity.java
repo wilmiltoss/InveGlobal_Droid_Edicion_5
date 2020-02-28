@@ -306,34 +306,34 @@ public class LecturasActivity extends AppCompatActivity {
 
     private void variables() {
         conn = new ConexionSQLiteHelper(getApplicationContext(), "InveStock.sqlite", null, 1);
-        btnBuscar = (Button) findViewById(R.id.btn_buscar);
-        btnBuscar2 = (Button) findViewById(R.id.btn_buscar2);
-        btnConteoRapido = (Button) findViewById(R.id.btn_ConteoRapido);
-        txConteo = (TextView) findViewById(R.id.txtConteo);
-        txMetro = (TextView) findViewById(R.id.txtMetro);
-        txNivel = (TextView) findViewById(R.id.txtNivel);
-        txLocacion = (TextView) findViewById(R.id.txtLocacion);
-        txSoporte = (TextView) findViewById(R.id.txtTipoSoporte);
-        nroLecturasL = (TextView) findViewById(R.id.tvNroLecturasL);
-        tvUsuario = (TextView)findViewById(R.id.tv_Usuario);
-        tvClave = (TextView)findViewById(R.id.tv_clave);
+        btnBuscar = findViewById(R.id.btn_buscar);
+        btnBuscar2 =  findViewById(R.id.btn_buscar2);
+        btnConteoRapido =  findViewById(R.id.btn_ConteoRapido);
+        txConteo =  findViewById(R.id.txtConteo);
+        txMetro = findViewById(R.id.txtMetro);
+        txNivel =  findViewById(R.id.txtNivel);
+        txLocacion =  findViewById(R.id.txtLocacion);
+        txSoporte = findViewById(R.id.txtTipoSoporte);
+        nroLecturasL =  findViewById(R.id.tvNroLecturasL);
+        tvUsuario = findViewById(R.id.tv_Usuario);
+        tvClave = findViewById(R.id.tv_clave);
 
-        tvScanning = (TextView)findViewById(R.id.tv_scanning);//auxiliar
-        panelNormal=(TextInputLayout) findViewById(R.id.et_panelNormal);
-        panelRapido=(TextInputLayout) findViewById(R.id.et_panelRapido);
+        tvScanning = findViewById(R.id.tv_scanning);//auxiliar
+        panelNormal= findViewById(R.id.et_panelNormal);
+        panelRapido= findViewById(R.id.et_panelRapido);
 
         //btnScanner=(ImageButton)findViewById(R.id.btn_Scanner);
 
-        campoScanning = (EditText) findViewById(R.id.et_scanningLectura); // campoScanning.requestFocus();
-        lecturaRapida = (EditText) findViewById(R.id.et_scanningLecturaRapida);
+        campoScanning =  findViewById(R.id.et_scanningLectura); // campoScanning.requestFocus();
+        lecturaRapida =  findViewById(R.id.et_scanningLecturaRapida);
 
         //variables de transferencia a la ventana StockActivity
-        txRnroLocacion = (TextView) findViewById(R.id.tvRnroLocacion);
-        txRconteo = (TextView) findViewById(R.id.tvRconteo);
-        txRsoporte = (TextView) findViewById(R.id.tvRsoporte);
-        txRnivel = (TextView) findViewById(R.id.tvRnivel);
-        txRmetro = (TextView) findViewById(R.id.tvRmetro);
-        txRnroSoporte = (TextView) findViewById(R.id.tvRnroSoporte);
+        txRnroLocacion =  findViewById(R.id.tvRnroLocacion);
+        txRconteo =  findViewById(R.id.tvRconteo);
+        txRsoporte =  findViewById(R.id.tvRsoporte);
+        txRnivel =  findViewById(R.id.tvRnivel);
+        txRmetro =  findViewById(R.id.tvRmetro);
+        txRnroSoporte =  findViewById(R.id.tvRnroSoporte);
     }
 
     //envia las capturas de los datos ingresados a la ventana StockActivity

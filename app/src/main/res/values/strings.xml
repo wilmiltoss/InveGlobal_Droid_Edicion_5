@@ -15,6 +15,10 @@
     <string name="action_limpiar">Limpiar</string>
     <string name="action_enviar_red">Enviar Datos a Red</string>
 
+    <!--de iTrack-->
+    <string name="action_quiebre">Quiebre</string>
+    <string name="action_inventario_puntual">Inventario Puntual</string>
+
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="tab_text_1">Ubicacion</string>
@@ -25,5 +29,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_principal_">Principal_Activity</string>
     <string name="title_activity_ubicar_bd_">UbicarBD_Activity</string>
+    <string name="title_activity_quiebre">QuiebreActivity</string>
 </resources>
 

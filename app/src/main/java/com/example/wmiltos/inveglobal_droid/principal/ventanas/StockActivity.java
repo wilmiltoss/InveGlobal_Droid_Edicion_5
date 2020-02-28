@@ -62,8 +62,8 @@ public class StockActivity extends AppCompatActivity {
 
                     dialogoGuardarRegistro();
 
-                }else{//si no guarda el registro directamente
-                    guardarRegistro();
+                }else{//si no va a comprobarRegistro luego lo guarda  directamente
+                    comprobarRegistro();
                 }
             }
 
@@ -106,7 +106,7 @@ public class StockActivity extends AppCompatActivity {
         dialogo.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-               guardarRegistro();
+                comprobarRegistro();
 
             }
         });
@@ -120,7 +120,7 @@ public class StockActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    public void guardarRegistro(){
+    public void comprobarRegistro(){
             //convertimos el campo a int p/ enviarlo a seleccionarConteo
             int campo = Integer.parseInt(txIconteo.getText().toString());
             conteoEnProceso(campo);
@@ -241,7 +241,7 @@ public class StockActivity extends AppCompatActivity {
 
     }
 
-    //muestra los datos traidos de LecturasActivity en la pantalla StockActivity
+    //muestra los datos del scanning segun el tx que capturamos de la ventana anterior
     private void consultar() {
         SQLiteDatabase db = conn.getReadableDatabase();
         String str = txIScanning.getText().toString();
@@ -269,12 +269,10 @@ public class StockActivity extends AppCompatActivity {
                 cursor.close();
             }
 
-
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "El codigo no existe", Toast.LENGTH_LONG).show();
             StockActivity.this.finish();
             limpiar();
-
         }
     }
 
@@ -339,7 +337,6 @@ public class StockActivity extends AppCompatActivity {
 
     //registro de un nuevo campo en la tabla Lecturas
     private void registrarDialogo() {
-
         //1 -creamos dialogo
         android.support.v7.app.AlertDialog.Builder dialogo = new android.support.v7.app.AlertDialog.Builder(StockActivity.this);
         dialogo.setMessage("Datos Guardados!").setTitle("Datos de Lectura")
@@ -358,32 +355,32 @@ public class StockActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    private void actualizarDialogo() {
-        //1 -creamos dialogo
-        android.support.v7.app.AlertDialog.Builder dialogo = new android.support.v7.app.AlertDialog.Builder(StockActivity.this);
-        dialogo.setMessage("¿Se Agregar a esta cantidad a la ya antes Cargada?").setTitle("Datos de Lectura")
-                .setIcon(R.drawable.alert_dialogo);
-        //2 -evento click ok
-        dialogo.setPositiveButton("Si", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                actualizarTablaLecturaSQL3();
-                limpiar();
-                volverAmenu();
-            }
-        });
+        private void actualizarDialogo() {
+            //1 -creamos dialogo
+            android.support.v7.app.AlertDialog.Builder dialogo = new android.support.v7.app.AlertDialog.Builder(StockActivity.this);
+            dialogo.setMessage("¿Se Agregar a esta cantidad a la ya antes Cargada?").setTitle("Datos de Lectura")
+                    .setIcon(R.drawable.alert_dialogo);
+            //2 -evento click ok
+            dialogo.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    actualizarTablaLecturaSQL3();
+                    limpiar();
+                    volverAmenu();
+                }
+            });
 
-        dialogo.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-              dialogoReemplazar();
-            }
-        });
-        //4-crear alertDialogo
-        android.support.v7.app.AlertDialog alertDialog = dialogo.create();
-        alertDialog.show();
+            dialogo.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                  dialogoReemplazar();
+                }
+            });
+            //4-crear alertDialogo
+            android.support.v7.app.AlertDialog alertDialog = dialogo.create();
+            alertDialog.show();
 
-    }
+        }
     public void dialogoReemplazar(){
         android.support.v7.app.AlertDialog.Builder dialogo = new android.support.v7.app.AlertDialog.Builder(StockActivity.this);
         dialogo.setMessage("Esta seguro de Reemplazar la Cantidad antes Cargada?").setTitle("Datos de Lectura")

@@ -73,19 +73,43 @@ public class Utilidades {
     public static String CAMPO_CONTEO_3="CONTEO3";
     public static String CAMPO_ID_LOCACIONES="ID_LOCACIONES";
 
-
-
-
-
-    //final son las Sentencias  SQL dadas
-    public static final String CREAR_TABLA_USUARIO="CREATE TABLE IF NOT EXISTS "+TABLA_USUARIO+" ("+CAMPO_ID_USUARIO+" INT NOT NULL PRIMARY KEY ASC, "
-                                                                                     +CAMPO_NOMBRE_USUARIO+" VARCHAR NOT NULL, "
-                                                                                     +CAMPO_NIVEL_ACCESO+" INT NOT NULL)";
+    /*public static final String CREAR_TABLA_PRODUCTOS="CREATE TABLE IF NOT EXISTS "+TABLA_PRODUCTOS+" ("+CAMPO_ID_USUARIO2+" INT NOT NULL PRIMARY KEY ASC, "
+            +CAMPO_NOMBRE_USUARIO2+" VARCHAR NOT NULL, "
+            +CAMPO_NIVEL_ACCESO2+" INT NOT NULL)";*/
 
     public static final String ELIMINAR_TABLA_USUARIO="DROP TABLE IF EXISTS USUARIOS";
     public static final String BORRAR_DATOS_LECTURA="DELETE FROM LECTURAS";
     public static final String INSERTAR_TABLA_USUARIO="INSERT INTO"+TABLA_USUARIO+"VALUES(01,'admin',01)";
-
     public static final String BUSCAR_USUARIOS="SELECT * FROM "+TABLA_USUARIO;
+
+    public static final String ELIMINAR_TABLA_LOCALES="DROP TABLE IF EXISTS LOCALES";
+
+    //ITRACK**********************************************************************************************
+    public static String TABLA_PRODUCTOS="PRODUCTOS";
+    public static String CAMPO_ID="ID";
+    public static String CAMPO_CODIGO_BARRA ="CODIGO_BARRA";
+    public static String CAMPO_DESCRIP ="DESCRIPCION";
+    public static String CAMPO_CANT_PROD ="CANTIDAD";
+    public static String CAMPO_CATEGORIA ="CATEGORIA";
+    public static String CAMPO_LOCAL ="LOCAL";
+
+    //final son las Sentencias  SQL dadas
+    //CREAMOS LA TABLA PRODUCTO
+    public static final String CREAR_TABLA_PRODUCTOS="CREATE TABLE IF NOT EXISTS "+TABLA_PRODUCTOS+" ("+CAMPO_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                                                                     +CAMPO_CODIGO_BARRA+" VARCHAR NOT NULL, "
+                                                                                     +CAMPO_DESCRIP+" VARCHAR NOT NULL, "
+                                                                                     +CAMPO_CANT_PROD+" FLOAT, "
+                                                                                     +CAMPO_CATEGORIA+" VARCHAR NULL, "
+                                                                                     +CAMPO_LOCAL+" INT NULL)";
+
+    //ITRACK..............DE LAS IMPORTACIONES TABLAS CSV CARPETA DOWNLOAD.....................................
+    public static String TABLA_LOCALES="LOCALES";
+    public static String CAMPO_CODIGO="CODIGO";
+    public static String CAMPO_DESCRIPCION_LOCAL ="DESCRIPCION";
+    public static String CAMPO_CADENA ="CADENA";
+
+    public static final String CREAR_TABLA_LOCALES="CREATE TABLE IF NOT EXISTS "+TABLA_LOCALES+" (" +CAMPO_CODIGO+" VARCHAR NOT NULL, "
+                                                                                                    +CAMPO_DESCRIPCION_LOCAL+" VARCHAR NOT NULL, "
+                                                                                                    +CAMPO_CADENA+" INT NULL)";
 
 }

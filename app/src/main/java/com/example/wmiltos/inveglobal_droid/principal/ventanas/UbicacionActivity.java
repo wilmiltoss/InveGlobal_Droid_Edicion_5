@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -30,6 +31,7 @@ import com.example.wmiltos.inveglobal_droid.dialogo.DialogoBarraSector;
 import com.example.wmiltos.inveglobal_droid.entidades.conexion.ConexionSQLiteHelper;
 import com.example.wmiltos.inveglobal_droid.entidades.tablas.Locacion;
 import com.example.wmiltos.inveglobal_droid.entidades.tablas.Soportes;
+import com.example.wmiltos.inveglobal_droid.iTrack.QuiebreActivity;
 import com.example.wmiltos.inveglobal_droid.principal.subVentanas.ConfiguracionSoporteActivity;
 import com.example.wmiltos.inveglobal_droid.principal.subVentanas.Limpiar2Activity;
 import com.example.wmiltos.inveglobal_droid.principal.login.LoginActivity;
@@ -172,20 +174,17 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
             case R.id.navigation_home:
                 dialogo();
                 return true;
-            case R.id.action_genera_archivo:
-                Intent intent2 = new Intent(UbicacionActivity.this, VisualizarRegistroActivity.class);
+            case R.id.quiebre:
+                Intent intent2 = new Intent(UbicacionActivity.this, QuiebreActivity.class);
                 startActivity(intent2);
                 return true;
-            case R.id.action_limpiar:
+            case R.id.inventairo_puntual:
                 Intent intent3 = new Intent(UbicacionActivity.this, Limpiar2Activity.class);
                 startActivity(intent3);
                 return true;
-            case R.id.action_enviar_red:
-                Intent intent4 = new Intent(UbicacionActivity.this, RedActivity.class);
-                startActivity(intent4);
+            case R.id.quiebre3:
+
                 return true;
-        //}
-        //return false;
         }
 
         return super.onOptionsItemSelected(item);
@@ -941,5 +940,7 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
         db.execSQL(insert);
         db.close();
     }
+
+
 
 }

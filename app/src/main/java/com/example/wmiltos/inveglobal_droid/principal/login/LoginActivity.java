@@ -1,11 +1,13 @@
 package com.example.wmiltos.inveglobal_droid.principal.login;
 
 import android.Manifest;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -21,16 +23,22 @@ import com.example.wmiltos.inveglobal_droid.PruebasBD.PruebaTabsActivity;
 import com.example.wmiltos.inveglobal_droid.PruebasBD.ScannerActivity;
 import com.example.wmiltos.inveglobal_droid.R;
 import com.example.wmiltos.inveglobal_droid.entidades.conexion.ConexionSQLiteHelper;
+import com.example.wmiltos.inveglobal_droid.iTrack.QuiebreActivity;
+import com.example.wmiltos.inveglobal_droid.iTrack.tablasCSV.Locales;
 import com.example.wmiltos.inveglobal_droid.principal.subVentanas.VisualizarRegistroActivity;
 import com.example.wmiltos.inveglobal_droid.principal.ventanas.UbicacionActivity;
 import com.example.wmiltos.inveglobal_droid.utilidades.Utilidades;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -403,6 +411,55 @@ public class LoginActivity extends AppCompatActivity {
         LoginActivity.this.finish();//finaliza la ventana anterior
     }
 
+    public void importarCSV() {
+        List<Locales> listaLocales = new ArrayList<>();//previas configuraciones del adaptador y la tablaCSV
+        //limpiarTablas("usuarios");
+        File carpeta = new File(Environment.getExternalStorageDirectory() + "/Download");
+        String archivoAgenda = carpeta.toString() + "/" + "locales.csv";
+        boolean isCreate = false;
+        if(!carpeta.exists()) {
+            Toast.makeText(this, "NO EXISTE LA CARPETA", Toast.LENGTH_SHORT).show();
+        } else {
+            String cadena;
+            String[] arreglo;
+            try {
+                FileReader fileReader = new FileReader(archivoAgenda);
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+                // Toast.makeText(this, "respuesta2"+bufferedReader, Toast.LENGTH_SHORT).show();
+                while((cadena = bufferedReader.readLine()) != null) {
+                    arreglo = cadena.split(",");
+                    ConexionSQLiteHelper admin = new ConexionSQLiteHelper(this, "InveStock.sqlite", null, 1);
+                    SQLiteDatabase db = admin.getWritableDatabase();
+                    ContentValues registro = new ContentValues();
+
+                    registro.put("CODIGO", arreglo[0]);
+                    registro.put("DESCRIPCION", arreglo[1]);
+                    registro.put("CADENA", arreglo[2]);
+
+                    listaLocales.add(
+                            new Locales(
+                                    arreglo[0],
+                                    arreglo[1],
+                                    arreglo[2]
+                            )
+                    );
+
+                    // los inserto en la base de datos
+                    db.insert("LOCALES", null, registro);
+                    db.close();
+                    Toast.makeText(this, "SE IMPORTO EXITOSAMENTE", Toast.LENGTH_SHORT).show();
+                    //llama el adaptador en QuiebreActivity
+                    //adaptador = new AdaptadorLocales(QuiebreActivity.this, listaLocales);
+                    //rvLo.setAdapter(adaptador);
+                }
+            } catch(Exception e) {
+                Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
 
+    public void onClickbtn(View view) {
+        importarCSV();
+    }
 }

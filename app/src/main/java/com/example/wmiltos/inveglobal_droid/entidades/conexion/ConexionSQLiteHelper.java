@@ -27,9 +27,10 @@ public class ConexionSQLiteHelper extends SQLiteOpenHelper {
 
     }
 
+    //CREA LAS TABLAS POR DEFECTO SOLO EN EL PRIMER INGRESO
     @Override
     public void onUpgrade(SQLiteDatabase db, int versionAntigua, int versionNueva) {
-        db.execSQL(Utilidades.CREAR_TABLA_USUARIO);
+        //db.execSQL(Utilidades.CREAR_TABLA_USUARIO);
         db.execSQL(Utilidades.INSERTAR_TABLA_USUARIO);
         db.execSQL(Utilidades.ELIMINAR_TABLA_USUARIO);
         onCreate(db);

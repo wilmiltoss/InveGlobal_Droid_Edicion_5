@@ -4,22 +4,23 @@
     tools:context="com.example.wmiltos.inveglobal_droid.principal.login.LoginActivity">
 
     <item
-        android:id="@+id/action_genera_archivo"
+        android:id="@+id/inventairo_puntual"
         android:orderInCategory="100"
-        android:title="@string/action_generarArchivo"
+        android:title="@string/action_inventario_puntual"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_limpiar"
+        android:id="@+id/quiebre"
         android:orderInCategory="100"
-        android:title="@string/action_limpiar"
+        android:title="@string/action_quiebre"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_enviar_red"
+        android:id="@+id/quiebre3"
         android:orderInCategory="100"
-        android:title="@string/action_enviar_red"
+        android:title="otro"
         app:showAsAction="never" />
+
 
 
 </menu>

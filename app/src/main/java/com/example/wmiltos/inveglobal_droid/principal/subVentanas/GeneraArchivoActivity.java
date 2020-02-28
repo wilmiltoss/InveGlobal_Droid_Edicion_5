@@ -65,12 +65,11 @@ public class GeneraArchivoActivity extends AppCompatActivity {
         try{
         String Query = "Select count(scanning) as cantidad from " +Utilidades.TABLA_LECTURAS+" where " + Utilidades.CAMPO_ID_SOPORTE_L;
         Cursor cursor = db.rawQuery(Query, null);
-
+        //mostrar en el log la consulta select
         while (cursor.moveToNext()) {
-            lecturas = new Lecturas();
-            lecturas.setScanning(cursor.getString(0));
-
-            Log.i("cantidad", lecturas.getScanning());
+            lecturas = new Lecturas();//llamamos a la tabla Lecturas.java
+            lecturas.setScanning(cursor.getString(0));//la 1ra columna
+            Log.i("cantidad", lecturas.getScanning());//mostrar en el log
         }
         if(lecturas.getScanning().equals("0"))//si no hay registro enviar mensaje
         {
@@ -81,11 +80,9 @@ public class GeneraArchivoActivity extends AppCompatActivity {
             File origen = new File("sdcard/Download/lectura.csv");//de origen
             File destino = new File("sdcard/Inve_Back/lectura.csv");//copia en destino
             copiarDirectorio(origen, destino);
-            //copiarPegarBd ();
-
-            escribirLecturas2();//escribe de la bd al archivo csv
+            //escribe de la bd al archivo csv
+            escribirLecturas2();
             Toast.makeText(getApplicationContext(), "Archivo Generado!", Toast.LENGTH_LONG).show();
-
             pasarAmenuPrincipal();
             }
         }catch (Exception ex){
@@ -106,8 +103,8 @@ public class GeneraArchivoActivity extends AppCompatActivity {
         ConexionSQLiteHelper conn = null;
         Cursor cursor = null;
         SQLiteDatabase db = null;
-        List<String> lLineas= new ArrayList<>();
-        String deviceName = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL;
+        List<String> lLineas= new ArrayList<>();//array
+        String deviceName = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL;//modelo del equipo
         try{
             conn= new ConexionSQLiteHelper(getApplicationContext(),"InveStock.sqlite",null,1);
             db = conn.getWritableDatabase();
@@ -123,7 +120,7 @@ public class GeneraArchivoActivity extends AppCompatActivity {
                     +Utilidades.CAMPO_ID_USUARIO_L+
                     " FROM "+Utilidades.TABLA_LECTURAS, null);
             while(cursor.moveToNext())
-                //muestra los campos por columnas
+                //escribe las lineas del cursor en lLineas y lo formatea con puntos y coma
                 lLineas.add(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s",
                         cursor.getString(0),
                         cursor.getString(1),
@@ -139,24 +136,19 @@ public class GeneraArchivoActivity extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Error al generar registros", Toast.LENGTH_LONG).show();
         }finally {
-            if(null != db && db.isOpen())
-                db.close();
-            if(null != cursor)
-                cursor.close();
-            if(null != conn)
-                conn.close();
+            if(null != db && db.isOpen())//si no habre la bd
+                db.close();//lo cierra
+            if(null != cursor)//si la consulta sql no tiene registros
+                cursor.close();//cierra la consulta
+            if(null != conn)//si no hay conexion
+                conn.close();//cierra la conexion
         }
-        if(!lLineas.isEmpty()) {
-            OutputStreamWriter fout = null;
-            File ruta_sd, ruta_sd1, ruta_sd2, ruta_sd3, ruta_sd4 = null;
-            String ruta_sd5 = null;
-            String []ruta_sd6 = null;
+        if(!lLineas.isEmpty()) {//si lLineas es distinto a vacio
+            OutputStreamWriter flujoSalida = null;//lo va almacenar en fout
+            File ruta_sd3 = null;
             File file = null;
             String pathDir = null;
-            String pathDB = null;
-
             try {
-
                 //guarda el archivo en la memoria externa  de la aplicacion
                 ruta_sd3 = new File (Environment.getExternalStorageDirectory()+"/Download");//guarda en la carpeta /sdcard/
                 //guarda en la memoria externa de la aplicacion(sdcard)
@@ -164,19 +156,17 @@ public class GeneraArchivoActivity extends AppCompatActivity {
                 //_____________________________________________________________________________
                 //almacenamiento externo **Dar permiso en el aplicacion del dispositivo
                 file = new File(pathDir, "lectura.csv");//se puede decirle la ruta aca
-                fout = new OutputStreamWriter(new FileOutputStream(file));
-
+                flujoSalida = new OutputStreamWriter(new FileOutputStream(file));
                 //proceso de lectura_________________________________________________________________
-                fout.write("Nombre del Equipo: "+deviceName+"\r\n");//nombre del equipo
+                flujoSalida.write("Nombre del Equipo: "+deviceName+"\r\n");//nombre del equipo
                 for(String cLinea : lLineas)
-                    fout.write(cLinea+"\r\n");//salto de lineas
-
+                    flujoSalida.write(cLinea+"\r\n");//salto de lineas
             }catch (Exception ex){
                 Toast.makeText(getApplicationContext(), "Error al generar archivo", Toast.LENGTH_LONG).show();
             }finally {
-                if(null != fout) {
+                if(null != flujoSalida) {
                     try {
-                        fout.close();
+                        flujoSalida.close();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -214,27 +204,23 @@ public class GeneraArchivoActivity extends AppCompatActivity {
     }
 
     public void copiarDirectorio(File sourceLocation , File targetLocation) {
-        //si no existe el directorio la crea
-        if (sourceLocation.isDirectory()) {
-            if (!targetLocation.exists() && !targetLocation.mkdirs()) {
+        if (sourceLocation.isDirectory()) {//mapea el directorio
+            if (!targetLocation.exists() && !targetLocation.mkdirs()) {//en caso de error
                 Log.e("Error", "No puede crear directorio: " + targetLocation.getAbsolutePath());
             }
-            String[] children = sourceLocation.list();
-            for (int i=0; i<children.length; i++) {
-                copiarDirectorio(new File(sourceLocation, children[i]),
-                        new File(targetLocation, children[i]));
+            String[] children = sourceLocation.list();//guarda en un array "children" la lista
+            for (int i=0; i<children.length; i++) {//si ya no hay filas
+                //copiamos el archivo de la carpeta "sourceLocation" a "targetLocation"
+                copiarDirectorio(new File(sourceLocation, children[i]), new File(targetLocation, children[i]));
             }
-        } else {
+        } else {  //si no existe el directorio la crea
             File directory = targetLocation.getParentFile();
             if (directory != null && !directory.exists() && !directory.mkdirs()) {
                 Log.e("Error", "No puede crear directorio: " + directory.getAbsolutePath());
             }
-
             try {
-                InputStream in = new FileInputStream(sourceLocation);
-                OutputStream out = new FileOutputStream(targetLocation);
-
-
+                InputStream in = new FileInputStream(sourceLocation);//carpeta origen
+                OutputStream out = new FileOutputStream(targetLocation);//carpeta destino
                 //Copiar bits de inputStream a outputStream.
                 byte[] buf = new byte[1024];
                 int len;
@@ -243,36 +229,29 @@ public class GeneraArchivoActivity extends AppCompatActivity {
                 }
                 in.close();
                 out.close();
-
             }catch(IOException ioe){
                 Log.e("Error", "Error " + ioe.getMessage());
             }
         }
-
     }
-
+    //copia del directorio raiz
     public void copiarDirectorioBD(File sourceLocation , File targetLocation) {
-        //si no existe el directorio la crea
-        if (sourceLocation.isDirectory()) {
+        if (sourceLocation.isDirectory()) {//mapea el directorio
             if (!targetLocation.exists() && !targetLocation.mkdirs()) {
                 Log.e("Error", "No puede crear directorio: " + targetLocation.getAbsolutePath());
             }
             String[] children = sourceLocation.list();
             for (int i=0; i<children.length; i++) {
-                copiarDirectorio(new File(sourceLocation, children[i]),
-                        new File(targetLocation, children[i]));
+                copiarDirectorio(new File(sourceLocation, children[i]), new File(targetLocation, children[i]));//lectura de las filas
             }
-        } else {
+        } else {  //si no existe el directorio la crea
             File directory = targetLocation.getParentFile();
-            if (directory != null && !directory.exists() && !directory.mkdirs()) {
+            if (directory != null && !directory.exists() && !directory.mkdirs()) {//en caso de error
                 Log.e("Error", "No puede crear directorio: " + directory.getAbsolutePath());
             }
-
             try {
                 InputStream in = new FileInputStream(sourceLocation);
                 OutputStream out = new FileOutputStream(targetLocation);
-
-
                 //Copiar bits de inputStream a outputStream.
                 byte[] buf = new byte[1024];
                 int len;
@@ -281,12 +260,10 @@ public class GeneraArchivoActivity extends AppCompatActivity {
                 }
                 in.close();
                 out.close();
-
             }catch(IOException ioe){
                 Log.e("Error", "Error " + ioe.getMessage());
             }
         }
-
     }
     //-----------------------pruebas--------------------------------
     public void copiarPegarBd (){
