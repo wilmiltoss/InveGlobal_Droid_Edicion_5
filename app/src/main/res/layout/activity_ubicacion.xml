@@ -104,6 +104,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+
+
+                <Spinner
+                    android:id="@+id/sp_tipoSoporte"
+                    android:layout_width="242dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/stylo_borde"
+                    android:text="" />
+
                 <Button
                     android:id="@+id/btn_nroSoporte"
                     android:layout_width="53dp"
@@ -114,14 +124,6 @@
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:layout_editor_absoluteY="116dp" />
-
-                <Spinner
-                    android:id="@+id/sp_tipoSoporte"
-                    android:layout_width="242dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:background="@drawable/stylo_borde"
-                    android:text="" />
 
                 <TextView
                     android:id="@+id/tv_nro_soporte"

@@ -42,33 +42,32 @@ public class ConfiguracionSoporteActivity extends AppCompatActivity {
         variables();
         recepcionDatosUsuario();
         validacionCampoCodSoporte();
-
     }
 
     public void variables(){
         conn = new ConexionSQLiteHelper(getApplicationContext(), "InveStock.sqlite", null, 1);
         //se almacenan en las variables tv la consulta
-        tv1 = (TextView) findViewById(R.id.tv_1);
-        tv2 = (TextView) findViewById(R.id.tv_2);
-        tv3 = (TextView) findViewById(R.id.tv_3);
-        tv4 = (TextView) findViewById(R.id.tv_4);
-        tv5 = (TextView) findViewById(R.id.tv_5);
-        tv6 = (TextView) findViewById(R.id.tv_6);
-        tv7 = (TextView) findViewById(R.id.tv_7);
-        tvUsuario = (TextView) findViewById(R.id.tv_usurioC);
-        tvNroConteo = (TextView)findViewById(R.id.tv_NRO_CONTEO);
+        tv1 = findViewById(R.id.tv_1);
+        tv2 = findViewById(R.id.tv_2);
+        tv3 = findViewById(R.id.tv_3);
+        tv4 =  findViewById(R.id.tv_4);
+        tv5 =  findViewById(R.id.tv_5);
+        tv6 = findViewById(R.id.tv_6);
+        tv7 =  findViewById(R.id.tv_7);
+        tvUsuario = findViewById(R.id.tv_usurioC);
+        tvNroConteo = findViewById(R.id.tv_NRO_CONTEO);
 
-        tvConteo1 = (TextView) findViewById(R.id.tv_conteo1);
-        tvConteo2 = (TextView) findViewById(R.id.tv_conteo2);
-        tvConteo3 = (TextView) findViewById(R.id.tv_conteo3);
+        tvConteo1 = findViewById(R.id.tv_conteo1);
+        tvConteo2 = findViewById(R.id.tv_conteo2);
+        tvConteo3 = findViewById(R.id.tv_conteo3);
 
         //btnAceptar2 = (Button)findViewById(R.id.btn_aceptar2);
 
-        codigoSoporte = (EditText) findViewById(R.id.et_codigoSoporte);
-        claveArreglada = (TextView) findViewById(R.id.et_claveArreglada);
+        codigoSoporte = findViewById(R.id.et_codigoSoporte);
+        claveArreglada =  findViewById(R.id.et_claveArreglada);
 
-        idInvS = (TextView) findViewById(R.id.tv_ID_INV_SOPORT);
-        idInv = (TextView) findViewById(R.id.tv_ID_INVENTARIO);
+        idInvS = findViewById(R.id.tv_ID_INV_SOPORT);
+        idInv = findViewById(R.id.tv_ID_INVENTARIO);
     }
     //Carga de datos segun clave scaneada
     //arregla el numero scanneado del codigo de barra
@@ -88,7 +87,7 @@ public class ConfiguracionSoporteActivity extends AppCompatActivity {
                                                     Utilidades.CAMPO_CONTEO_2+","+
                                                     Utilidades.CAMPO_CONTEO_3+
                     " FROM " + Utilidades.TABLA_INVENTARIO_SOPORTE +" WHERE "
-                            + Utilidades.CAMPO_ID_INVENTARIO_SOPORTE +"= substr('"+lecturaScanner+"',10,3) AND "
+                            + Utilidades.CAMPO_ID_INVENTARIO_SOPORTE +"= substr('"+lecturaScanner+"',8,5) AND "
                             + Utilidades.CAMPO_ID_INVENTARIO_IS +"=substr('"+lecturaScanner+"',3,4)",null);
             //Nos aseguramos de que existe al menos un registro
             if (c.moveToFirst()) {//recorremos todas las filas
@@ -127,7 +126,7 @@ public class ConfiguracionSoporteActivity extends AppCompatActivity {
 
 
     public void aceptarlo(View view) {
-       // validacionConteo();// # 1
+        validacionConteo();// # 1
     }
 
 
@@ -147,7 +146,7 @@ public class ConfiguracionSoporteActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
-            validacionConteo();
+            //validacionConteo();
             }
         });
     }
@@ -213,8 +212,8 @@ public class ConfiguracionSoporteActivity extends AppCompatActivity {
     //capturar los datos de los campos EditText para envio a UbicacionActivity #4
     public void envioMensaje_a_Ubicacion (){
         selectScannerClave();
-        if (tv1.getText().toString().isEmpty()){
-            dialogoBtnCerrar();
+        if (tv1.getText().toString().isEmpty()){//si viene vacio el editext del scanner ubicacion
+            dialogoBtnCerrar();//cierra
         }else {
             Intent miIntent = null;
             String msjtv1 = tv1.getText().toString();

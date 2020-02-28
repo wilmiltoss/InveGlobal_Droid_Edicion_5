@@ -15,11 +15,11 @@
         android:title="@string/action_quiebre"
         app:showAsAction="never" />
 
-    <item
+    <!--<item
         android:id="@+id/quiebre3"
         android:orderInCategory="100"
         android:title="otro"
-        app:showAsAction="never" />
+        app:showAsAction="never" />-->
 
 
 

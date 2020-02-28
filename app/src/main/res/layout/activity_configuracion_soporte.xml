@@ -75,71 +75,77 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="1dp"
-        android:layout_height="1dp"
+        android:layout_width="8dp"
+        android:layout_height="6dp"
         android:orientation="vertical">
 
         <!--De la consulta de la tabla INVENTARIO_CONFIGURACIONES -->
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="1dp"
+            android:layout_height="1dp">
+
             <TextView
                 android:id="@+id/tv_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:textColor="@color/colorPrimaryNegro"/>
+                android:textColor="@color/colorPrimaryNegro"
+                android:textSize="20dp" />
+
             <TextView
                 android:id="@+id/tv_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
                 android:hint="tv2"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/colorPrimary"
+                android:textSize="30dp" />
+
             <TextView
                 android:id="@+id/tv_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
                 android:hint="tv3"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/colorPrimary"
+                android:textSize="2dp" />
+
             <TextView
                 android:id="@+id/tv_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
                 android:text="tv1: "
-                android:textColor="@color/colorPrimaryNegro"/>
+                android:textColor="@color/colorPrimaryNegro"
+                android:textSize="2dp" />
+
             <TextView
                 android:id="@+id/tv_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
                 android:hint="tv2"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/colorPrimary"
+                android:textSize="2dp" />
+
             <TextView
                 android:id="@+id/tv_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
                 android:hint="tv3"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/colorPrimary"
+                android:textSize="2dp" />
 
             <TextView
                 android:id="@+id/tv_7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:hint="tv7"
-                android:textColor="@color/colorPrimary"/>
+                android:hint="tv"
+                android:textColor="@color/colorPrimary"
+                android:textSize="2dp" />
 
             <TextView
                 android:id="@+id/tv_usurioC"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
                 android:hint="usuario"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp" />
 
 
         </LinearLayout>
@@ -153,54 +159,57 @@
                 android:id="@+id/tv_conteo1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
                 android:hint="con1"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp" />
+
             <TextView
                 android:id="@+id/tv_conteo2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
                 android:hint="con2"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp" />
+
             <TextView
                 android:id="@+id/tv_conteo3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
                 android:hint="con3"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/et_claveArreglada"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
                 android:hint="claveArreglada"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/tv_ID_INV_SOPORT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
                 android:hint="ID_INV_SOPORT"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/tv_ID_INVENTARIO"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
                 android:hint="ID_INVENTARIO"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp" />
+
             <TextView
                 android:id="@+id/tv_NRO_CONTEO"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
                 android:hint="NRO CONTEO"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp" />
 
 
         </LinearLayout>

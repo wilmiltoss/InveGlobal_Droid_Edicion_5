@@ -89,8 +89,8 @@
 
             <Button
                 android:id="@+id/button"
-                android:layout_width="139dp"
-                android:layout_height="50dp"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
                 android:text="Button"
                 android:onClick="onClickbtn"
                 tools:layout_editor_absoluteX="1dp"
