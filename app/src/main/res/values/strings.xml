@@ -1,6 +1,6 @@
 <resources>
     <!--TITULO PRINCIPAL DE LA APLICACION-->
-    <string name="app_name">InveGlobalDroid V 1.2 </string>
+    <string name="app_name">InveGlobalDroid V 1.3 </string>
     <string name="descripcion">Imagen</string>
     <string name="user">Usuario</string>
     <string name="prompt_id_usuario">ID Usuario</string>
@@ -31,5 +31,6 @@
     <string name="title_activity_principal_">Principal_Activity</string>
     <string name="title_activity_ubicar_bd_">UbicarBD_Activity</string>
     <string name="title_activity_quiebre">Quiebre</string>
+    <string name="title_activity_captura">CapturaActivity</string>
 </resources>
 

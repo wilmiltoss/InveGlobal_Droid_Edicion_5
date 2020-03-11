@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.wmiltos.inveglobal_droid.iTrack.tablasCSV.Locales;
+import com.example.wmiltos.inveglobal_droid.iTrack.tablasCSV_Objetos.Locales;
 
 import java.util.List;
 

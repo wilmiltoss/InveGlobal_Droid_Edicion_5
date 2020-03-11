@@ -257,6 +257,49 @@
             android:textSize="1dp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/txttipoNegocio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="tipoNegocio"
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="19dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtcadena"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="cadena"
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="19dp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/txtlocal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="local"
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="19dp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/txttipoSoporte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="tipoSoporte"
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="19dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtusuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="usuario"
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="19dp"
+            android:textStyle="bold" />
+
 
     </LinearLayout>
 

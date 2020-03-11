@@ -21,6 +21,7 @@ import com.example.wmiltos.inveglobal_droid.utilidades.Utilidades;
 public class AgregarActivity extends AppCompatActivity {
 
     TextView codigoBarra, txDescripcion, txDetalle, txSector,txSectorDescripcion, txResulSuma,txSumaCantidad;
+    TextView campoTipoNegocio, campoCadena, campoLocal, campoTipoSoporte, campoUsuario;
     EditText campoCantidad;
     ConexionSQLiteHelper conn;
     Button btnAgregar;
@@ -103,11 +104,18 @@ public class AgregarActivity extends AppCompatActivity {
                                                                          +Utilidades.CAMPO_DESCRIP+","
                                                                          +Utilidades.CAMPO_CANTIDAD+","
                                                                          +Utilidades.CAMPO_CATEGORIA+","
-                                                                         +Utilidades.CAMPO_LOCAL+")"+
+                                                                         +Utilidades.CAMPO_LOCAL+","
+                                                                         +Utilidades.CAMPO_CADENA_P+","
+                                                                         +Utilidades.CAMPO_TIPO_NEGOCIO+","
+                                                                         +Utilidades.CAMPO_TIPO_SOPORTE+")"+
                                                                          "VALUES ('"+codigoBarra.getText().toString()+"','"
                                                                                     +txDescripcion.getText().toString()+"',"
                                                                                     +campoCantidad.getText().toString()+",'"
-                                                                                    +txSectorDescripcion.getText().toString()+"','s6')";
+                                                                                    +txSectorDescripcion.getText().toString()+"','"
+                                                                                    +campoLocal.getText().toString()+"','"
+                                                                                    +campoCadena.getText().toString()+"','"
+                                                                                    +campoTipoNegocio.getText().toString()+"','"
+                                                                                    +campoTipoSoporte.getText().toString()+"')";
 
             //"Id Registrado" es el mensaje que envia al insertar
             Toast.makeText(getApplicationContext(),"Lectura Registrada",Toast.LENGTH_SHORT).show();
@@ -196,9 +204,7 @@ public class AgregarActivity extends AppCompatActivity {
     }
 
     private void volverAmenu() {
-        Intent intent = new Intent(AgregarActivity.this, QuiebreActivity.class);
-        startActivity(intent);
-        AgregarActivity.this.finish();
+       envioDatosQuiebreRetorno();
     }
 
     private void actualizarTablaLecturaSQL3() {
@@ -206,8 +212,8 @@ public class AgregarActivity extends AppCompatActivity {
             sumaStock();
             SQLiteDatabase db = conn.getWritableDatabase();
             String[] parametros = { codigoBarra.getText().toString(),
-                    txDescripcion.getText().toString(),
-                    txSectorDescripcion.getText().toString()};
+                                    txDescripcion.getText().toString(),
+                                    txSectorDescripcion.getText().toString()};
 
             ContentValues valores = new ContentValues();
             valores.put(Utilidades.CAMPO_CANTIDAD,txResulSuma.getText().toString());
@@ -220,7 +226,6 @@ public class AgregarActivity extends AppCompatActivity {
         } catch (Exception ex) {
             Toast.makeText(getApplicationContext(), ex.toString(), Toast.LENGTH_LONG).show();
         }
-
     }
 
     private void variables() {
@@ -234,13 +239,33 @@ public class AgregarActivity extends AppCompatActivity {
         btnAgregar = findViewById(R.id.btn_agregar);
         txResulSuma=findViewById(R.id.txResulSuma);
         txSumaCantidad=findViewById(R.id.tx_sumaCantidad);
+
+        campoCadena=findViewById(R.id.txtcadena);
+        campoLocal=findViewById(R.id.txtlocal);
+        campoTipoNegocio=findViewById(R.id.txttipoNegocio);
+        campoTipoSoporte=findViewById(R.id.txttipoSoporte);
+        campoUsuario=findViewById(R.id.txtusuario);
     }
 
-
-    private void recepcionDatosQuiebre() {
+    private void recepcionDatosQuiebre() {//A-R1
         //recibirScannerCamara();
         Bundle miBundle = this.getIntent().getExtras();
         if(miBundle!=null){
+            String tipoNegocio = miBundle.getString("msjTipoNegocio");
+            campoTipoNegocio.setText(tipoNegocio);
+
+            String cadena = miBundle.getString("msjCadena");
+            campoCadena.setText(cadena);
+
+            String local = miBundle.getString("msjLocal");
+            campoLocal.setText(local);
+
+            String tipoSoporte = miBundle.getString("msjTipoSoporte");
+            campoTipoSoporte.setText(tipoSoporte);
+
+            String usuario = miBundle.getString("msjUsuario");
+            campoUsuario.setText(usuario);
+
             //8 ELIMINAR 0 A LA IZQUIERDA
             //si el 1er digito es igual a 0 lo guardamos en scanning0 sino guardamos en scanning
             String scanning =miBundle.getString("msjScanning");
@@ -253,39 +278,60 @@ public class AgregarActivity extends AppCompatActivity {
             }
         }
     }
+    private void envioDatosQuiebreRetorno(){//A-E2
+        Intent miIntent = null;
+        String msjTipoNegocioR = campoTipoNegocio.getText().toString();
+        String msjCadenaR = campoCadena.getText().toString();
+        String msjLocalR = campoLocal.getText().toString();
+        String msjTipoSoporteR = campoTipoSoporte.getText().toString();
+        String msjUsuarioR = campoUsuario.getText().toString();
+
+        miIntent = new Intent(AgregarActivity.this, QuiebreActivity.class);
+        Bundle miBundle = new Bundle();
+
+        miBundle.putString("msjTipoNegocioR",campoTipoNegocio.getText().toString());
+        miBundle.putString("msjCadenaR",campoCadena.getText().toString());
+        miBundle.putString("msjLocalR",campoLocal.getText().toString());
+        miBundle.putString("msjTipoSoporteR",campoTipoSoporte.getText().toString());
+        miBundle.putString("msjUsuarioR",campoUsuario.getText().toString());
+
+        miIntent.putExtras(miBundle);
+        startActivity(miIntent);
+        AgregarActivity.this.finish();
+
+    }
 
     //muestra los datos del scanning segun el tx que capturamos de la ventana anterior
     private void consultar() {
         try {
             SQLiteDatabase db = conn.getReadableDatabase();
-            String str = codigoBarra.getText().toString();
-            String pri_digito=str.substring(0,1);//extrae el 1er
-            String[] campos = {Utilidades.CAMPO_DESCRIPCION_SCANNING, Utilidades.CAMPO_DETALLE, Utilidades.CAMPO_ID_SECTOR};
+                String str = codigoBarra.getText().toString();
+                String pri_digito = str.substring(0, 1);//extrae el 1er
+                String[] campos = {Utilidades.CAMPO_DESCRIPCION_SCANNING, Utilidades.CAMPO_DETALLE, Utilidades.CAMPO_ID_SECTOR};
 
-            if (pri_digito.equals("0")) {//si el 1er digito es 0
-                String scanning = str.substring(1);//lo eliminamos y realizamos la consulta
-                String[] parametros = {scanning};//guarmados en un array scanning ya con el 1er digito eliminado
-                Cursor cursor = db.query(Utilidades.TABLA_MAESTRO, campos, Utilidades.CAMPO_SCANNING + "=?", parametros, null, null, null);
-                cursor.moveToFirst();
-                txDescripcion.setText(cursor.getString(0));//muestra los campos
-                txDetalle.setText(cursor.getString(1));
-                txSector.setText(cursor.getString(2));
-                cursor.close();
-            }else{
-                String[] parametros = {str};//guarmados en un array el str con todos sus digitos
-                Cursor cursor = db.query(Utilidades.TABLA_MAESTRO, campos, Utilidades.CAMPO_SCANNING + "=?", parametros, null, null, null);
-                cursor.moveToFirst();
-                txDescripcion.setText(cursor.getString(0));//muestra los campos
-                txDetalle.setText(cursor.getString(1));
-                txSector.setText(cursor.getString(2));
-                cursor.close();
-            }
+                if (pri_digito.equals("0")) {//si el 1er digito es 0
+                    String scanning = str.substring(1);//lo eliminamos y realizamos la consulta
+                    String[] parametros = {scanning};//guarmados en un array scanning ya con el 1er digito eliminado
+                    Cursor cursor = db.query(Utilidades.TABLA_MAESTRO, campos, Utilidades.CAMPO_SCANNING + "=?", parametros, null, null, null);
+                    cursor.moveToFirst();
+                    txDescripcion.setText(cursor.getString(0));//muestra los campos
+                    txDetalle.setText(cursor.getString(1));
+                    txSector.setText(cursor.getString(2));
+                    cursor.close();
+                } else {
+                    String[] parametros = {str};//guarmados en un array el str con todos sus digitos
+                    Cursor cursor = db.query(Utilidades.TABLA_MAESTRO, campos, Utilidades.CAMPO_SCANNING + "=?", parametros, null, null, null);
+                    cursor.moveToFirst();
+                    txDescripcion.setText(cursor.getString(0));//muestra los campos
+                    txDetalle.setText(cursor.getString(1));
+                    txSector.setText(cursor.getString(2));
+                    cursor.close();
+                }
 
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "El codigo no existe", Toast.LENGTH_LONG).show();
-            AgregarActivity.this.finish();
+             Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+            envioDatosQuiebreRetorno();//funciona si es ya fue cargado un codigo
             limpiar();
-
         }
     }
 
@@ -349,7 +395,7 @@ public class AgregarActivity extends AppCompatActivity {
                 fila.moveToFirst();
                 txSumaCantidad.setText(fila.getString(0));
         }catch (Exception ex){
-            Toast.makeText(getApplicationContext(), ex.toString(), Toast.LENGTH_LONG).show();
+           // Toast.makeText(getApplicationContext(), ex.toString(), Toast.LENGTH_LONG).show();
         }
     }
 }

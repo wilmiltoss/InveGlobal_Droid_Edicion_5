@@ -2,17 +2,9 @@ package com.example.wmiltos.inveglobal_droid.entidades.conexion;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Environment;
 
 import com.example.wmiltos.inveglobal_droid.utilidades.Utilidades;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 public class ConexionSQLiteHelper extends SQLiteOpenHelper {
 
@@ -33,8 +25,20 @@ public class ConexionSQLiteHelper extends SQLiteOpenHelper {
         //db.execSQL(Utilidades.CREAR_TABLA_USUARIO);
         db.execSQL(Utilidades.INSERTAR_TABLA_USUARIO);
         db.execSQL(Utilidades.ELIMINAR_TABLA_USUARIO);
+
         onCreate(db);
     }
+
+
+    public void borrarRegistros(String tabla, SQLiteDatabase db) {
+        db.execSQL("DELETE FROM "+tabla);
+    }
+
+    public void consultaTabla(String tabla, SQLiteDatabase db) {
+        db.execSQL("SELECT * FROM "+tabla);
+
+    }
+
 
 
 

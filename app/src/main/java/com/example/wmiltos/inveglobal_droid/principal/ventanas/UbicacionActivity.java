@@ -31,6 +31,7 @@ import com.example.wmiltos.inveglobal_droid.dialogo.DialogoBarraSector;
 import com.example.wmiltos.inveglobal_droid.entidades.conexion.ConexionSQLiteHelper;
 import com.example.wmiltos.inveglobal_droid.entidades.tablas.Locacion;
 import com.example.wmiltos.inveglobal_droid.entidades.tablas.Soportes;
+import com.example.wmiltos.inveglobal_droid.iTrack.ConfiguracionActivity;
 import com.example.wmiltos.inveglobal_droid.iTrack.QuiebreActivity;
 import com.example.wmiltos.inveglobal_droid.principal.subVentanas.ConfiguracionSoporteActivity;
 import com.example.wmiltos.inveglobal_droid.principal.subVentanas.Limpiar2Activity;
@@ -97,19 +98,14 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
         btnNivel.setOnClickListener(this);
 
         btnNroSoporte = findViewById(R.id.btn_nroSoporte);
-
         btnNroSoporte.setOnClickListener(this);
 
-        ArrayAdapter<CharSequence> adaptador = new ArrayAdapter
-                (this, android.R.layout.simple_spinner_item, listaLocacion);
-        ArrayAdapter<CharSequence> adaptadorSp = new ArrayAdapter
-                (this, android.R.layout.simple_spinner_item, listaSoporte);
-
+        ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listaLocacion);
+        ArrayAdapter<CharSequence> adaptadorSp = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listaSoporte);
         //adaptador de los spinner
         comboLocacion.setAdapter(adaptador);
         comboSoporte.setAdapter(adaptadorSp);
-
-        //captura de datos del spinner
+            //captura de datos del spinner
         comboLocacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -174,9 +170,8 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
             case R.id.navigation_home:
                 dialogo();
                 return true;
-            case R.id.quiebre:
-                Intent intent2 = new Intent(UbicacionActivity.this, QuiebreActivity.class);
-                startActivity(intent2);
+            case R.id.quiebre:compruebaRegistroConfiguracion();
+
                 return true;
             case R.id.inventairo_puntual:
                 Intent intent3 = new Intent(UbicacionActivity.this, Limpiar2Activity.class);
@@ -281,7 +276,7 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
     private void consultarListaLocacion() {
         SQLiteDatabase db = conn.getReadableDatabase();
         Locacion locales = null;
-        locacionList = new ArrayList<Locacion>();
+        locacionList = new ArrayList<>();
         Cursor cursor = db.rawQuery("SELECT * FROM " + Utilidades.TABLA_LOCACION, null);
 
         while (cursor.moveToNext()) {
@@ -299,34 +294,32 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
 
     private void obtenerLista() {
         listaLocacion = new ArrayList<String>();
-        //listaLocacion.add("Seleccione");
-
         for (int i = 0; i < locacionList.size(); i++) {
             listaLocacion.add(locacionList.get(i).getId_locacion() + " - " + locacionList.get(i).getDescripcion());
         }
     }
     //spinner tipo soporte
-    private void consultarListaSoporte() {
-        SQLiteDatabase db = conn.getReadableDatabase();
-        Soportes soporte = null;
-        soporteList = new ArrayList<Soportes>();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + Utilidades.TABLA_SOPORTE, null);
+        private void consultarListaSoporte() {
+            SQLiteDatabase db = conn.getReadableDatabase();
+            Soportes soporte = null;
+            soporteList = new ArrayList<Soportes>();
+            Cursor cursor = db.rawQuery("SELECT * FROM " + Utilidades.TABLA_SOPORTE, null);
 
-        while (cursor.moveToNext()) {
-            soporte = new Soportes();
-            soporte.setId_soporte(cursor.getInt(0));
-            soporte.setDescripcion(cursor.getString(1));
-            soporte.setSubdivisible(cursor.getInt(2));
+            while (cursor.moveToNext()) {
+                soporte = new Soportes();
+                soporte.setId_soporte(cursor.getInt(0));
+                soporte.setDescripcion(cursor.getString(1));
+                soporte.setSubdivisible(cursor.getInt(2));
 
-            Log.i("id", soporte.getId_soporte().toString());
-            Log.i("descripcion", soporte.getDescripcion());
-            Log.i("subdivisible", soporte.getSubdivisible().toString());
+                Log.i("id", soporte.getId_soporte().toString());
+                Log.i("descripcion", soporte.getDescripcion());
+                Log.i("subdivisible", soporte.getSubdivisible().toString());
 
-            soporteList.add(soporte);
+                soporteList.add(soporte);
 
+            }
+            obtenerListaSoporte();
         }
-        obtenerListaSoporte();
-    }
 
     private void obtenerListaSoporte() {
         listaSoporte = new ArrayList<String>();
@@ -338,7 +331,6 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
 
     //capturar los datos de los campos EditText para envio a LecturasActivity
     public void onClickHecho(View view) {
-
         Intent miIntent = null;
         switch (view.getId()) {
             case R.id.btn_hecho:
@@ -421,11 +413,9 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
                 //bloqueamos controles
                 comboLocacion.setEnabled(false);
                 comboSoporte.setEnabled(false);
-
                 //campoNroSoporte.setEnabled(false);
 
             }
-
 
             //CAMPO_ID_INVENTARIO_SOPORTE tv1
             //CAMPO_ID_CLAVE              tv2
@@ -580,7 +570,6 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
 
     //numberPickerDialogo de Conteo
     private void numberPickerDialogoConteo(){
-
         NumberPicker myNumberPickerConteo = new NumberPicker(this);
         myNumberPickerConteo.setMaxValue(1);
         myNumberPickerConteo.setMinValue(1);
@@ -655,7 +644,6 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
 
     //numberPickerDialogo de NroSoporte
     private void numberPickerDialogoNroSoporte(){
-
         NumberPicker myNumberPickerNroSoporte = new NumberPicker(this);
         myNumberPickerNroSoporte.setMaxValue(150);
         myNumberPickerNroSoporte.setMinValue(1);
@@ -707,6 +695,17 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
         Bundle miBundle = new Bundle();
         miBundle.putString("msjUsuario", txtUsuario.getText().toString());
         miBundle.putString("msjNroSoporteTv", campoConteo.getText().toString());
+        miIntent.putExtras(miBundle);
+        startActivity(miIntent);
+    }
+
+    public void envioUsuarioQuiebre(){
+        Intent miIntent = null;
+        String msjUsuario = txtUsuario.getText().toString();
+
+        miIntent = new Intent(UbicacionActivity.this, ConfiguracionActivity.class);
+        Bundle miBundle = new Bundle();
+        miBundle.putString("msjUsuario", txtUsuario.getText().toString());
         miIntent.putExtras(miBundle);
         startActivity(miIntent);
     }
@@ -814,6 +813,45 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
+    //Comprueba si existe registros en la bd con las configuraciones iniciales, salta en caso de que ya tenga la configuracion ITRACK
+    public void compruebaRegistroConfiguracion(){
+        try {
+            if (isTableExists("PRODUCTOS")) {
+                SQLiteDatabase db = conn.getReadableDatabase();
+                Cursor _productos = db.rawQuery(Utilidades.CONSULTA_TABLA_PRODUCTOS, null);//consulta si existe, luego
+                if (_productos.getCount() > 0)   //2do comprueba si la tabla esta cargada
+                {//si ya tiene registros salta a la ventana Quiebrs
+                    Toast.makeText(getApplicationContext(), "Aviso: Finalice la carga para volver a configurar los parametros", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(UbicacionActivity.this, QuiebreActivity.class);
+                    startActivity(intent);
+                } else {//si no pasa a la ventana ConfiguracionActivity
+                    Toast.makeText(getApplicationContext(), "Establezca las configuraciones iniciales", Toast.LENGTH_SHORT).show();
+                    envioUsuarioQuiebre();
+                }
+            }else {//sino pasa a la sgte ventana Configuracion p/ la 1ra carga de la tabla
+                Intent intent = new Intent(UbicacionActivity.this, ConfiguracionActivity.class);
+                startActivity(intent);
+            }
+        }catch (Exception e){
+            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+        }
+    }
+    //comprueba si existe la tabla en la bd sqlite
+    public boolean isTableExists(String nombreTabla) {
+        SQLiteDatabase db = conn.getReadableDatabase();
+        boolean isExist = false;
+        Cursor cursor = db.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '" + nombreTabla + "'", null);
+        if (cursor != null) {
+            if (cursor.getCount() > 0) {
+                isExist = true;
+                // Toast.makeText(getApplicationContext(), "la tabla existe", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(getApplicationContext(), "la/s tabla/s no existe/n", Toast.LENGTH_SHORT).show();
+            }
+            cursor.close();
+        }
+        return isExist;
+    }
 
 
 

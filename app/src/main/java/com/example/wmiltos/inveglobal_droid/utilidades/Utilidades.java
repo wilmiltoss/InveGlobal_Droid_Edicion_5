@@ -85,6 +85,7 @@ public class Utilidades {
     public static final String ELIMINAR_TABLA_LOCALES="DROP TABLE IF EXISTS LOCALES";
 
     //ITRACK**********************************************************************************************
+    //PRODUCTOS
     public static String TABLA_PRODUCTOS="PRODUCTOS";
     public static String CAMPO_ID="ID";
     public static String CAMPO_CODIGO_BARRA ="CODIGO_BARRA";
@@ -92,24 +93,61 @@ public class Utilidades {
     public static String CAMPO_CANT_PROD ="CANTIDAD";
     public static String CAMPO_CATEGORIA ="CATEGORIA";
     public static String CAMPO_LOCAL ="LOCAL";
-
-    //final son las Sentencias  SQL dadas
-    //CREAMOS LA TABLA PRODUCTO
-    public static final String CREAR_TABLA_PRODUCTOS="CREATE TABLE IF NOT EXISTS "+TABLA_PRODUCTOS+" ("+CAMPO_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
-                                                                                     +CAMPO_CODIGO_BARRA+" VARCHAR NOT NULL, "
-                                                                                     +CAMPO_DESCRIP+" VARCHAR NOT NULL, "
-                                                                                     +CAMPO_CANT_PROD+" FLOAT, "
-                                                                                     +CAMPO_CATEGORIA+" VARCHAR NULL, "
-                                                                                     +CAMPO_LOCAL+" INT NULL)";
-
-    //ITRACK..............DE LAS IMPORTACIONES TABLAS CSV CARPETA DOWNLOAD.....................................
+    public static String CAMPO_TIPO_NEGOCIO = "TIPO_NEGOCIO";
+    public static String CAMPO_TIPO_SOPORTE = "TIPO_SOPORTE";
+    public static String CAMPO_CADENA_P ="CADENA";
+    //UBICACIONES
+    public static String TABLA_UBICACIONES="UBICACIONES";
+    public static String CAMPO_ID_UBICACION="ID_UBICACION";
+    public static String CAMPO_DESCR_UBICACION ="DESCR_UBICACION";
+    //TIPO_NEGOCIO
+    public static String TABLA_TIPO_NEGOCIO="TIPO_NEGOCIO";
+    public static String CAMPO_ID_TN ="ID";
+    public static String CAMPO_DESCRIPCION_TN = "DESCRIPCION";
+    //CADENAS
+    public static String TABLA_CADENAS ="CADENAS";
+    public static String CAMPO_ID_CADENA = "IDCADENA";
+    public static String CAMPO_DESCR_CADENA = "DESCRCADENA";
+    public static String CAMPO_ID_TIPO_NEGOCIO = "IDTIPONEGOCIO";
+    //LOCALES
     public static String TABLA_LOCALES="LOCALES";
     public static String CAMPO_CODIGO="CODIGO";
     public static String CAMPO_DESCRIPCION_LOCAL ="DESCRIPCION";
     public static String CAMPO_CADENA ="CADENA";
 
-    public static final String CREAR_TABLA_LOCALES="CREATE TABLE IF NOT EXISTS "+TABLA_LOCALES+" (" +CAMPO_CODIGO+" VARCHAR NOT NULL, "
-                                                                                                    +CAMPO_DESCRIPCION_LOCAL+" VARCHAR NOT NULL, "
-                                                                                                    +CAMPO_CADENA+" INT NULL)";
 
+
+    //final son las Sentencias  SQL dadas
+    //ITRACK..............CREACION DE TABLAS.....................................
+    public static final String CREAR_TABLA_PRODUCTOS="CREATE TABLE IF NOT EXISTS "+TABLA_PRODUCTOS+" ("+CAMPO_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                                                                     +CAMPO_CODIGO_BARRA+" VARCHAR NOT NULL, "
+                                                                                     +CAMPO_DESCRIP+" VARCHAR NOT NULL, "
+                                                                                     +CAMPO_CANT_PROD+" FLOAT, "
+                                                                                     +CAMPO_CATEGORIA+" VARCHAR NOT NULL, "
+                                                                                     +CAMPO_LOCAL+" VARCHAR NULL, "
+                                                                                     +CAMPO_CADENA_P+" VARCHAR NULL, "
+                                                                                     +CAMPO_TIPO_NEGOCIO+" VARCHAR NULL, "
+                                                                                     +CAMPO_TIPO_SOPORTE+" VARCHAR)";
+
+    public static final String CREAR_TABLA_UBICACIONES="CREATE TABLE IF NOT EXISTS "+TABLA_UBICACIONES+" (" +CAMPO_ID_UBICACION+" INTEGER PRIMARY KEY, "
+                                                                                                            +CAMPO_DESCR_UBICACION+" VARCHAR)";
+
+    public static final String CREAR_TABLA_TIPO_NEGOCIO="CREATE TABLE IF NOT EXISTS "+TABLA_TIPO_NEGOCIO+" (" +CAMPO_ID_TN+" INTEGER PRIMARY KEY, "
+                                                                                                              +CAMPO_DESCRIPCION_TN+" VARCHAR)";
+
+    public static final String CREAR_TABLA_CADENAS="CREATE TABLE IF NOT EXISTS "+TABLA_CADENAS+" (" +CAMPO_ID_CADENA+" INTEGER PRIMARY KEY, "
+                                                                                                    +CAMPO_DESCR_CADENA+ " VARCHAR, "
+                                                                                                     +CAMPO_ID_TIPO_NEGOCIO+" INTEGER)";
+
+    public static final String CREAR_TABLA_LOCALES="CREATE TABLE IF NOT EXISTS "+TABLA_LOCALES+" (" +CAMPO_CODIGO+" INTEGER PRIMARY KEY, "
+                                                                                                    +CAMPO_DESCRIPCION_LOCAL+" VARCHAR, "
+                                                                                                    +CAMPO_CADENA+" INT NULL)";
+    //ITRACK..............CONSULTA DE TABLAS.....................................
+    public static String CONSULTA_TABLA_PRODUCTOS="SELECT * FROM "+TABLA_PRODUCTOS;
+    public static String CONSULTA_TABLA_LOCALES="SELECT * FROM "+TABLA_LOCALES;
+    public static String CONSULTA_TABLA_UBICACIONES="SELECT * FROM "+TABLA_UBICACIONES;
+    public static String CONSULTA_TABLA_TIPO_NEGOCIO="SELECT * FROM "+TABLA_TIPO_NEGOCIO;
+    public static String CONSULTA_TABLA_CADENAS="SELECT * FROM "+TABLA_CADENAS;
+    public static String CONSULTA_TABLA_SOPORTE="SELECT * FROM "+TABLA_SOPORTE;
+    public static String CONSULTA_TABLA_MAESTRO="SELECT * FROM "+TABLA_MAESTRO;
 }

@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".iTrack.AgregarActivity"></activity>
+        <activity android:name=".iTrack.CapturasActivity"></activity>
+        <activity android:name=".iTrack.utils_csv.CapturaListViewActivity" />
+        <activity android:name=".iTrack.ConfiguracionActivity" />
+        <activity android:name=".iTrack.AgregarActivity" />
         <activity
             android:name=".iTrack.QuiebreActivity"
             android:label="@string/title_activity_quiebre"

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal"
+    android:background="#1A3D75">
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/columna_id"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:minHeight="20dp"
+        android:padding="8dp"
+        android:textStyle="bold"
+        android:textColor="#FFF"
+        android:layout_weight="0.33"/>
+    <TextView
+        android:id="@+id/columna_codigo"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:minHeight="20dp"
+        android:padding="8dp"
+        android:textColor="#FFF"
+        android:layout_weight="0.33"/>
+
+    <TextView
+        android:id="@+id/columna_descripcion"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:minHeight="20dp"
+        android:padding="8dp"
+        android:textColor="#FFF"
+        android:layout_weight="0.33"/>
+
+    <TextView
+        android:id="@+id/columna_cantidad"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:minHeight="20dp"
+        android:padding="8dp"
+        android:textColor="#FFF"
+        android:layout_weight="0.33"/>
+
+
+</LinearLayout>

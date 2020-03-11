@@ -1,4 +1,4 @@
-package com.example.wmiltos.inveglobal_droid.iTrack.tablasCSV;
+package com.example.wmiltos.inveglobal_droid.iTrack.tablasCSV_Objetos;
 
 public class Locales {
     private String codigo;
@@ -9,6 +9,10 @@ public class Locales {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.cadena = cadena;
+    }
+
+    public Locales() {
+
     }
 
 

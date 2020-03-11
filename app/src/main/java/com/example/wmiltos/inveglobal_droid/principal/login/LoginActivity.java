@@ -18,14 +18,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.wmiltos.inveglobal_droid.PruebasBD.PermisoActivity;
-import com.example.wmiltos.inveglobal_droid.PruebasBD.PruebaTabsActivity;
-import com.example.wmiltos.inveglobal_droid.PruebasBD.ScannerActivity;
+import com.example.wmiltos.inveglobal_droid.iTrack.utils_csv.CapturaListViewActivity;
 import com.example.wmiltos.inveglobal_droid.R;
 import com.example.wmiltos.inveglobal_droid.entidades.conexion.ConexionSQLiteHelper;
-import com.example.wmiltos.inveglobal_droid.iTrack.QuiebreActivity;
-import com.example.wmiltos.inveglobal_droid.iTrack.tablasCSV.Locales;
-import com.example.wmiltos.inveglobal_droid.principal.subVentanas.VisualizarRegistroActivity;
+import com.example.wmiltos.inveglobal_droid.iTrack.tablasCSV_Objetos.Locales;
 import com.example.wmiltos.inveglobal_droid.principal.ventanas.UbicacionActivity;
 import com.example.wmiltos.inveglobal_droid.utilidades.Utilidades;
 
@@ -411,7 +407,7 @@ public class LoginActivity extends AppCompatActivity {
         LoginActivity.this.finish();//finaliza la ventana anterior
     }
 
-    public void importarCSV() {
+    public void importarCSVLocal() {
         List<Locales> listaLocales = new ArrayList<>();//previas configuraciones del adaptador y la tablaCSV
         //limpiarTablas("usuarios");
         File carpeta = new File(Environment.getExternalStorageDirectory() + "/Download");
@@ -427,7 +423,7 @@ public class LoginActivity extends AppCompatActivity {
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
                 // Toast.makeText(this, "respuesta2"+bufferedReader, Toast.LENGTH_SHORT).show();
                 while((cadena = bufferedReader.readLine()) != null) {
-                    arreglo = cadena.split(",");
+                    arreglo = cadena.split(";");
                     ConexionSQLiteHelper admin = new ConexionSQLiteHelper(this, "InveStock.sqlite", null, 1);
                     SQLiteDatabase db = admin.getWritableDatabase();
                     ContentValues registro = new ContentValues();
@@ -443,23 +439,26 @@ public class LoginActivity extends AppCompatActivity {
                                     arreglo[2]
                             )
                     );
-
                     // los inserto en la base de datos
                     db.insert("LOCALES", null, registro);
                     db.close();
-                    Toast.makeText(this, "SE IMPORTO EXITOSAMENTE", Toast.LENGTH_SHORT).show();
                     //llama el adaptador en QuiebreActivity
                     //adaptador = new AdaptadorLocales(QuiebreActivity.this, listaLocales);
                     //rvLo.setAdapter(adaptador);
                 }
+                Toast.makeText(this, "SE IMPORTO EXITOSAMENTE", Toast.LENGTH_SHORT).show();
             } catch(Exception e) {
                 Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-
     public void onClickbtn(View view) {
-        importarCSV();
+        Intent intent = new Intent(LoginActivity.this, CapturaListViewActivity.class);
+        startActivity(intent);
+        //importarCSVLocal();
+
     }
+
+
 }
