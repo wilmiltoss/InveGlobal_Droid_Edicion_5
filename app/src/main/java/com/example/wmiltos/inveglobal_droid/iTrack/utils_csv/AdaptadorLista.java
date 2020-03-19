@@ -9,7 +9,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.wmiltos.inveglobal_droid.R;
-import com.example.wmiltos.inveglobal_droid.iTrack.CapturasActivity;
 import com.example.wmiltos.inveglobal_droid.iTrack.tablasCSV_Objetos.Product;
 
 import java.util.ArrayList;
@@ -67,7 +66,7 @@ public class AdaptadorLista extends BaseAdapter {
             public void onClick(View view) {
                 mHolder.txColumnId.setText("Usted salió de aquí!");
 
-                Intent intent = new Intent(context, CapturasActivity.class);
+                Intent intent = new Intent();
                 intent.putExtra("texto1", entradas.get(position).getId());
                 intent.putExtra("texto2", entradas.get(position).getCodigo_producto());
                 intent.putExtra("texto3", entradas.get(position).getDescripcion());

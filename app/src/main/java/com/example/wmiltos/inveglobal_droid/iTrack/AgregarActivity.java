@@ -20,8 +20,8 @@ import com.example.wmiltos.inveglobal_droid.utilidades.Utilidades;
 
 public class AgregarActivity extends AppCompatActivity {
 
-    TextView codigoBarra, txDescripcion, txDetalle, txSector,txSectorDescripcion, txResulSuma,txSumaCantidad;
-    TextView campoTipoNegocio, campoCadena, campoLocal, campoTipoSoporte, campoUsuario;
+    TextView codigoBarra, txDescripcion, txDetalle, txSector,txSectorDescripcion, txResulSuma,txSumaCantidad, txUbicacion;
+    TextView campoTipoNegocio, campoCadena, campoLocal, campoTipoSoporte, campoUsuario, campoJoin;
     EditText campoCantidad;
     ConexionSQLiteHelper conn;
     Button btnAgregar;
@@ -43,7 +43,31 @@ public class AgregarActivity extends AppCompatActivity {
             }
         });
     }
+    //boton fisico atraz
+    @Override
+    public void onBackPressed() {
+        dialogo();
+    }
 
+    //dialogo antes de salir
+    public void dialogo(){
+        android.support.v7.app.AlertDialog.Builder dialogo = new android.support.v7.app.AlertDialog.Builder(AgregarActivity.this);
+        dialogo.setMessage("Desea cancelar la carga actual?").setTitle("Cancelar Carga")
+                .setIcon(R.drawable.alert_dialogo);
+        dialogo.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+               volverAmenu();
+            }
+        });
+        dialogo.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        android.support.v7.app.AlertDialog alertDialog = dialogo.create();
+        alertDialog.show();
+    }
     public void comprobarRegistro(){
         try {
             if (campoCantidad.getText().length() != 0) {//si el campo esta vacio, mostrar mensaje
@@ -60,7 +84,7 @@ public class AgregarActivity extends AppCompatActivity {
                 //si el select tira cantidad va actualizar, sino va registrar
                 if (fila.moveToFirst()) {//si trae registros = true
                     if (fila != null) {//si la fila existe
-                        Toast.makeText(getApplicationContext(), "El codigo ya existe en la lista", Toast.LENGTH_LONG).show();
+                       // Toast.makeText(getApplicationContext(), "El codigo ya existe en la lista", Toast.LENGTH_LONG).show();
                         actualizarDialogo();//lo actualiza
                     }
                 } else {//si no trae registros = false
@@ -73,7 +97,6 @@ public class AgregarActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), ex.toString(), Toast.LENGTH_LONG).show();
         }
     }
-
 
     private void registrarDialogo() {
         //1 -creamos dialogo
@@ -99,6 +122,8 @@ public class AgregarActivity extends AppCompatActivity {
         try{
             //CONEXION
             SQLiteDatabase db = conn.getWritableDatabase();
+            //Del campo join = union de los campos codigoBarra, Descripcion y Cantidad
+            String union = codigoBarra.getText().toString()+" -"+txDescripcion.getText().toString()+"  "+campoCantidad.getText().toString();
             //CON SENTENCIA SQL
             String insert="INSERT INTO "+ Utilidades.TABLA_PRODUCTOS +"("+Utilidades.CAMPO_CODIGO_BARRA+","
                                                                          +Utilidades.CAMPO_DESCRIP+","
@@ -107,7 +132,8 @@ public class AgregarActivity extends AppCompatActivity {
                                                                          +Utilidades.CAMPO_LOCAL+","
                                                                          +Utilidades.CAMPO_CADENA_P+","
                                                                          +Utilidades.CAMPO_TIPO_NEGOCIO+","
-                                                                         +Utilidades.CAMPO_TIPO_SOPORTE+")"+
+                                                                         +Utilidades.CAMPO_TIPO_SOPORTE+","
+                                                                         +Utilidades.CAMPO_AUX+")"+
                                                                          "VALUES ('"+codigoBarra.getText().toString()+"','"
                                                                                     +txDescripcion.getText().toString()+"',"
                                                                                     +campoCantidad.getText().toString()+",'"
@@ -115,7 +141,8 @@ public class AgregarActivity extends AppCompatActivity {
                                                                                     +campoLocal.getText().toString()+"','"
                                                                                     +campoCadena.getText().toString()+"','"
                                                                                     +campoTipoNegocio.getText().toString()+"','"
-                                                                                    +campoTipoSoporte.getText().toString()+"')";
+                                                                                    +campoTipoSoporte.getText().toString()+"','"
+                                                                                    +union+"')";
 
             //"Id Registrado" es el mensaje que envia al insertar
             Toast.makeText(getApplicationContext(),"Lectura Registrada",Toast.LENGTH_SHORT).show();
@@ -178,22 +205,12 @@ public class AgregarActivity extends AppCompatActivity {
         try{
             sumaStock();
             SQLiteDatabase db = conn.getWritableDatabase();
-            String[] parametros = { "1",
-                    "1",
-                    "1",
-                    "1",
-                    "1",
-                    "1",
-                    codigoBarra.getText().toString()};
+            String[] parametros = { codigoBarra.getText().toString(),
+            };
 
             ContentValues valores = new ContentValues();
             valores.put(Utilidades.CAMPO_CANT_PROD,campoCantidad.getText().toString());
-            db.update(Utilidades.TABLA_PRODUCTOS,valores, Utilidades.CAMPO_ID+"=? AND "
-                            +Utilidades.CAMPO_CODIGO_BARRA+"=? AND "
-                            +Utilidades.CAMPO_DESCRIP+"=? AND "
-                            +Utilidades.CAMPO_CANT_PROD+"=? AND "
-                            +Utilidades.CAMPO_CATEGORIA+"=? AND "
-                            +Utilidades.CAMPO_LOCAL+"=?"
+            db.update(Utilidades.TABLA_PRODUCTOS,valores, Utilidades.CAMPO_CODIGO_BARRA+"=? "
                     ,parametros);
             Toast.makeText(getApplicationContext(),"Cantidad reemplazada",Toast.LENGTH_SHORT).show();
             db.close();
@@ -245,9 +262,13 @@ public class AgregarActivity extends AppCompatActivity {
         campoTipoNegocio=findViewById(R.id.txttipoNegocio);
         campoTipoSoporte=findViewById(R.id.txttipoSoporte);
         campoUsuario=findViewById(R.id.txtusuario);
+        campoJoin=findViewById(R.id.tv_join);
+
+        txUbicacion = findViewById(R.id.tv_ubicacion);
     }
 
-    private void recepcionDatosQuiebre() {//A-R1
+    //A-R1
+    private void recepcionDatosQuiebre() {
         //recibirScannerCamara();
         Bundle miBundle = this.getIntent().getExtras();
         if(miBundle!=null){
@@ -262,6 +283,9 @@ public class AgregarActivity extends AppCompatActivity {
 
             String tipoSoporte = miBundle.getString("msjTipoSoporte");
             campoTipoSoporte.setText(tipoSoporte);
+
+            String ubicacion = miBundle.getString("msjUbicacion");
+            txUbicacion.setText(ubicacion);
 
             String usuario = miBundle.getString("msjUsuario");
             campoUsuario.setText(usuario);

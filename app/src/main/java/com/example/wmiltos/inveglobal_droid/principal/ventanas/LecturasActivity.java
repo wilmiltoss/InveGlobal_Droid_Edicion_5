@@ -123,7 +123,6 @@ public class LecturasActivity extends AppCompatActivity {
         });
     }
 
-
     //NAVEGADORES
     public void navigationView (){
         //declaracion de navegadores *menu inferior
@@ -154,7 +153,6 @@ public class LecturasActivity extends AppCompatActivity {
                         " WHERE " + Utilidades.CAMPO_SCANNING + "='" + str + "'", null);
                 fila.moveToFirst();
                 tvScanning.setText(fila.getString(0));//muestra los campos en la tx oculta
-
             }
 
         }catch (Exception e){
@@ -192,13 +190,10 @@ public class LecturasActivity extends AppCompatActivity {
     //2-salto automatico de ventana
     public void validacionCampoScanning (){
         campoScanning.addTextChangedListener(new TextWatcher() {
-
             @Override
             public void afterTextChanged(Editable s) {}
-
             @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 sumaRegistrosSQL();
             }
             //Pasar a la sgte ventana automaticamente si el numero de caracteres son las sgtes
@@ -215,7 +210,8 @@ public class LecturasActivity extends AppCompatActivity {
                         (s.length() == 10) && (tvScanning.getText().length()!=0) ||
                         (s.length() == 9)  && (tvScanning.getText().length()!=0) ||
                         (s.length() == 8)  && (tvScanning.getText().length()!=0) ||
-                        (s.length() == 7)  && (tvScanning.getText().length()!=0))
+                        (s.length() == 7)  && (tvScanning.getText().length()!=0) ||
+                        (s.length() == 6)  && (tvScanning.getText().length()!=0))
                 {
                     envioDatosLectura();//si esta correcto, envia los datos a Lectura
                 }else if (s.length()==13){
@@ -228,19 +224,15 @@ public class LecturasActivity extends AppCompatActivity {
     //2-salto automatico de ventana
     public void validacionCampoScanning2 (){
         lecturaRapida.addTextChangedListener(new TextWatcher() {
-
             @Override
             public void afterTextChanged(Editable s) {}
-
             @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 sumaRegistrosSQL();
             }
             //Pasar a la sgte ventana automaticamente si el numero de caracteres son las sgtes
             @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 comprobarCodigo2();
                 //validacion de salto
                 if(     (s.length() == 15) && (tvScanning.getText().length()!=0) ||//que tenga 15 dig y q el campo sea indistinto a 0
@@ -251,7 +243,8 @@ public class LecturasActivity extends AppCompatActivity {
                         (s.length() == 10) && (tvScanning.getText().length()!=0) ||
                         (s.length() == 9)  && (tvScanning.getText().length()!=0) ||
                         (s.length() == 8)  && (tvScanning.getText().length()!=0) ||
-                        (s.length() == 7)  && (tvScanning.getText().length()!=0))
+                        (s.length() == 7)  && (tvScanning.getText().length()!=0) ||
+                        (s.length() == 6)  && (tvScanning.getText().length()!=0))
                 {
                     envioDatosLectura2();//si esta correcto, envia los datos a Lectura
 
@@ -423,7 +416,9 @@ public class LecturasActivity extends AppCompatActivity {
         SQLiteDatabase db = conn.getReadableDatabase();
 
         Cursor c = db.rawQuery("select * from " + Utilidades.TABLA_LECTURAS, null);
-        nroLecturasL.setText("Nro.Lecturas:   " + c.getCount());
+        int contador = c.getCount();
+        int suma = contador;
+        nroLecturasL.setText("Nro.Lecturas:   " + suma);
         db.close();
     }
         //Envio de mensajes de Lecturas al activityStock

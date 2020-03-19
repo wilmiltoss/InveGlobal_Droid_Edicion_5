@@ -104,8 +104,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        >
+        android:paddingTop="10dp">
 
         <TextView
             android:id="@+id/txtSector1"
@@ -114,7 +113,6 @@
             android:text="Sector : "
             android:textColor="@color/colorPrimaryNegro"
             android:textSize="20dp" />
-
 
         <TextView
             android:id="@+id/txtSectorDescrip"
@@ -127,17 +125,37 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp">
 
+        <TextView
+            android:id="@+id/txtUbicacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ubicación : "
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="20dp" />
 
+        <TextView
+            android:id="@+id/tv_ubicacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="ubicacion"
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="19dp"
+            android:textStyle="bold" />
 
+    </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
-        android:paddingTop="20dp"
-        >
+        android:paddingTop="20dp">
 
         <TextView
             android:id="@+id/txtCantidad"
@@ -222,8 +240,8 @@
 
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="1dp"
+        android:layout_height="1dp">
         <TextView
             android:id="@+id/txt_Barra"
             android:layout_width="wrap_content"
@@ -236,8 +254,8 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="1dp"
+        android:layout_height="1dp">
 
         <TextView
             android:id="@+id/txtSector"
@@ -300,8 +318,23 @@
             android:textSize="19dp"
             android:textStyle="bold" />
 
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="1dp"
+        android:layout_height="1dp">
+        <TextView
+            android:id="@+id/tv_join"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="union"
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="19dp"
+            android:textStyle="bold" />
+
+
 
     </LinearLayout>
+
 
 
 

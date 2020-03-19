@@ -13,25 +13,41 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center">
+        android:gravity="">
 
-
-      <!--  <Button
-            android:id="@+id/btn_ConteoRapido_quiebre"
-            android:layout_width="100dp"
-            android:layout_height="25dp"
+        <Button
+            android:id="@+id/btn_importar_csv"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="40dp"
             android:background="@drawable/btn_color"
-            android:onClick="onClickConteoRapido_quiebre"
-            android:text="Conteo +1"
-            android:textColor="@color/colorVerde" />-->
+            android:onClick="onClickImportarCsv"
+            android:text="CSV"
+            android:textColor="@color/colorVerde" />
+
 
         <TextView
             android:id="@+id/txtScanning"
+            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SCANNING            "
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="3dp"
+            android:text="SCANNING"
             android:textColor="@color/colorPrimaryNegro"
             android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/btn_consulta_listado"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginLeft="40dp"
+            android:background="@drawable/btn_color"
+            android:onClick="onClickConsultaListado"
+            android:text="MAESTRO"
+            android:textColor="@color/colorPrimaryDark" />
+
 
     </LinearLayout>
 
@@ -63,6 +79,27 @@
                     android:maxLength="20" />
             </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/et_panelLista"
+                android:layout_width="282dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="0dp"
+                android:inputType="number"
+                app:counterEnabled="true"
+                app:counterMaxLength="13">
+
+                <EditText
+                    android:id="@+id/et_scanningLecturaLista"
+                    android:layout_width="256dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorVerdeClaro"
+                    android:background="@drawable/stylo_borde"
+                    android:inputType="number"
+                    android:maxLength="20"
+                    android:textColor="@color/colorPrimaryNegro"/>
+            </android.support.design.widget.TextInputLayout>
+
         </RelativeLayout>
 
     </LinearLayout>
@@ -85,16 +122,15 @@
             android:textColor="@color/cardview_light_background" />
 
 
-
-        <!--    <Button
+          <Button
             android:id="@+id/btn_buscar2"
-            android:layout_width="300dp"
-            android:layout_height="58dp"
-            android:background="@color/colorPrimaryNegro"
-            android:onClick="onClickBuscar"
-            android:layout_marginTop="20dp"
+            android:layout_width="312dp"
+            android:layout_height="40dp"
+            android:background="@color/colorVerde"
+            android:onClick="onClickBuscar2"
+            android:gravity="center"
             android:text="Buscar"
-            android:textColor="@color/colorTransparente" />-->
+            android:textColor="@color/colorTransparente" />
 
 
     </LinearLayout>
@@ -121,7 +157,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ID "
+                    android:text="Nro. "
                     android:textColor="@color/colorPrimaryNegro" />
 
                 <TextView
@@ -136,7 +172,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:paddingRight="50dp"
+                    android:paddingRight="40dp"
                     android:text="DESCRIPCION    "
                     android:textColor="@color/colorPrimaryNegro" />
 
@@ -164,15 +200,10 @@
             <ListView
                 android:id="@+id/listViewPanel"
                 android:layout_width="wrap_content"
-                android:layout_height="244dp"
+                android:layout_height="306dp"
                 android:divider="#61000000"
                 android:dividerHeight="1dp"
                 android:scrollbarSize="2dp" />
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center">
-            </LinearLayout>
 
         </LinearLayout>
 
@@ -194,63 +225,124 @@
             android:gravity="center"
             android:textColor="@color/cardview_light_background" />
     </LinearLayout>
+
+    <!--Datos generales de la lista-->
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
 
         <TextView
-            android:id="@+id/text_cadena"
+            android:id="@+id/text_count_registro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:paddingRight="3dp"
-            android:text="cadena"
+            android:text="Items: 0"
             android:textColor="@color/colorPrimaryNegro" />
+        <!-- <TextView
+             android:id="@+id/text_count_pendiente"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="2dp"
+             android:paddingRight="3dp"
+             android:text="Pendientes: 0"
+             android:textColor="@color/colorPrimaryNegro" />-->
+         <TextView
+             android:id="@+id/text_count_quiebre"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="2dp"
+             android:paddingRight="3dp"
+             android:text="En quiebre: 0"
+             android:textColor="@color/colorPrimaryNegro" />
 
-        <TextView
-            android:id="@+id/text_tipo_negocio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:paddingRight="3dp"
-            android:text="tipo negocio"
-            android:textColor="@color/colorPrimaryNegro" />
+         <TextView
+             android:id="@+id/text_count_encontrado"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="2dp"
+             android:paddingRight="3dp"
+             android:text="Encontrados: 0"
+             android:textColor="@color/colorPrimaryNegro" />
 
-        <TextView
-            android:id="@+id/text_local"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:paddingRight="3dp"
-            android:text="local"
-            android:textColor="@color/colorPrimaryNegro" />
-
-        <TextView
-            android:id="@+id/text_tipo_soporte"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:paddingRight="3dp"
-            android:text="tipo soporte"
-            android:textColor="@color/colorPrimaryNegro" />
-
-        <TextView
-            android:id="@+id/text_usuarios"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:paddingRight="3dp"
-            android:text="usuario"
-            android:textColor="@color/colorPrimaryNegro" />
-
-    </LinearLayout>
+     </LinearLayout>
 
 
 
 
+     <LinearLayout
+         android:layout_width="1dp"
+         android:layout_height="1dp">
+
+         <TextView
+             android:id="@+id/text_cadena"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="2dp"
+             android:paddingRight="3dp"
+             android:text="cadena"
+             android:textColor="@color/colorPrimaryNegro" />
+
+         <TextView
+             android:id="@+id/text_tipo_negocio"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="2dp"
+             android:paddingRight="3dp"
+             android:text="tipo negocio"
+             android:textColor="@color/colorPrimaryNegro" />
+
+         <TextView
+             android:id="@+id/text_local"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="2dp"
+             android:paddingRight="3dp"
+             android:text="local"
+             android:textColor="@color/colorPrimaryNegro" />
+
+         <TextView
+             android:id="@+id/text_tipo_soporte"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="2dp"
+             android:paddingRight="3dp"
+             android:text="tipo soporte"
+             android:textColor="@color/colorPrimaryNegro" />
+
+         <TextView
+             android:id="@+id/text_usuarios"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="2dp"
+             android:paddingRight="3dp"
+             android:text="usuario"
+             android:textColor="@color/colorPrimaryNegro" />
+
+     </LinearLayout>
+
+     <LinearLayout
+         android:layout_width="1dp"
+         android:layout_height="1dp">
+         <TextView
+             android:id="@+id/text_extracto_listview"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="2dp"
+             android:paddingRight="3dp"
+             android:text="del listview"
+             android:textColor="@color/colorPrimaryNegro" />
+         <TextView
+             android:id="@+id/text_extracto_ubicacion"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="2dp"
+             android:paddingRight="3dp"
+             android:text="extracto ubicacion"
+             android:textColor="@color/colorPrimaryNegro" />
+
+     </LinearLayout>
 
 
-
-
-
-</LinearLayout>
+ </LinearLayout>

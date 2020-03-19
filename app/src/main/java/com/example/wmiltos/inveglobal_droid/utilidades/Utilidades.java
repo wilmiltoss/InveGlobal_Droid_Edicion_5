@@ -96,6 +96,8 @@ public class Utilidades {
     public static String CAMPO_TIPO_NEGOCIO = "TIPO_NEGOCIO";
     public static String CAMPO_TIPO_SOPORTE = "TIPO_SOPORTE";
     public static String CAMPO_CADENA_P ="CADENA";
+    public static String CAMPO_UBICACION = "UBICACION";
+    public static String CAMPO_AUX ="AUX";
     //UBICACIONES
     public static String TABLA_UBICACIONES="UBICACIONES";
     public static String CAMPO_ID_UBICACION="ID_UBICACION";
@@ -114,6 +116,11 @@ public class Utilidades {
     public static String CAMPO_CODIGO="CODIGO";
     public static String CAMPO_DESCRIPCION_LOCAL ="DESCRIPCION";
     public static String CAMPO_CADENA ="CADENA";
+    //LISTADO
+    public static String TABLA_LISTADO="LISTADO";
+    public static String CAMPO_SCANNING_LISTA="SCANNING";
+    public static String CAMPO_DESCRIP_LISTA ="DESCRIPCION";
+    public static String CAMPO_CANTIDAD_LISTA ="CANTIDAD";
 
 
 
@@ -123,11 +130,13 @@ public class Utilidades {
                                                                                      +CAMPO_CODIGO_BARRA+" VARCHAR NOT NULL, "
                                                                                      +CAMPO_DESCRIP+" VARCHAR NOT NULL, "
                                                                                      +CAMPO_CANT_PROD+" FLOAT, "
-                                                                                     +CAMPO_CATEGORIA+" VARCHAR NOT NULL, "
+                                                                                     +CAMPO_CATEGORIA+" VARCHAR NULL, "
                                                                                      +CAMPO_LOCAL+" VARCHAR NULL, "
                                                                                      +CAMPO_CADENA_P+" VARCHAR NULL, "
                                                                                      +CAMPO_TIPO_NEGOCIO+" VARCHAR NULL, "
-                                                                                     +CAMPO_TIPO_SOPORTE+" VARCHAR)";
+                                                                                     +CAMPO_TIPO_SOPORTE+" VARCHAR NULL, "
+                                                                                     +CAMPO_UBICACION+" VARCHAR NULL, "
+                                                                                     +CAMPO_AUX+" VARCHAR)";
 
     public static final String CREAR_TABLA_UBICACIONES="CREATE TABLE IF NOT EXISTS "+TABLA_UBICACIONES+" (" +CAMPO_ID_UBICACION+" INTEGER PRIMARY KEY, "
                                                                                                             +CAMPO_DESCR_UBICACION+" VARCHAR)";
@@ -142,6 +151,10 @@ public class Utilidades {
     public static final String CREAR_TABLA_LOCALES="CREATE TABLE IF NOT EXISTS "+TABLA_LOCALES+" (" +CAMPO_CODIGO+" INTEGER PRIMARY KEY, "
                                                                                                     +CAMPO_DESCRIPCION_LOCAL+" VARCHAR, "
                                                                                                     +CAMPO_CADENA+" INT NULL)";
+    public static final String CREAR_TABLA_LISTADO="CREATE TABLE IF NOT EXISTS "+TABLA_LISTADO+"  ("+CAMPO_SCANNING_LISTA+" VARCHAR PRIMARY KEY, "
+                                                                                                    +CAMPO_DESCRIP_LISTA+" VARCHAR, "
+                                                                                                    +CAMPO_CANTIDAD_LISTA+" INTEGER)";
+
     //ITRACK..............CONSULTA DE TABLAS.....................................
     public static String CONSULTA_TABLA_PRODUCTOS="SELECT * FROM "+TABLA_PRODUCTOS;
     public static String CONSULTA_TABLA_LOCALES="SELECT * FROM "+TABLA_LOCALES;
@@ -150,4 +163,5 @@ public class Utilidades {
     public static String CONSULTA_TABLA_CADENAS="SELECT * FROM "+TABLA_CADENAS;
     public static String CONSULTA_TABLA_SOPORTE="SELECT * FROM "+TABLA_SOPORTE;
     public static String CONSULTA_TABLA_MAESTRO="SELECT * FROM "+TABLA_MAESTRO;
+    public static String CONSULTA_TABLA_LISTADO="SELECT * FROM "+TABLA_LISTADO;
 }

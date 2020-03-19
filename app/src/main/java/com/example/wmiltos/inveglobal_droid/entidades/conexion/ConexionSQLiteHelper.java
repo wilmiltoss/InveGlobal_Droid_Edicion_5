@@ -39,6 +39,11 @@ public class ConexionSQLiteHelper extends SQLiteOpenHelper {
 
     }
 
+    public void countRegistroTabla(String tabla, String campo, SQLiteDatabase db) {
+        db.execSQL("SELECT count("+campo+") FROM "+tabla);
+
+    }
+
 
 
 

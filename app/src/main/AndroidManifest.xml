@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.wmiltos.inveglobal_droid">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".iTrack.CapturasActivity"></activity>
+        <activity android:name=".iTrack.ImportarCSVActivity"></activity>
+        <activity android:name=".iTrack.EditarActivity" />
         <activity android:name=".iTrack.utils_csv.CapturaListViewActivity" />
         <activity android:name=".iTrack.ConfiguracionActivity" />
         <activity android:name=".iTrack.AgregarActivity" />
@@ -46,10 +52,5 @@
         <activity android:name=".principal.subVentanas.VisualizarRegistroActivity" />
         <activity android:name=".PruebasBD.SimpleScannerActivity" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>

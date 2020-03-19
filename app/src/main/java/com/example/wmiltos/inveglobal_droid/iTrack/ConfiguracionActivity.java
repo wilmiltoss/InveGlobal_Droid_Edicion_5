@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.wmiltos.inveglobal_droid.R;
 import com.example.wmiltos.inveglobal_droid.entidades.conexion.ConexionSQLiteHelper;
+import com.example.wmiltos.inveglobal_droid.entidades.tablas.Productos;
 import com.example.wmiltos.inveglobal_droid.entidades.tablas.Soportes;
 import com.example.wmiltos.inveglobal_droid.entidades.tablas.Usuarios;
 import com.example.wmiltos.inveglobal_droid.iTrack.tablasCSV_Objetos.Cadena;
@@ -55,21 +56,24 @@ public class ConfiguracionActivity extends AppCompatActivity {
     ArrayList<Tiponegocio>tipoNegocioLista;
     ArrayList<Cadena>cadenaslLista;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracion);
-        variables();
-        crearTablas2();
-        pedirPermisos();
-        consultarListaLocales();
-        consultarListaSoporte();
-        consultarListaCadena();
-        consultarListaTipoNegocio();
-        recepcionDatosUsuario();
+        try {
+            variables();
+            crearTablas3();
+            pedirPermisos();
+            consultarListaLocales();
+            consultarListaSoporte();
+            consultarListaCadena();
+            consultarListaTipoNegocio();
+            recepcionDatosUsuario();
         //compruebaRegistroConfiguracion();
 
-        try {
+
             //2 - creamos los array adaptadores******************************************
             //Adaptadores de secuencias
             ArrayAdapter<CharSequence> adaptadorLocales = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listaLocalesSpinner);
@@ -77,19 +81,20 @@ public class ConfiguracionActivity extends AppCompatActivity {
             ArrayAdapter<CharSequence> adaptadorCadena = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listaCadenasSpinner);
             ArrayAdapter<CharSequence> adaptadorTipoNegocio = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listaTipoNegocioSpinner);
 
-            //mostrar en el combo el array adaptador
+            //3- mostrar en el combo el array adaptador
             comboLocales.setAdapter(adaptadorLocales);
             comboSoporte.setAdapter(adaptadorSoporte);
             comboCadenas.setAdapter(adaptadorCadena);
             comboTipoNegocio.setAdapter(adaptadorTipoNegocio);
 
-            //captura de datos del spinner
+            //4- captura de datos del spinner
             comboLocales.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
                     //accede al elemento seleccionado
                     txLocal.setText(localLista.get(posicion).getCodigo());
                     txDescripcionLocal.setText(localLista.get(posicion).getDescripcion());
+
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> adapterView) {
@@ -140,7 +145,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
     }
 
 
-    //spinner Locacion
+    //5-spinner Locacion
     private void consultarListaLocales() {
         try {
             SQLiteDatabase db = conn.getReadableDatabase();
@@ -271,8 +276,9 @@ public class ConfiguracionActivity extends AppCompatActivity {
         }
 
     }
+
     //DE LA CREACION DE LAS TABLAS
-    public void crearTablas2(){
+    public void crearTablas3(){
         try {
             SQLiteDatabase db = conn.getReadableDatabase();
             // 1ro comprueba si existe las tablas
@@ -289,8 +295,8 @@ public class ConfiguracionActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "tablas creadas correctamente", Toast.LENGTH_SHORT).show();
                 //despues de crear, cargar las tablas
-                cargarTablas();
                 Toast.makeText(getApplicationContext(), "Cargando tablas - Aguarde un momento", Toast.LENGTH_SHORT).show();
+                cargarTablas();
             }
         }catch (Exception ex){
             Toast.makeText(getApplicationContext(), ex.toString(), Toast.LENGTH_SHORT).show();
@@ -320,6 +326,8 @@ public class ConfiguracionActivity extends AppCompatActivity {
         }
     }
 
+
+
     //comprueba si existe la tabla en la bd sqlite
     public boolean isTableExists(String nombreTabla) {
         SQLiteDatabase db = conn.getReadableDatabase();
@@ -338,6 +346,10 @@ public class ConfiguracionActivity extends AppCompatActivity {
     }
 
     //*****************************************************************************************************************
+
+
+
+
     //LOCALES
     public void importarCSV_locales() {
         File carpeta = new File(Environment.getExternalStorageDirectory() + "/Download");

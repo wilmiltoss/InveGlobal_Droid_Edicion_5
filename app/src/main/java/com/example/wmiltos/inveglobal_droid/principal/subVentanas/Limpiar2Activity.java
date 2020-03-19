@@ -21,16 +21,15 @@ public class Limpiar2Activity extends AppCompatActivity {
     Button limpiarDatos;
     TextView cantidadRegistros, parameters;
     ConexionSQLiteHelper conn;
-    private Cursor fila;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_limpiar2);
         conn= new ConexionSQLiteHelper(getApplicationContext(),"InveStock.sqlite",null,1);
-        cantidadRegistros=(TextView) findViewById(R.id.tvCampoCantidadRegistros);
-        limpiarDatos = (Button)findViewById(R.id.btn_limpiar);
-        parameters=(TextView) findViewById(R.id.tvParametro);
+        cantidadRegistros= findViewById(R.id.tvCampoCantidadRegistros);
+        limpiarDatos = findViewById(R.id.btn_limpiar);
+        parameters= findViewById(R.id.tvParametro);
         sumaRegistrosSQL();
     }
 
