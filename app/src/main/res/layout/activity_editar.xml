@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".iTrack.EditarActivity">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp">
+
+        <TextView
+            android:id="@+id/tvScanning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Código de Barra : "
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryNegro" />
+
+        <TextView
+            android:id="@+id/txtScanning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Código de Barra : "
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryNegro" />
+
+
+        <TextView
+            android:id="@+id/tx_Scanning_Stock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="28sp"
+            android:textColor="@color/colorPrimaryNegro" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:id="@+id/txtDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descripcion : "
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp">
+
+        <TextView
+            android:id="@+id/tx_Descripcion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="descripcion"
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="25dp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/txtDetalle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detalle : "
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/txtDetalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="detalle"
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        >
+
+        <TextView
+            android:id="@+id/txtSector1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sector : "
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="20dp" />
+
+
+        <TextView
+            android:id="@+id/txtSectorDescrip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="sector"
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!--Lista desplegable Ubicacion-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/txt_ubicacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="5dp"
+            android:text="Ubicacion :"
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="25dp" />
+
+        <Spinner
+            android:id="@+id/sp_ubicacion"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/stylo_borde"
+            android:text="" />
+
+        <!--De la captura de los datos-->
+        <TextView
+            android:id="@+id/textView_id_ubicacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tipo negocio"
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="1dp" />
+
+        <TextView
+            android:id="@+id/textView_desc_ubicacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="descripcion"
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="1dp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:id="@+id/txtCantidad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:textSize="18dp"
+            android:text="Cantidad : "
+            android:textColor="@color/colorPrimaryNegro"/>
+
+        <!-- <EditText
+             android:id="@+id/etCantidad"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textSize="25dp"
+             android:hint="cantidad.."
+             android:inputType="number"
+             android:maxLength="7"
+             android:background="@drawable/stylo_borde"
+             android:textColor="@color/colorPrimaryNegro"
+             android:textStyle="bold"/> -->
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/et_panel"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingTop="0dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="4">
+
+            <EditText
+                android:id="@+id/etCantidad"
+                android:layout_width="141dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/stylo_borde"
+                android:inputType="number"
+                android:maxLength="6" />
+        </android.support.design.widget.TextInputLayout>
+
+        <!--DE LA CANTIDA DE REGISTROS-->
+        <TextView
+            android:id="@+id/txtConteo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="Reg: "
+            android:textColor="@color/colorPrimaryNegro"/>
+
+        <TextView
+            android:id="@+id/tx_sumaCantidad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="19dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_-1"
+            android:layout_width="wrap_content"
+            android:layout_height="74dp"
+            android:background="@color/colorDefecto"
+            android:onClick="onClickResta"
+            android:text="-1"
+            android:textColor="@drawable/tx_btn1"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_agregar"
+            android:layout_width="257dp"
+            android:layout_height="74dp"
+            android:background="@color/colorCeleste"
+            android:text="Agregar"
+            android:textColor="@color/colorPrimaryNegro"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="1dp"
+        android:layout_height="1dp">
+        <TextView
+            android:id="@+id/txt_Barra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="codigo capturado "
+
+            android:textColor="@color/colorPrimaryNegro"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="1dp"
+        android:layout_height="1dp">
+
+        <TextView
+            android:id="@+id/txtSector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="sector"
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="19dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txResulSuma"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="suma"
+            android:textColor="@color/colorPrimary"
+            android:textSize="1dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txttipoNegocio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="tipoNegocio"
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="19dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtcadena"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="cadena"
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="19dp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/txtlocal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="local"
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="19dp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/txttipoSoporte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="tipoSoporte"
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="19dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtusuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="usuario"
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="19dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="1dp"
+        android:layout_height="1dp">
+        <TextView
+            android:id="@+id/tv_join"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="union"
+            android:textColor="@color/colorPrimaryNegro"
+            android:textSize="19dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+
+</LinearLayout>
