@@ -119,8 +119,7 @@ public class CapturaListViewActivity extends AppCompatActivity {
         SQLiteDatabase db = conn.getReadableDatabase();
         Cursor cursor = null;
 
-        cursor = db.rawQuery("SELECT " + Utilidades.CAMPO_ID + "," +
-                Utilidades.CAMPO_CODIGO_BARRA + "," +
+        cursor = db.rawQuery("SELECT " +Utilidades.CAMPO_CODIGO_BARRA + "," +
                 Utilidades.CAMPO_DESCRIP + "," +
                 Utilidades.CAMPO_CANT_PROD
                 + " FROM " + Utilidades.TABLA_PRODUCTOS, null);
@@ -128,11 +127,10 @@ public class CapturaListViewActivity extends AppCompatActivity {
         int post = 0;
         if (cursor.moveToFirst()) {//si tenemo al menos 1 reg lo recorremos
             do {
-                String id = cursor.getString(0);
-                String codigo = cursor.getString(1);
-                String Descripcion = cursor.getString(2);
-                String Cantidad = cursor.getString(3);
-                listado[post] = id + " -" + codigo + "-" + Descripcion + "  " + Cantidad;
+                String codigo = cursor.getString(0);
+                String Descripcion = cursor.getString(1);
+                String Cantidad = cursor.getString(2);
+                listado[post] = codigo + "-" + Descripcion + "  " + Cantidad;
                 post++;
 
             } while (cursor.moveToNext());//mientras se mueve al sgte registro

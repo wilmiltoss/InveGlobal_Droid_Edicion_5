@@ -154,18 +154,14 @@
                 android:layout_height="wrap_content"
                 android:gravity="center">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nro. "
-                    android:textColor="@color/colorPrimaryNegro" />
+
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:paddingRight="40dp"
-                    android:text="CODIGO"
+                    android:text="CODIGO    "
                     android:textColor="@color/colorPrimaryNegro" />
 
                 <TextView

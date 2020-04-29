@@ -87,7 +87,6 @@ public class Utilidades {
     //ITRACK**********************************************************************************************
     //PRODUCTOS
     public static String TABLA_PRODUCTOS="PRODUCTOS";
-    public static String CAMPO_ID="ID";
     public static String CAMPO_CODIGO_BARRA ="CODIGO_BARRA";
     public static String CAMPO_DESCRIP ="DESCRIPCION";
     public static String CAMPO_CANT_PROD ="CANTIDAD";
@@ -126,17 +125,16 @@ public class Utilidades {
 
     //final son las Sentencias  SQL dadas
     //ITRACK..............CREACION DE TABLAS.....................................
-    public static final String CREAR_TABLA_PRODUCTOS="CREATE TABLE IF NOT EXISTS "+TABLA_PRODUCTOS+" ("+CAMPO_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
-                                                                                     +CAMPO_CODIGO_BARRA+" VARCHAR NOT NULL, "
-                                                                                     +CAMPO_DESCRIP+" VARCHAR NOT NULL, "
-                                                                                     +CAMPO_CANT_PROD+" FLOAT, "
-                                                                                     +CAMPO_CATEGORIA+" VARCHAR NULL, "
-                                                                                     +CAMPO_LOCAL+" VARCHAR NULL, "
-                                                                                     +CAMPO_CADENA_P+" VARCHAR NULL, "
-                                                                                     +CAMPO_TIPO_NEGOCIO+" VARCHAR NULL, "
-                                                                                     +CAMPO_TIPO_SOPORTE+" VARCHAR NULL, "
-                                                                                     +CAMPO_UBICACION+" VARCHAR NULL, "
-                                                                                     +CAMPO_AUX+" VARCHAR)";
+    public static final String CREAR_TABLA_PRODUCTOS="CREATE TABLE IF NOT EXISTS "+TABLA_PRODUCTOS+" ("+CAMPO_CODIGO_BARRA+" VARCHAR NOT NULL, "
+                                                                                                         +CAMPO_DESCRIP+" VARCHAR NOT NULL, "
+                                                                                                         +CAMPO_CANT_PROD+" FLOAT, "
+                                                                                                         +CAMPO_CATEGORIA+" VARCHAR NULL, "
+                                                                                                         +CAMPO_LOCAL+" VARCHAR NULL, "
+                                                                                                         +CAMPO_CADENA_P+" VARCHAR NULL, "
+                                                                                                         +CAMPO_TIPO_NEGOCIO+" VARCHAR NULL, "
+                                                                                                         +CAMPO_TIPO_SOPORTE+" VARCHAR NULL, "
+                                                                                                         +CAMPO_UBICACION+" VARCHAR NULL, "
+                                                                                                         +CAMPO_AUX+" VARCHAR)";
 
     public static final String CREAR_TABLA_UBICACIONES="CREATE TABLE IF NOT EXISTS "+TABLA_UBICACIONES+" (" +CAMPO_ID_UBICACION+" INTEGER PRIMARY KEY, "
                                                                                                             +CAMPO_DESCR_UBICACION+" VARCHAR)";

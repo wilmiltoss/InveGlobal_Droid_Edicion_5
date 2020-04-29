@@ -5,8 +5,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -39,6 +42,9 @@ import com.example.wmiltos.inveglobal_droid.principal.subVentanas.Limpiar2Activi
 import com.example.wmiltos.inveglobal_droid.principal.ventanas.LecturasActivity;
 import com.example.wmiltos.inveglobal_droid.utilidades.Utilidades;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -64,14 +70,12 @@ public class QuiebreActivity extends AppCompatActivity {
     private ListView textViewPanel;
     private ListAdapter adapter;
     private ArrayList <Product>Pro;
+    String bandera = "0";
 
     String cantidadReg = null;
     String cantidadEnc = null;
     String cantidadQuieb = null;
     String cantidadPend = null;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,34 +88,34 @@ public class QuiebreActivity extends AppCompatActivity {
         contarItems();
         llenaListView();
 
-        //ocultamos
-        panelNormal.setVisibility(View.GONE);
-        btnBuscar.setVisibility(View.GONE);
+       // Toast.makeText(getApplicationContext(),"bandera recibo replica = "+bandera,Toast.LENGTH_SHORT).show();
 
-        /*final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.mylistado, cargar());//myListado =cambio manual del tamaño list
-        textViewPanel.setAdapter(adapter);*/
+        if (bandera.equals("0")) {
+            //ocultamos el panel normal y btnbuscar al inicio
+            panelNormal.setVisibility(View.GONE);
+            btnBuscar.setVisibility(View.GONE);
+            panelLista.setVisibility(View.VISIBLE);
+            btnBuscar2.setVisibility(View.VISIBLE);
+        }else if(bandera.equals("1")){
+            panelNormal.setVisibility(View.VISIBLE);
+            btnBuscar.setVisibility(View.VISIBLE);
+            panelLista.setVisibility(View.GONE);
+            btnBuscar2.setVisibility(View.GONE);
+        }
 
-        //del icono correo
-        /*FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
         //SELECCIONANDO UN ITEMS DE LA LISTA PASA A LA SIGUIENTE VENTANA
         textViewPanel.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
                     String extraer = (textViewPanel.getItemAtPosition (position)).toString();//se extrae de la lista el valor para consultarlo como parametro en aux
-                    String sSubCadena = extraer.substring(6,33);//obtiene el valor recortado
+                    String sSubCadena = extraer.substring(0,30);//obtiene el valor recortado
                     SQLiteDatabase db = conn.getWritableDatabase();
-                     //Cursor cursor3 = db.rawQuery(Query+" WHERE AUX LIKE SUBSTR('%"+sSubCadena+"%',0,40)", null);
 
-                    String Query2 = "SELECT * FROM (select codigo_barra||' -'||descripcion as AUX2, codigo_barra, descripcion, ubicacion  FROM "+Utilidades.TABLA_PRODUCTOS+")";
-                    Cursor cursor = db.rawQuery(Query2+" WHERE AUX2 LIKE SUBSTR('%"+sSubCadena+"%',0,50)", null);
+                    //query que selecciona el articulo y lo guarda en el cursor para luego editarlo en la siguiente layout
+                    String Query2 = "SELECT * FROM (select codigo_barra||' -'||descripcion as AUX2, codigo_barra, descripcion, ubicacion  FROM "+Utilidades.TABLA_PRODUCTOS+")" +
+                            " AS PRO INNER JOIN MAESTRO M ON PRO.CODIGO_BARRA = M.SCANNING";
+                    Cursor cursor = db.rawQuery(Query2+" WHERE AUX2 LIKE SUBSTR('%"+sSubCadena+"%',0,50) OR M.SCANNING LIKE SUBSTR('%"+sSubCadena+"%',0,9)", null);
 
                     if  (cursor.moveToNext()) {//recorremos todas las filas
                         //almacenamos la consulta en un texview para utilizarlo en el where
@@ -120,6 +124,7 @@ public class QuiebreActivity extends AppCompatActivity {
                         String ubicacion = cursor.getString(3);
                         texExtractUbicacion.setText(ubicacion);
 
+                        Toast.makeText(getApplicationContext(), sSubCadena, Toast.LENGTH_SHORT).show();
                         //si la ubicacion esta vacia lo mandados a agregar sino a editar, valida si son campos importados del csv sin registros
                         //o si ya contienen registros
                         if(ubicacion == null){
@@ -135,7 +140,6 @@ public class QuiebreActivity extends AppCompatActivity {
             }
         });
     }
-
 
     //boton fisico atraz
     @Override
@@ -199,7 +203,7 @@ public class QuiebreActivity extends AppCompatActivity {
         //si el campo scanning esta cargado envia los datos
         if (etScanning.getText().length() != 0) {//si el campo esta vacio, mostrar mensaje
             switch (view.getId()) {
-                case R.id.btn_buscar:envioDatosAgregar();//enviar a la sgte ventana
+                case R.id.btn_buscar:envioDatosAgregarDeMaestro();//enviar a la sgte ventana
             }
         } else {
             Toast.makeText(getApplicationContext(), "Busqueda sin resultado", Toast.LENGTH_SHORT).show();
@@ -224,8 +228,7 @@ public class QuiebreActivity extends AppCompatActivity {
         //comprobamos 1ro si el codigo existe
         String Query = Utilidades.CONSULTA_TABLA_PRODUCTOS;
         String parametro = textExtractoList.getText().toString();//de la captura del listView
-        Cursor cursorExistCodigo = db.rawQuery(Query+" WHERE " +Utilidades.CAMPO_CODIGO_BARRA + " = "+parametro,
-                 null);
+        Cursor cursorExistCodigo = db.rawQuery(Query+" WHERE " +Utilidades.CAMPO_CODIGO_BARRA + " = "+parametro, null);
 
         //si existe el enviamos los datos, parametros capturados en configuracion
         if (cursorExistCodigo.getCount() > 0) {
@@ -259,7 +262,7 @@ public class QuiebreActivity extends AppCompatActivity {
     }
 
     //La busqueda lo hace en el maestro desde el btn buscar para agregar registro (insert)
-    public void envioDatosAgregar(){//A-E1
+    public void envioDatosAgregarDeMaestro(){//A-E1
         SQLiteDatabase db = conn.getReadableDatabase();
         //comprobamos 1ro si el codigo existe
         String Query = Utilidades.CONSULTA_TABLA_MAESTRO;
@@ -283,6 +286,7 @@ public class QuiebreActivity extends AppCompatActivity {
             miBundle.putString("msjLocal", textLocal.getText().toString());
             miBundle.putString("msjTipoSoporte", textTipoSoporte.getText().toString());
             miBundle.putString("msjUsuario", textUsuario.getText().toString());
+            miBundle.putInt("msjbandera", 1);//1)enviamos bandera valor 1 p/ mantener activo la vista busqueda en maestro
 
             miIntent.putExtras(miBundle);
             startActivity(miIntent);
@@ -369,7 +373,7 @@ public class QuiebreActivity extends AppCompatActivity {
         etScanning.setText("");
     }
 
-    public void recepcionDatosAgregarRetorno(){//A-R2
+    public void recepcionDatosAgregarEditarRetorno(){//A-R2
 
         Bundle miBundle = this.getIntent().getExtras();
         if (miBundle != null) {
@@ -387,6 +391,9 @@ public class QuiebreActivity extends AppCompatActivity {
 
             String usuario = miBundle.getString("msjUsuarioR");
             textUsuario.setText(usuario);
+
+            bandera = miBundle.getString("msjbanderaR");//4)Recibimos la bandera con el valor de retornado
+           // Toast.makeText(getApplicationContext(),"bandera recibo = "+bandera,Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -395,11 +402,11 @@ public class QuiebreActivity extends AppCompatActivity {
             String Query = Utilidades.CONSULTA_TABLA_PRODUCTOS;//contar registros
             Cursor cursor = db.rawQuery(Query, null);
         if (cursor.getCount() > 0) {
-            recepcionDatosAgregarRetorno();
+            recepcionDatosAgregarEditarRetorno();
            // Toast.makeText(getApplicationContext(), "si hay registros", Toast.LENGTH_LONG).show();
         }else{
             recepcionDatosConfiguracion();
-           // Toast.makeText(getApplicationContext(), "no hay registros", Toast.LENGTH_LONG).show();
+
         }
         cursor.close();
     }
@@ -421,13 +428,27 @@ public class QuiebreActivity extends AppCompatActivity {
 
             String usuario = miBundle.getString("msjUsuario");
             textUsuario.setText(usuario);
+
+            bandera = "0";
         }
     }
     //muestra la lista de la tabla productos
     public void llenaListView(){
         try {
+                final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.mylistado, cargar()){
+                    @NonNull
+                    @Override
+                    public View getView(int position, @Nullable  View convertView, @NonNull ViewGroup parent) {
+                        View view = super.getView(position, convertView, parent);
 
-                final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.mylistado, cargar());//myListado =cambio manual del tamaño list
+                        if (position %2 == 1){
+                            view.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
+                        }else{
+                            view.setBackgroundColor(getResources().getColor(android.R.color.white));
+                        }
+                        return view;
+                    }
+                };//myListado =cambio manual del tamaño list
                 textViewPanel.setAdapter(adapter);//muestra el array en el panel textViewPanel
 
         }catch (Exception ex){
@@ -440,20 +461,18 @@ public class QuiebreActivity extends AppCompatActivity {
         SQLiteDatabase db = conn.getReadableDatabase();
         Cursor cursor = null;
 
-        cursor = db.rawQuery("SELECT " + Utilidades.CAMPO_ID + "," +
-                Utilidades.CAMPO_CODIGO_BARRA + "," +
+        cursor = db.rawQuery("SELECT "+Utilidades.CAMPO_CODIGO_BARRA + "," +
                 Utilidades.CAMPO_DESCRIP + "," +
                 Utilidades.CAMPO_CANT_PROD
-                + " FROM " + Utilidades.TABLA_PRODUCTOS, null);
+                + " FROM " + Utilidades.TABLA_PRODUCTOS + " ORDER BY "+ Utilidades.CAMPO_CANT_PROD + " DESC ", null);
         String[] listado = new String[cursor.getCount()];//arreglo string que trae el listado
         int post = 0;
-        if (cursor.moveToFirst()) {//si tenemo al menos 1 reg lo recorremos
+        if (cursor.moveToFirst()) {//si tenemos al menos 1 registro lo recorremos
             do {
-                String id = cursor.getString(0);
-                String codigo = cursor.getString(1);
-                String Descripcion = cursor.getString(2);
-                String Cantidad = cursor.getString(3);
-                listado[post] = id + " -" + codigo + " -" + Descripcion + "  " + Cantidad;
+                String codigo = cursor.getString(0);
+                String Descripcion = cursor.getString(1);
+                String Cantidad = cursor.getString(2);
+                listado[post] = codigo + " -"+ Descripcion + "     " + Cantidad;//TITULOS DEL LISTVIEW
                 post++;
 
             } while (cursor.moveToNext());//mientras se mueve al sgte registro
@@ -477,12 +496,11 @@ public class QuiebreActivity extends AppCompatActivity {
         try{
             String Query = "Select count(CODIGO_BARRA) as codigoBarra from " +Utilidades.TABLA_PRODUCTOS;//contar registros
             Cursor cursor = db.rawQuery(Query, null);
-            //mostrar en el log la consulta select
+            //mostrar en el log la consulta select los datos extraidos
             while (cursor.moveToNext()) {
                 productos = new Productos();//llamamos a la tabla Productos.java
                 productos.setCodigo_barra(cursor.getString(0));//la 1ra columna
                 Log.i("cantidad", productos.getCodigo_barra());//mostrar en el log
-
             }
             if(productos.getCodigo_barra().equals("0"))//si no hay registro enviar mensaje
             {
@@ -546,8 +564,7 @@ public class QuiebreActivity extends AppCompatActivity {
         try{
             conn= new ConexionSQLiteHelper(getApplicationContext(),"InveStock.sqlite",null,1);
             db = conn.getWritableDatabase();
-            cursor = db.rawQuery("SELECT " +Utilidades.CAMPO_ID+","
-                    +Utilidades.CAMPO_CODIGO_BARRA+","
+            cursor = db.rawQuery("SELECT " +Utilidades.CAMPO_CODIGO_BARRA+","
                     +Utilidades.CAMPO_DESCRIP+","
                     +Utilidades.CAMPO_CANT_PROD+","
                     +Utilidades.CAMPO_CATEGORIA+","
@@ -560,7 +577,7 @@ public class QuiebreActivity extends AppCompatActivity {
             // Toast.makeText(getApplicationContext(), "respuesta1"+cursor.toString(), Toast.LENGTH_LONG).show();
             while(cursor.moveToNext())//recorrido del cursor
                 //escribe las lineas del cursor en lLineas y lo formatea con puntos y coma
-                lLineas.add(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s",
+                lLineas.add(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s",
                         cursor.getString(0),
                         cursor.getString(1),
                         cursor.getString(2),
@@ -569,8 +586,7 @@ public class QuiebreActivity extends AppCompatActivity {
                         cursor.getString(5),
                         cursor.getString(6),
                         cursor.getString(7),
-                        cursor.getString(8),
-                        cursor.getString(9)));
+                        cursor.getString(8)));
             // Toast.makeText(getApplicationContext(), "respuesta2"+lLineas, Toast.LENGTH_LONG).show();
             cursor.close();
         } catch (Exception ex) {
@@ -600,7 +616,7 @@ public class QuiebreActivity extends AppCompatActivity {
                 flujoSalida = new OutputStreamWriter(new FileOutputStream(file));
                 //proceso de lectura_________________________________________________________________
                 flujoSalida.write("Nombre del Dispositivo: "+deviceName+"\r\n");//nombre del equipo
-                flujoSalida.write("ID;CODIGO_BARRA;DESCRIPCION;CANTIDAD;CATEGORIA;LOCAL;CADENA;TIPO_NEGOCIO;SOPORTE;UBICACION \r\n");//CABECERA
+                flujoSalida.write("CODIGO_BARRA;DESCRIPCION;CANTIDAD;CATEGORIA;LOCAL;CADENA;TIPO_NEGOCIO;SOPORTE;UBICACION \r\n");//CABECERA
                 for(String cLinea : lLineas)
                     flujoSalida.write(cLinea+"\r\n");//salto de lineas
 
@@ -633,8 +649,6 @@ public class QuiebreActivity extends AppCompatActivity {
     }
 
     public void onClickConsultaListado(View view) {
-
-
         android.support.v7.app.AlertDialog.Builder dialogo = new android.support.v7.app.AlertDialog.Builder(QuiebreActivity.this);
         dialogo.setMessage("Consulta Maestro").setTitle("Activar/Desactivar").setIcon(R.drawable.alerta);
         //2 -evento click Oculta el panel normal y activa el conteo rapido si le da si al dialogo
@@ -664,7 +678,6 @@ public class QuiebreActivity extends AppCompatActivity {
         android.support.v7.app.AlertDialog alertDialog = dialogo.create();
         alertDialog.show();
 
-
     }
 
     //cuenta la cantidad de registros en la tabla
@@ -686,26 +699,23 @@ public class QuiebreActivity extends AppCompatActivity {
         countRegistroTabla(Utilidades.TABLA_PRODUCTOS,Utilidades.CAMPO_CODIGO_BARRA,Utilidades.CAMPO_CODIGO_BARRA," > "," 1");
         txCantidadRegistro.setText("Items:"+cantidadReg);
 
-        countRegistroTabla(Utilidades.TABLA_PRODUCTOS,Utilidades.CAMPO_ID,Utilidades.CAMPO_UBICACION," NOT "," NULL ");
+        countRegistroTabla(Utilidades.TABLA_PRODUCTOS,Utilidades.CAMPO_CODIGO_BARRA,Utilidades.CAMPO_UBICACION," NOT "," NULL ");
         txCantEncontrado.setText("Encontrados:"+cantidadEnc);
 
-        countRegistroTabla(Utilidades.TABLA_PRODUCTOS,Utilidades.CAMPO_ID,Utilidades.CAMPO_CANT_PROD," = "," 0 ");
+        countRegistroTabla(Utilidades.TABLA_PRODUCTOS,Utilidades.CAMPO_CODIGO_BARRA,Utilidades.CAMPO_CANT_PROD," = "," 0 ");
         txCantEnQuiebre.setText("En quiebre:"+cantidadQuieb);
     }
 
     public void onClickImportarCsv(View view) {
         Intent intent = new Intent(QuiebreActivity.this, ImportarCSVActivity.class);
         startActivity(intent);
-
     }
-
 
     //***************************pruebas no se usa*********************************************************
 
     //consultamos la tabla por medio del metodo generado en la clase ConexionSQLiteHelper
     public boolean consultaTabla(String tabla){
         SQLiteDatabase db = conn.getReadableDatabase();
-
         conn.consultaTabla(tabla, db);//consulta tabla(sql generico) query de la conexion
         return false;
     }

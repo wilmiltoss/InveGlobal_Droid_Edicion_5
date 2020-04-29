@@ -20,7 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.wmiltos.inveglobal_droid.R;
 import com.example.wmiltos.inveglobal_droid.entidades.conexion.ConexionSQLiteHelper;
-import com.example.wmiltos.inveglobal_droid.entidades.tablas.Productos;
 import com.example.wmiltos.inveglobal_droid.entidades.tablas.Soportes;
 import com.example.wmiltos.inveglobal_droid.entidades.tablas.Usuarios;
 import com.example.wmiltos.inveglobal_droid.iTrack.tablasCSV_Objetos.Cadena;
@@ -94,7 +93,6 @@ public class ConfiguracionActivity extends AppCompatActivity {
                     //accede al elemento seleccionado
                     txLocal.setText(localLista.get(posicion).getCodigo());
                     txDescripcionLocal.setText(localLista.get(posicion).getDescripcion());
-
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> adapterView) {
@@ -253,7 +251,6 @@ public class ConfiguracionActivity extends AppCompatActivity {
     private void variables() {
         try {
             conn = new ConexionSQLiteHelper(getApplicationContext(), "InveStock.sqlite", null, 1);
-
             comboLocales = findViewById(R.id.sp_local);
             comboSoporte = findViewById(R.id.sp_tipo_soporte);
             comboTipoNegocio = findViewById(R.id.sp_tipo_negocio);
@@ -346,8 +343,6 @@ public class ConfiguracionActivity extends AppCompatActivity {
     }
 
     //*****************************************************************************************************************
-
-
 
 
     //LOCALES

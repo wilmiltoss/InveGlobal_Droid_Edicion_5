@@ -26,6 +26,7 @@ public class AgregarActivity extends AppCompatActivity {
     ConexionSQLiteHelper conn;
     Button btnAgregar;
     private Cursor fila;
+    String banderaBack = "0";//iniciamos la bandera con 0
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -290,6 +291,9 @@ public class AgregarActivity extends AppCompatActivity {
             String usuario = miBundle.getString("msjUsuario");
             campoUsuario.setText(usuario);
 
+            Integer bandera = miBundle.getInt("msjbandera");
+            banderaBack = bandera.toString();//2)Recibimos la bandera y la guardamos en esta variable
+
             //8 ELIMINAR 0 A LA IZQUIERDA
             //si el 1er digito es igual a 0 lo guardamos en scanning0 sino guardamos en scanning
             String scanning =miBundle.getString("msjScanning");
@@ -318,6 +322,7 @@ public class AgregarActivity extends AppCompatActivity {
         miBundle.putString("msjLocalR",campoLocal.getText().toString());
         miBundle.putString("msjTipoSoporteR",campoTipoSoporte.getText().toString());
         miBundle.putString("msjUsuarioR",campoUsuario.getText().toString());
+        miBundle.putString("msjbanderaR", banderaBack);//3)Enviamos de retorno la bandera con el valor de la variable
 
         miIntent.putExtras(miBundle);
         startActivity(miIntent);

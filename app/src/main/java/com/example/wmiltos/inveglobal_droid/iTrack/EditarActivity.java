@@ -38,6 +38,7 @@ public class EditarActivity extends AppCompatActivity {
     ConexionSQLiteHelper conn;
     Button btnAgregar;
     private Cursor fila;
+    String banderaBack = "0";
 
     Spinner comboUbicaciones;
     ArrayList<String>listaUbicacionesSpinner;
@@ -464,6 +465,10 @@ public class EditarActivity extends AppCompatActivity {
             String usuario = miBundle.getString("msjUsuario");
             campoUsuario.setText(usuario);
 
+            Integer bandera = miBundle.getInt("msjbandera");
+            banderaBack = bandera.toString();//2)Recibimos la bandera y la guardamos en esta variable
+
+
             //8 ELIMINAR 0 A LA IZQUIERDA
             //si el 1er digito es igual a 0 lo guardamos en scanning0 sino guardamos en scanning
             String scanning =miBundle.getString("msjScanning");
@@ -484,6 +489,7 @@ public class EditarActivity extends AppCompatActivity {
         String msjTipoSoporteR = campoTipoSoporte.getText().toString();
         String msjUsuarioR = campoUsuario.getText().toString();
 
+
         miIntent = new Intent(EditarActivity.this, QuiebreActivity.class);
         Bundle miBundle = new Bundle();
 
@@ -492,6 +498,8 @@ public class EditarActivity extends AppCompatActivity {
         miBundle.putString("msjLocalR",campoLocal.getText().toString());
         miBundle.putString("msjTipoSoporteR",campoTipoSoporte.getText().toString());
         miBundle.putString("msjUsuarioR",campoUsuario.getText().toString());
+        miBundle.putString("msjbanderaR", banderaBack);//3)Enviamos de retorno la bandera con el valor de la variable
+        // Toast.makeText(getApplicationContext(),"bandera envio= "+banderaBack,Toast.LENGTH_SHORT).show();
 
         miIntent.putExtras(miBundle);
         startActivity(miIntent);

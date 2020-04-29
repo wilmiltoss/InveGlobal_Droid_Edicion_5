@@ -44,17 +44,17 @@ public class RedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_red);
 
         conn= new ConexionSQLiteHelper(getApplicationContext(),"InveStock.sqlite",null,1);
-        parametro = (TextView) findViewById(R.id.etParametro);
-        resultado = (TextView) findViewById(R.id.tvResultado);
+        parametro =  findViewById(R.id.etParametro);
+        resultado =  findViewById(R.id.tvResultado);
 
-        progressBarHorizontal = (ProgressBar)findViewById(R.id.progressbar_Horizontal);
+        progressBarHorizontal = findViewById(R.id.progressbar_Horizontal);
         progressBarHorizontal.setProgress(0);
-        progressBarCircular = (ProgressBar)findViewById(R.id.progressBarCircular);
+        progressBarCircular = findViewById(R.id.progressBarCircular);
         progressBarCircular.setProgress(0);
 
         //de los botones
-        enviarDatos = (Button)findViewById(R.id.btn_enviar_datos);
-        volver = (Button)findViewById(R.id.btn_volver);
+        enviarDatos = findViewById(R.id.btn_enviar_datos);
+        volver = findViewById(R.id.btn_volver);
 
 
        /* enviarDatos.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +68,7 @@ public class RedActivity extends AppCompatActivity {
         });*/
     }
 
-
+    //barra de progreso
     public class AsyncTask_load extends AsyncTask<Void, Integer, Void> {
         int progreso;
 

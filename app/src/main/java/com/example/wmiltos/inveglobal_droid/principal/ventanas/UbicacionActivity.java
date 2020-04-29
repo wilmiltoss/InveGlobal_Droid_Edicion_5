@@ -173,10 +173,9 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
             case R.id.quiebre:compruebaRegistroConfiguracion();
 
                 return true;
-            case R.id.inventairo_puntual:
-                Intent intent3 = new Intent(UbicacionActivity.this, Limpiar2Activity.class);
+/*                Intent intent3 = new Intent(UbicacionActivity.this, Limpiar2Activity.class);
                 startActivity(intent3);
-                return true;
+                return true;*/
             //case R.id.quiebre3:
 
                 //return true;
