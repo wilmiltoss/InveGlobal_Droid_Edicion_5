@@ -20,6 +20,9 @@
     <string name="action_quiebre">Quiebre</string>
     <string name="action_inventario_puntual">Inventario Puntual</string>
 
+    <!--del Deposito CD-->
+    <string name="action_deposito">Deposito</string>
+
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="tab_text_1">Ubicacion</string>

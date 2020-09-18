@@ -1,4 +1,4 @@
-package com.example.wmiltos.inveglobal_droid.PruebasBD;
+package com.example.wmiltos.inveglobal_droid.Deposito;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,56 +14,57 @@ import android.widget.Toast;
 import com.example.wmiltos.inveglobal_droid.R;
 import com.example.wmiltos.inveglobal_droid.entidades.conexion.ConexionSQLiteHelper;
 import com.example.wmiltos.inveglobal_droid.principal.login.LoginValidacionActivity;
+import com.example.wmiltos.inveglobal_droid.principal.subVentanas.Limpiar2Activity;
 import com.example.wmiltos.inveglobal_droid.utilidades.Utilidades;
 
-public class LimpiarActivity extends AppCompatActivity {
+import java.io.File;
+
+public class LimpiarDepo extends AppCompatActivity {
 
     Button limpiarDatos;
     TextView cantidadRegistros, parameters;
     ConexionSQLiteHelper conn;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_limpiar);
-
-        variables();
-        //sumaRegistrosSQL();
-    }
-
-    private void variables(){
+        setContentView(R.layout.activity_limpiar_depo);
 
         conn= new ConexionSQLiteHelper(getApplicationContext(),"InveStock.sqlite",null,1);
         cantidadRegistros= findViewById(R.id.tvCampoCantidadRegistros);
         limpiarDatos = findViewById(R.id.btn_limpiar);
         parameters= findViewById(R.id.tvParametro);
+        sumaRegistrosSQL();
+
+
     }
 
     public void sumaRegistrosSQL(){
         SQLiteDatabase db = conn.getReadableDatabase();
-        Cursor c = db.rawQuery("select * from "+Utilidades.TABLA_LECTURAS,null);
+        Cursor c = db.rawQuery(" SELECT * FROM "+Utilidades.TABLA_DEPOSITO,null);
         cantidadRegistros.setText("Cantidad de Lecturas:   "+c.getCount());
+
+
         db.close();
     }
 
     private void mensajeDialogo() {
         try {
             //1 -creamos dialogo
-            android.support.v7.app.AlertDialog.Builder dialogo = new android.support.v7.app.AlertDialog.Builder(LimpiarActivity.this);
+            android.support.v7.app.AlertDialog.Builder dialogo = new android.support.v7.app.AlertDialog.Builder(LimpiarDepo.this);
             dialogo.setMessage("Esta Seguro de borrar los datos?").setTitle("Datos de lecturas")
                     .setIcon(R.drawable.alerta);
             //2 -evento click ok
             dialogo.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    pasarAmenuLogin();
+                    limpiarLecturas();
                 }
             });
             dialogo.setNegativeButton("No", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    LimpiarActivity.this.finish();
+                    LimpiarDepo.this.finish();
                 }
             });
             android.support.v7.app.AlertDialog alertDialog = dialogo.create();
@@ -73,19 +74,56 @@ public class LimpiarActivity extends AppCompatActivity {
         }
     }
 
+    private void limpiarLecturas() {
+        borrarDatosLecturaSQL();
+        eliminarArchivo();
+        LimpiarDepo.this.finish();
+    }
+
+
+
     public void onClick2(View view) {
         switch (view.getId()){
-            case R.id.btn_volverL:LimpiarActivity.this.finish();
+            case R.id.btn_volverL:LimpiarDepo.this.finish();
                 break;
             case R.id.btn_limpiar:mensajeDialogo();
                 break;
         }
     }
 
-    private void pasarAmenuLogin() {
-        Intent intent = new Intent(LimpiarActivity.this, LoginValidacionActivity.class);
-        startActivity(intent);
-        LimpiarActivity.this.finish();
+    private void borrarDatosLecturaSQL() {
+        try {
+            SQLiteDatabase db = conn.getReadableDatabase();
+            //SENTENCIA SQL
+            db.delete(Utilidades.TABLA_DEPOSITO, null    , null);
+            Toast.makeText(getApplicationContext(), "Lectura Eliminadas correctamente", Toast.LENGTH_SHORT).show();
+            db.close();
+        }catch (Exception e){
+
+            Toast.makeText(getApplicationContext(), "Error al eliminar los datos", Toast.LENGTH_SHORT).show();
+        }
     }
 
+    //elimina segun la ubicacion del archivo
+    private void eliminarArchivo() {
+        File archivo, archivoSdcard = null;
+
+        String direccionExterna = "sdcard/lecturaDeposito.csv";
+        String direccionSdcard = "sdcard/sdcard/lecturaDeposito.csv";
+
+        try{
+            archivo = new File(direccionExterna);
+            archivoSdcard = new File(direccionSdcard);
+            //eliminamos ambos archivos de las dos ubicaciones
+            boolean estatus = archivo.delete();
+            boolean estatus2 = archivoSdcard.delete();
+            if (!estatus && estatus2) {
+                Toast.makeText(getApplicationContext(), "No se encotro documento", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(getApplicationContext(), "Documento eliminado exitosamente", Toast.LENGTH_SHORT).show();
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
 }

@@ -60,16 +60,16 @@ public class LoginActivity extends AppCompatActivity {
 
 
         //para los permisos de lectura y escritura de documentos y camara
-        abrirDocumentos = (Button) findViewById(R.id.button);
+        abrirDocumentos =  findViewById(R.id.button);
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE+ Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             abrirDocumentos.setEnabled(false);
             ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA },REQUEST_PERMISSION_DOCUMENTOS_CAMARA);
         }
 
-        et_Password = (EditText) findViewById(R.id.et_usuario);
-        et_usuario2 = (EditText) findViewById(R.id.et_usuario2);
+        et_Password =  findViewById(R.id.et_usuario);
+        et_usuario2 =  findViewById(R.id.et_usuario2);
 
-        Button btnSalir = (Button) findViewById(R.id.btn_salir);
+        Button btnSalir =  findViewById(R.id.btn_salir);
         btnSalir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

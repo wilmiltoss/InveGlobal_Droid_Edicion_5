@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Deposito.UbicacionDeposito">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:id="@+id/txt_local"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="5dp"
+                android:text="Local : "
+                android:textColor="@color/colorPrimaryNegro"
+                android:textSize="20dp" />
+
+            <Spinner
+                android:id="@+id/sp_local"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/stylo_borde"
+                android:text="" />
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Cod. Unidad de Manipulación "
+                android:textColor="@color/colorPrimaryNegro"
+                android:textSize="20dp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_cod_manipulacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:hint="codigo"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_DescripcionUbic"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:text="Ubicación"
+                android:textColor="@color/colorPrimaryNegro"
+                android:textSize="20dp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_descrip_ubicacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:hint="descripción ubicación"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="185dp"
+            android:paddingLeft="1dp"
+            android:paddingTop="5dp">
+
+            <Button
+                android:id="@+id/btn_barra"
+                android:layout_width="wrap_content"
+                android:layout_height="69dp"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="30dp"
+                android:background="@color/secondary_text"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp"
+                android:text="| | | |"
+                android:textColor="@color/colorTransparente" />
+
+            <Button
+                android:id="@+id/btn_hecho"
+                android:layout_width="255dp"
+                android:layout_height="69dp"
+                android:layout_marginTop="30dp"
+                android:background="@color/colorPrimary"
+                android:onClick="onClickHecho"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp"
+                android:text="Hecho"
+                android:textColor="@color/colorTransparente" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="1dp">
+
+            <TextView
+                android:id="@+id/tv_id_local"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="idlocal"
+                android:textColor="@color/colorPrimaryNegro"
+                android:textSize="20dp" />
+            <TextView
+                android:id="@+id/textView_desc_local"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="descripcion"
+                android:textColor="@color/colorPrimaryNegro"
+                android:textSize="20dp" />
+
+
+
+        </LinearLayout>
+
+        <FrameLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.BottomNavigationView
+                android:id="@+id/navigation_deposito"
+                android:layout_width="365dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="0dp"
+                android:layout_marginStart="0dp"
+                android:background="?android:attr/windowBackground"
+                app:itemBackground="@color/colorPrimaryDark"
+                app:itemIconSize="20dp"
+                app:itemIconTint="@color/colorTransparente"
+                app:itemTextColor="@color/colorTransparente"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:menu="@menu/navigation2" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -129,11 +129,11 @@ public class LecturasActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         //*menu scanner
-        BottomNavigationView navigation2 = (BottomNavigationView) findViewById(R.id.navigation2);
-        navigation2.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener2);
+       /* BottomNavigationView navigation2 = (BottomNavigationView) findViewById(R.id.navigation2);
+        navigation2.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener2);*/
 
     }
-    //1-comprueba el codigo cargado si es existe //CONTEO NORMAL
+    //1-comprueba el codigo cargado si existe //CONTEO NORMAL
     public void comprobarCodigo (){
         try {
             ConexionSQLiteHelper admin = new ConexionSQLiteHelper(this, "InveStock.sqlite", null, 1);
@@ -362,10 +362,10 @@ public class LecturasActivity extends AppCompatActivity {
                     Intent intent3 = new Intent(LecturasActivity.this, Limpiar2Activity.class);
                     startActivity(intent3);
                     return true;
-                case R.id.navigation_scanning:
+               /* case R.id.navigation_scanning:
                     Intent intent4 = new Intent(LecturasActivity.this, ScannerActivity.class);
                     startActivity(intent4);
-                    return true;
+                    return true;*/
                 case R.id.navigation_red:
                     Intent intent5 = new Intent(LecturasActivity.this, RedActivity.class);
                     startActivity(intent5);
@@ -376,7 +376,7 @@ public class LecturasActivity extends AppCompatActivity {
     };
 
     //Boton Navegador del scanner Camara
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener2
+   /* private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener2
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -387,7 +387,7 @@ public class LecturasActivity extends AppCompatActivity {
                 return false;
 
         }
-    };
+    };*/
     //dialogo antes de salir
     public void dialogo(){
         android.support.v7.app.AlertDialog.Builder dialogo = new android.support.v7.app.AlertDialog.Builder(LecturasActivity.this);

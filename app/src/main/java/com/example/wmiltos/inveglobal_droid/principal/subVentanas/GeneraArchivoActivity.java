@@ -175,7 +175,6 @@ public class GeneraArchivoActivity extends AppCompatActivity {
         }
     }
 
-
     public void sumaRegistrosSQL(){
         SQLiteDatabase db = conn.getReadableDatabase();
 
@@ -234,6 +233,9 @@ public class GeneraArchivoActivity extends AppCompatActivity {
             }
         }
     }
+
+    //-----------------------pruebas--------------------------------
+
     //copia del directorio raiz
     public void copiarDirectorioBD(File sourceLocation , File targetLocation) {
         if (sourceLocation.isDirectory()) {//mapea el directorio
@@ -265,14 +267,13 @@ public class GeneraArchivoActivity extends AppCompatActivity {
             }
         }
     }
-    //-----------------------pruebas--------------------------------
     public void copiarPegarBd (){
         try {
             String packageName = getApplicationContext().getPackageName();
             File origen = new File("/data/data/" + packageName + "/databases/InveStock.sqlite");//copia del directorio de la aplicacion
             String DB_PATH = "sdcard/Download/";//y pega la direccion bd
             File destino = new File(DB_PATH + "investock.sqlite");
-            copiarDirectorioBD(origen, destino);
+           // copiarDirectorioBD(origen, destino);
             //Toast.makeText(getApplicationContext(), " Bd se copio a download", Toast.LENGTH_LONG).show();
         }catch (Exception ex){
             Toast.makeText(getApplicationContext(), "Error al copiar Bd a download", Toast.LENGTH_LONG).show();

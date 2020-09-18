@@ -30,8 +30,8 @@ public class LoginValidacionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         conn= new ConexionSQLiteHelper(getApplicationContext(),"InveStock.sqlite",null,1);
         setContentView(R.layout.activity_login_validacion);
-        et_PasswordV = (EditText) findViewById(R.id.et_usuarioV);
-        txParametro = (TextView) findViewById(R.id.tvParametro2);
+        et_PasswordV = findViewById(R.id.et_usuarioV);
+        txParametro =  findViewById(R.id.tvParametro2);
 
     }
     public void ingresar2(View view) {
@@ -39,20 +39,35 @@ public class LoginValidacionActivity extends AppCompatActivity {
             ConexionSQLiteHelper admin = new ConexionSQLiteHelper(this, "InveStock.sqlite", null, 1);
             SQLiteDatabase db = admin.getWritableDatabase();
             String usuario = et_PasswordV.getText().toString();
-            fila = db.rawQuery("SELECT " + Utilidades.CAMPO_ID_USUARIO + " FROM " + Utilidades.TABLA_USUARIO +
+            fila = db.rawQuery("SELECT " + Utilidades.CAMPO_ID_USUARIO + "," + Utilidades.CAMPO_NIVEL_ACCESO
+                                     +" FROM " + Utilidades.TABLA_USUARIO +
                     " WHERE " + Utilidades.CAMPO_ID_USUARIO + "='" +usuario+ "'", null);
             fila.moveToFirst();
-            //si el usuario existe ingresa
-            if (fila.moveToFirst()) {
-                String pass = fila.getString(0);
-                if (usuario.equals(pass)) {
-                    dialogo();
+
+            Integer nivelAc = fila.getInt(1);
+          //  Toast.makeText(getApplicationContext(), "Devolucion"+nivelAc, Toast.LENGTH_LONG).show();
+
+            //validacion de usuario para eliminar lectura
+            if (nivelAc.equals(3) || nivelAc.equals(4)){
+
+                //si el usuario existe ingresa
+                if (fila.moveToFirst()) {
+                    String pass = fila.getString(0);
+                    if (usuario.equals(pass)) {
+                        dialogo();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "El usuario no está registrado!", Toast.LENGTH_LONG).show();
+                    limpiar();
+                    pasarAmenuPrincipal();
                 }
-            } else {
-                Toast.makeText(getApplicationContext(), "Clave de Autorización no Válida!", Toast.LENGTH_LONG).show();
-                limpiar();
-                pasarAmenuPrincipal();
+
+            }else{
+
+                Toast.makeText(getApplicationContext(), "No posee privilegios para realizar esta operación!", Toast.LENGTH_LONG).show();
+
             }
+
         }catch (Exception e){
             Toast.makeText(getApplicationContext(), "Error de autenticación", Toast.LENGTH_LONG).show();
         }

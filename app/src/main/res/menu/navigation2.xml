@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
+   <!-- <item
         android:id="@+id/navigation_scanning"
         android:icon="@drawable/barcode_scanner"
         android:title="Scan" />
+
+        -->
+
+    <item
+
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/salir"
+        android:tooltipText="@string/btn_salir"
+
+        android:title="Atras" />
+
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/descarga"
+        android:title="Generar Archivo" />
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/escoba"
+        android:title="Limpiar" />
+
+
 
 </menu>
 

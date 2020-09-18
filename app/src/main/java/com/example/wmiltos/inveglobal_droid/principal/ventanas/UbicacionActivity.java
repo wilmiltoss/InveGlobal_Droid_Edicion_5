@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.example.wmiltos.inveglobal_droid.Deposito.UbicacionDeposito;
 import com.example.wmiltos.inveglobal_droid.R;
 import com.example.wmiltos.inveglobal_droid.dialogo.DialogoBarraSector;
 import com.example.wmiltos.inveglobal_droid.entidades.conexion.ConexionSQLiteHelper;
@@ -171,14 +172,14 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
                 dialogo();
                 return true;
             case R.id.quiebre:compruebaRegistroConfiguracion();
-
                 return true;
-/*                Intent intent3 = new Intent(UbicacionActivity.this, Limpiar2Activity.class);
-                startActivity(intent3);
-                return true;*/
-            //case R.id.quiebre3:
 
-                //return true;
+            case R.id.depo:
+                Intent intent_depo = new Intent(UbicacionActivity.this, UbicacionDeposito.class);
+                startActivity(intent_depo);
+                UbicacionActivity.this.finish();
+                return true;
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -298,7 +299,7 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
         }
     }
     //spinner tipo soporte
-        private void consultarListaSoporte() {
+    private void consultarListaSoporte() {
             SQLiteDatabase db = conn.getReadableDatabase();
             Soportes soporte = null;
             soporteList = new ArrayList<Soportes>();
@@ -851,8 +852,6 @@ public class UbicacionActivity extends AppCompatActivity implements View.OnClick
         }
         return isExist;
     }
-
-
 
     //++++++++++++++++++++++++ PRUEBAS NO SE USA++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //Carga de datos segun clave scaneada

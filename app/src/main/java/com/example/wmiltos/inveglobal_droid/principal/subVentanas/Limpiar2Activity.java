@@ -26,6 +26,7 @@ public class Limpiar2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_limpiar2);
+
         conn= new ConexionSQLiteHelper(getApplicationContext(),"InveStock.sqlite",null,1);
         cantidadRegistros= findViewById(R.id.tvCampoCantidadRegistros);
         limpiarDatos = findViewById(R.id.btn_limpiar);

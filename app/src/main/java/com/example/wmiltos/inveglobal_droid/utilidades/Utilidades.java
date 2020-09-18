@@ -121,9 +121,34 @@ public class Utilidades {
     public static String CAMPO_DESCRIP_LISTA ="DESCRIPCION";
     public static String CAMPO_CANTIDAD_LISTA ="CANTIDAD";
 
+    //Aplicacion p/ Deposito*****************************************************************************
+    public static String TABLA_DEPOSITO = "DEPOSITO";
+    public static String CAMPO_ID_CONTEO = "ID";
+    public static String CAMPO_LOCAL_DEP = "LOCAL";
+    public static String CAMPO_UBICACION_DEP = "UBICACION";
+    public static String CAMPO_COD_BARRA_DEP = "CODIGO_BARRA";
+    public static String CAMPO_CANTIDAD_DEP = "CANTIDAD";
+    public static String CAMPO_COD_UND_MANIPULACION = "COD_MANIPULACION";
+
+    //site	Area	Grupo	Código	alto	ancho	prof	Volumen	Vol_libre	MP	MV	ML	Sec_picking	Vacia
+    public static String TABLA_CODIGO_SITE = "CODIGO_SITE";
+    public static String CAMPO_SITE = "SITE";
+    public static String CAMPO_AREA = "AREA";
+    public static String CAMPO_GRUPO = "GRUPO";
+    public static String CAMPO_CODIGO_UBICACION = "CODIGO_UBICACION";
+    public static String CAMPO_ALTO = "ALTO";
+    public static String CAMPO_ANCHO = "ANCHO";
+    public static String CAMPO_PROF = "PROF";
+    public static String CAMPO_VOLUMEN = "VOLUMEN";
+    public static String CAMPO_VOL_LIBRE = "VOL_LIBRE";
+    public static String CAMPO_MP = "MP";
+    public static String CAMPO_MV = "MV";
+    public static String CAMPO_ML = "ML";
+    public static String CAMPO_SEC_PICKING = "SEC_PICKING";
+    public static String CAMPO_VACIA= "VACIA";
 
 
-    //final son las Sentencias  SQL dadas
+
     //ITRACK..............CREACION DE TABLAS.....................................
     public static final String CREAR_TABLA_PRODUCTOS="CREATE TABLE IF NOT EXISTS "+TABLA_PRODUCTOS+" ("+CAMPO_CODIGO_BARRA+" VARCHAR NOT NULL, "
                                                                                                          +CAMPO_DESCRIP+" VARCHAR NOT NULL, "
@@ -152,6 +177,29 @@ public class Utilidades {
     public static final String CREAR_TABLA_LISTADO="CREATE TABLE IF NOT EXISTS "+TABLA_LISTADO+"  ("+CAMPO_SCANNING_LISTA+" VARCHAR PRIMARY KEY, "
                                                                                                     +CAMPO_DESCRIP_LISTA+" VARCHAR, "
                                                                                                     +CAMPO_CANTIDAD_LISTA+" INTEGER)";
+    //APLI DEPOSITO..............CREACION DE TABLAS.....................................
+    public static final String CREAR_TABLA_DEPOSITO = "CREATE TABLE IF NOT EXISTS "+TABLA_DEPOSITO+" ("+CAMPO_ID_CONTEO+" INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                                                                                       +CAMPO_LOCAL_DEP+ " VARCHAR, "
+                                                                                                       +CAMPO_UBICACION_DEP+ " VARCHAR, "
+                                                                                                       +CAMPO_COD_BARRA_DEP+ " VARCHAR, "
+                                                                                                       +CAMPO_CANTIDAD_DEP+ " FLOAT, "
+                                                                                                       +CAMPO_COD_UND_MANIPULACION+ " INTEGER)";
+
+
+    public static final String CREAR_TABLA_CODIGO_SITE = "CREATE TABLE IF NOT EXISTS "+TABLA_CODIGO_SITE+" ("+CAMPO_SITE+" VARCHAR, "
+            +CAMPO_AREA+ " VARCHAR, "
+            +CAMPO_GRUPO+ " VARCHAR, "
+            +CAMPO_CODIGO_UBICACION+ " VARCHAR, "
+            +CAMPO_ALTO+ " VARCHAR, "
+            +CAMPO_ANCHO+ " VARCHAR, "
+            +CAMPO_PROF+ " VARCHAR, "
+            +CAMPO_VOLUMEN+ " VARCHAR, "
+            +CAMPO_VOL_LIBRE+ " VARCHAR, "
+            +CAMPO_MP+ " VARCHAR, "
+            +CAMPO_MV+ " VARCHAR, "
+            +CAMPO_ML+ " VARCHAR, "
+            +CAMPO_SEC_PICKING+ " VARCHAR, "
+            +CAMPO_VACIA+ " VARCHAR)";
 
     //ITRACK..............CONSULTA DE TABLAS.....................................
     public static String CONSULTA_TABLA_PRODUCTOS="SELECT * FROM "+TABLA_PRODUCTOS;
@@ -162,4 +210,11 @@ public class Utilidades {
     public static String CONSULTA_TABLA_SOPORTE="SELECT * FROM "+TABLA_SOPORTE;
     public static String CONSULTA_TABLA_MAESTRO="SELECT * FROM "+TABLA_MAESTRO;
     public static String CONSULTA_TABLA_LISTADO="SELECT * FROM "+TABLA_LISTADO;
+
+    //APLI DEPOSITO..............CONSULTA DE TABLAS.....................................
+    public static String CONSULTA_TABLA_DEPOSITO = "SELECT * FROM "+TABLA_DEPOSITO;
+    public static String CONSULTA_TABLA_SITE = "SELECT * FROM "+TABLA_CODIGO_SITE;
+
+
+
 }

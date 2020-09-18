@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
+import com.example.wmiltos.inveglobal_droid.Deposito.CapturaUbicacion;
 import com.example.wmiltos.inveglobal_droid.R;
 import com.example.wmiltos.inveglobal_droid.principal.ventanas.LecturasActivity;
 import com.google.zxing.Result;
@@ -96,7 +97,7 @@ public class ScannerActivity extends AppCompatActivity  {
 
                 Intent miIntent = null;
                 String msjCamaraScanning = codigobarra.getText().toString();
-                miIntent = new Intent(ScannerActivity.this, LecturasActivity.class);
+                miIntent = new Intent(ScannerActivity.this, CapturaUbicacion.class);
                 //envio de los mensajes a la otra pantalla
                 Bundle miBundle = new Bundle();
                 miBundle.putString("msjCamaraScanning", codigobarra.getText().toString());
