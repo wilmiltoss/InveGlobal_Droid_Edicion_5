@@ -1,5 +1,0 @@
-nro de scanner para id inventario ejm; 1056250000887 y 1056250000931
-codigo de barra a escanear ejemplo
-310475	HR1820/16 EXTRACTOR	S/D	False	204848.3	504
-310901	AUTO BATERIA FAMOUS	S/D	False	0	305
-
